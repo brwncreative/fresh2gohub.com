@@ -18,15 +18,20 @@ h1 {
     grid-template: 1fr / 60% 1fr;
 }
 #h-mailing {
+    position: relative;
     overflow: hidden;
     color: black;
     border: 5px solid green;
-    height: 25rem;
     border-radius: 1em 0 0 1em;
 }
 #h-mailing > div {
-    height: 85%;
+    padding-block: 3rem;
     width: 90%;
+}
+#m-spacer{
+    display: block;
+    content: "";
+    margin: .8rem;
 }
 #h-mailing > div > h1 {
     font-size: 4rem;
@@ -51,7 +56,7 @@ h1 {
 }
 #email-input > input {
     border: none;
-    font-size: 1.5;
+    font-size: 1.2rem;
     width: 70%;
     margin-left: 1.2rem;
     background: none;
@@ -75,6 +80,10 @@ h1 {
     color: black;
     background-color: greenyellow;
 }
+/* Confetti */
+#h-mailing > canvas {
+    position: absolute;
+}
 /* Errors */
 @keyframes fade {
     from {
@@ -85,7 +94,7 @@ h1 {
     }
 }
 .fade {
-    animation: 1s linear 3s fade;
+    animation: 1s linear 0s fade;
 }
 .error {
     bottom: 1.5rem;
@@ -98,7 +107,6 @@ h1 {
     border: 1px solid grey;
 }
 #h-collection {
-    flex-direction: column;
     color: white;
     background-color: green;
     border: 5px solid green;
@@ -118,6 +126,11 @@ h1 {
 #h-collection > div > p {
     font-size: 1.5rem;
 }
+@media only screen and (max-width: 1480px) {
+    #h-mailing > div > h1 {
+        font-size: 3rem;
+    }  
+}
 @media only screen and (max-width: 1366px) {
     #h-wrapper {
         grid-template: 1fr 1fr / 1fr;
@@ -129,7 +142,7 @@ h1 {
         font-size: 3rem;
     }
     #h-mailing > div > p {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
     #h-collection {
         border-radius: 0 0 1em 1em;

@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name') }}</title>
     {{-- Favicon --}}
-    <link rel="icon" type="image/svg" href="">
+    <link rel="icon" type="svg" href="{{App\Http\Controllers\FileController::serveImageFile('favicon','svg')}}">
 
     <!-- Fonts and CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,6 +28,7 @@
     <header>
         <nav>
             <div id="panel" class="nav-element"></div>
+            <div id="panel2" class="nav-element"></div>
             {{-- Quick Links --}}
             <div id="links" class="nav-element">
                 <a href="/" class="nav-link">About</a>
@@ -39,7 +40,7 @@
             <div id="logo" class="nav-element">
                 <a href="{{ route('/') }}">
                     <picture>
-                        <img src="https://brwncreative.github.io/fresh2gohub.com/images/fresh2go_logo.svg" height="55px"
+                        <img src="{{App\Http\Controllers\FileController::serveImageFile('fresh2go_logo','svg')}}" height="55px"
                             width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
                     </picture>
                 </a>
@@ -78,7 +79,7 @@
         <div id="push"></div>
         <div id="content" class="center">
             <section id="hero" class="center">
-                @livewire('main.carousel')
+                @livewire('main.carousel',['title'=>$title])
             </section>
 
             <section>

@@ -1,4 +1,5 @@
 import './bootstrap';
+import './carousel';
 
 // TOGGLE HIDE NAV ---
 const navMenu = document.querySelector('#menu')
