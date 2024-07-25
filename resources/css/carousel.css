@@ -35,20 +35,21 @@ h1 {
     font-size: 1.5rem;
 }
 #h-mailing > div > form {
-    bottom: 3rem;
-    display: flex;
     width: 100%;
 }
 #m-controls {
     position: relative;
-    overflow: hidden;
+}
+#email-input {
     display: flex;
+    align-items: center;
     width: 100%;
     border: 2px solid black;
-    height: 3rem;
+    height: 3.2rem;
     border-radius: 15em;
+    margin-bottom: 1rem;
 }
-#m-controls > input {
+#email-input > input {
     border: none;
     font-size: 1.5;
     width: 70%;
@@ -59,21 +60,42 @@ h1 {
     justify-content: center;
     align-items: center;
 }
-#m-controls > input:focus {
+#email-input > input:focus {
     outline: none;
 }
 #m-controls > #m-btn {
-    position: absolute;
-    right: 0;
     border: none;
     font-weight: 500;
+    border-radius: 15px;
     outline: none;
     display: flex;
-    width: 20%;
-    height: 100%;
+    width: 100%;
+    height: 3rem;
     font-size: 1.2rem;
     color: black;
     background-color: greenyellow;
+}
+/* Errors */
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.fade {
+    animation: 1s linear 3s fade;
+}
+.error {
+    bottom: 1.5rem;
+    position: absolute;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    padding-inline: 2rem;
+    height: 2rem;
+    background-color: rgb(221, 221, 221);
+    border: 1px solid grey;
 }
 #h-collection {
     flex-direction: column;
@@ -114,7 +136,4 @@ h1 {
     }
 }
 @media only screen and (max-width: 768px) {
-    #m-btn {
-        width: 40% !important;
-    }
 }

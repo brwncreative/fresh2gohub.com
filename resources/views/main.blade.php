@@ -9,6 +9,8 @@
     <meta name="robots" content="index, follow" />
 
     <title>{{ config('app.name') }}</title>
+    {{-- Favicon --}}
+    <link rel="icon" type="image/svg" href="">
 
     <!-- Fonts and CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -37,7 +39,7 @@
             <div id="logo" class="nav-element">
                 <a href="{{ route('/') }}">
                     <picture>
-                        <img src="https://brwncreative.github.io/fresh2gohub.com/images/" height="55px"
+                        <img src="https://brwncreative.github.io/fresh2gohub.com/images/fresh2go_logo.svg" height="55px"
                             width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
                     </picture>
                 </a>
@@ -63,7 +65,7 @@
             </div>
             {{-- Menu --}}
             <menu id="menu" class="nav-element center">
-                @livewire('nav.menu', ['menuItems' => ['dsad', 'dsadsa', 'dsadsa', 'dsadsadsa']])
+                @livewire('nav.menu', ['menuItems' => ['packages', 'seasonings', 'fish']])
             </menu>
             {{-- Filters --}}
             <div id="filters" class="nav-element">
