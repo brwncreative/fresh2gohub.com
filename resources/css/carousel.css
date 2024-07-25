@@ -51,7 +51,7 @@ h1 {
     width: 100%;
     border: 2px solid black;
     height: 3.2rem;
-    border-radius: 15em;
+    border-radius: 15px;
     margin-bottom: 1rem;
 }
 #email-input > input {
@@ -149,4 +149,7 @@ h1 {
     }
 }
 @media only screen and (max-width: 768px) {
+    #h-mailing > div {
+        width: 85%;
+    }
 }

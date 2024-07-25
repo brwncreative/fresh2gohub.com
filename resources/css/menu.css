@@ -1,5 +1,6 @@
 
 #menu > #m-layout {
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;

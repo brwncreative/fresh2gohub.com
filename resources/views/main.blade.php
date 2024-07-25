@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Shop at Fresh2GoHub; Fruits, Veggies, Sauces and more! It's all Fresh2Go." />
     <meta name="robots" content="index, follow" />
 
