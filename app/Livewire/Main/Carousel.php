@@ -15,7 +15,7 @@ class Carousel extends Component
     public function addToMailing(){
         $this->validate();
         UserController::create('mail',$this->email);
-        \Illuminate\Support\Facades\Mail::to($this->email)->send(new \App\Mail\MailController());
+        \Illuminate\Support\Facades\Mail::to($this->email)->send(new \App\Mail\MailController($this->email));
         redirect()->route('welcome',['email'=>$this->email]);
     }
 
