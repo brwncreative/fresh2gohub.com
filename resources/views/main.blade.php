@@ -37,7 +37,7 @@
             <div id="logo" class="nav-element">
                 <a href="{{ route('/') }}">
                     <picture>
-                        <img src="https://brwncreative.github.io/Fresh2GoHub/Long@300x.png" height="55px"
+                        <img src="https://brwncreative.github.io/fresh2gohub.com/images/" height="55px"
                             width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
                     </picture>
                 </a>
