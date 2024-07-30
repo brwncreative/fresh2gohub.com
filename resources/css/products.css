@@ -1,0 +1,33 @@
+#ftp-container {
+    position: relative;
+    height: 22rem;
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+}
+#ftp-wrapper {
+    position: absolute;
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+}
+.ftp-card {
+    height: 20rem;
+    width: 16rem;
+    border-radius: 1rem;
+    border: 1px solid grey;
+}
+.ftp-contents {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template: 4fr 1fr 1.5fr 1fr 1fr / 1fr;
+}
+.card-text {
+    margin-left: .5rem;
+}
+@media only screen and (max-width: 1366px) {
+    #ftp-container {
+        margin-inline: 1.5rem;
+    }
+}

@@ -1,6 +1,7 @@
 #tags {
     display: flex;
     flex-direction: row;
+    gap: 1rem;
 }
 .nav-tag {
     padding-inline: 1rem;
@@ -8,5 +9,4 @@
     background-color: rgb(225, 225, 225);
     border-radius: 20px;
     border: 1px solid grey;
-    margin-inline: .5rem;
 }

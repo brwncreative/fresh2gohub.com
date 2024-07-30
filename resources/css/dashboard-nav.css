@@ -1,0 +1,35 @@
+#dashboard-nav {
+    background-color: white;
+    position: fixed;
+    width: 100vw;
+    display: grid;
+    grid-template: 5rem 3rem 5rem / 1fr;
+}
+#dashboard-actions {
+    display: flex;
+    gap: 2rem;
+}
+#dashboard-actions > .action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#d-menu-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.dm-item > a {
+    color: rgb(149, 149, 149);
+    text-decoration: none;
+}
+.d-active {
+    background-color: rgb(138, 138, 138);
+    padding-inline: 10px;
+    padding-block: 0.3rem;
+    border-radius: 10px;
+}
+.d-active > a {
+    color: rgb(255, 255, 255) !important;
+}

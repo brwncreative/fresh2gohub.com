@@ -1,4 +1,3 @@
-
 #menu > #m-layout {
     background-color: white;
     display: flex;
@@ -26,7 +25,7 @@
     column-gap: 2rem;
 }
 .m-item {
-    opacity: .5;
+    opacity: 0.5;
     color: black;
     font-size: 1rem;
     display: flex;
@@ -39,8 +38,16 @@
     margin: 0;
 }
 .m-item > p {
+    font-size: 0.8rem;
     font-weight: 500;
 }
-.m-item > i {
-    font-size: 1.6rem;
+@media only screen and (max-width: 1366px) {
+
 }
+@media only screen and (max-width: 715px) {
+    #m-layout {
+        overflow-x: scroll !important;
+        justify-content: start !important;
+    }
+}
+

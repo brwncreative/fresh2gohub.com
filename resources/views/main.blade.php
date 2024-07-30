@@ -5,12 +5,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Shop at Fresh2GoHub; Fruits, Veggies, Sauces and more! It's all Fresh2Go." />
     <meta name="robots" content="index, follow" />
 
     <title>{{ config('app.name') }}</title>
     {{-- Favicon --}}
-    <link rel="icon" type="svg" href="{{App\Http\Controllers\FileController::serveImageFile('favicon','svg')}}">
+    <link rel="icon" type="svg"
+        href="{{ App\Http\Controllers\FileController::serveImageFile('favicon', 'svg') }}">
 
     <!-- Fonts and CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -20,13 +22,13 @@
         defer>
 
     {{-- Vite assets from production --}}
-    @vite(['resources/css/app.css','resources/css/carousel.css','resources/css/menu.css', 'resources/css/searchbar.css', 'resources/css/tags.css', 'resources/js/app.js'])
+    @vite(['resources/js/app.js','resources/css/app.css'])
 </head>
 
 <body>
     {{-- Navigation --}}
     <header>
-        <nav>
+        <nav id="main-nav">
             <div id="panel" class="nav-element"></div>
             <div id="panel2" class="nav-element"></div>
             {{-- Quick Links --}}
@@ -40,8 +42,9 @@
             <div id="logo" class="nav-element">
                 <a href="{{ route('/') }}">
                     <picture>
-                        <img src="{{App\Http\Controllers\FileController::serveImageFile('fresh2go_logo','svg')}}" height="55px"
-                            width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
+                        <img src="{{ App\Http\Controllers\FileController::serveImageFile('fresh2go_logo', 'svg') }}"
+                            height="55px" width="auto" fetchpriority="high" loading="eager"
+                            alt="Fresh2Go Logo"></img>
                     </picture>
                 </a>
                 <div id="l-divider"></div>
@@ -56,7 +59,9 @@
                 </div>
                 <div id="a-account" class="action">
                     <strong>Account Area</strong>
-                    <p>Login / Sign up</p>
+                    <a href="{{ route('login') }}">
+                        <p>Login / Sign up</p>
+                    </a>
                 </div>
                 <div id="a-coupons" class="action"><i class="bi bi-ticket h2"></i></div>
                 <div id="a-cart" class="action"><i class="bi bi-basket h2"></i>
@@ -79,17 +84,17 @@
         <div id="push"></div>
         <div id="content" class="center">
             <section id="hero" class="center">
-                @livewire('main.carousel',['title'=>$title])
+                @livewire('main.carousel', ['title' => $title])
             </section>
 
             <section>
-         
+            
             </section>
         </div>
     </main>
-    
-    <footer>
 
+    <footer>
+        <x-footer></x-footer>
     </footer>
 </body>
 

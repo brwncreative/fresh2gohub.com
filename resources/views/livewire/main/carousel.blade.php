@@ -21,10 +21,8 @@
             </form>
         </div>
     </div>
-    <div id="h-collection" class="center">
-        <div>
-            <h1>Welcome to Fresh2Go.com</h1>
-            <p>your one stop shop all things fresh and ready to go!</p>
-        </div>
+    <div id="h-products">@livewire('main.feat-products')</div>
+    <div>
+        
     </div>
 </div>

@@ -1,0 +1,5 @@
+#dashboard-content{
+    background-color: rgb(239, 239, 239);
+    display: grid;
+    grid-template: 15rem 1fr / 1fr;
+}

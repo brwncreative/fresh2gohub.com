@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{{ config('app.name') }}</title>
+    {{-- Favicon --}}
+    <link rel="icon" type="svg" href="{{ App\Http\Controllers\FileController::serveImageFile('favicon', 'svg') }}">
+
+    <!-- Fonts and CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"
+        defer>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        defer>
+
+    {{-- Vite assets from production --}}
+    @vite(['resources/css/login.css','resources/css/errors.css'])
+</head>
+
+<body>
+    <main>
+        @livewire('login')
+    </main>
+</body>
+
+</html>

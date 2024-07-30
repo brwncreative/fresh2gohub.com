@@ -20,10 +20,10 @@ class UserController extends Controller
      */
     public static function create($purpose, $email)
     {
-        switch($purpose){
+        switch ($purpose) {
             case 'mail':
                 User::createOrFirst([
-                    'mailing'=>true,
+                    'mailing' => true,
                     'email' => $email,
                 ]);
         }
@@ -43,6 +43,23 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
+    }
+
+    /**
+     * Search the specified resource.
+     * @return boolean
+     */
+    public static function search($email, $id = null)
+    {
+        $users = User::where('email', 'like', '%' . $email . '%')->limit(1)->get();
+        foreach ($users as $user) {
+            switch ($user->email == $email) {
+                case true:
+                    return true;
+                case false:
+                    return false;
+            }
+        }
     }
 
     /**

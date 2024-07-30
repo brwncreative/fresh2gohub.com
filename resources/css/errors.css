@@ -1,0 +1,41 @@
+/* Errors */
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.fade {
+    animation: 1s linear 0s fade;
+}
+.error {
+    bottom: .5rem;
+    position: absolute;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    padding-block: 5px;
+    padding-inline: 2rem;
+    background-color: rgb(221, 221, 221);
+    border: 1px solid grey;
+}
+.error > p{
+    margin: 0;
+    padding: 0;
+}
+
+.login-error > p{
+    margin: 0;
+    padding: 0;
+}
+
+.login-error{
+    font-size: 1.1rem;
+    border-radius: 30px;
+    padding-block: 5px;
+    padding-inline: 1rem;
+    background-color: rgb(221, 221, 221);
+    border: 1px solid grey;
+    margin-top: .5rem;
+}

@@ -1,32 +1,16 @@
-p {
-    margin: 0;
-    padding: 0;
-}
-h1 {
-    margin: 0;
-    padding: 0;
-}
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 #h-wrapper {
     display: grid;
-    width: inherit;
+    width: 100%;
     height: inherit;
-    grid-template: 1fr / 60% 1fr;
+    grid-template: 1fr / 1.2fr 1fr;
 }
 #h-mailing {
     position: relative;
     overflow: hidden;
     color: black;
-    border: 5px solid green;
-    border-radius: 1em 0 0 1em;
 }
 #h-mailing > div {
-    padding-block: 3rem;
-    width: 90%;
+    width: 80%;
 }
 #m-spacer{
     display: block;
@@ -57,12 +41,17 @@ h1 {
 #email-input > input {
     border: none;
     font-size: 1.2rem;
-    width: 70%;
-    margin-left: 1.2rem;
+    width: 90%;
+    margin-left: 1rem;
     background: none;
     align-self: center;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+#email-input > input > *{
+    display: flex;
     align-items: center;
 }
 #email-input > input:focus {
@@ -84,48 +73,6 @@ h1 {
 #h-mailing > canvas {
     position: absolute;
 }
-/* Errors */
-@keyframes fade {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-.fade {
-    animation: 1s linear 0s fade;
-}
-.error {
-    bottom: 1.5rem;
-    position: absolute;
-    font-size: 1.1rem;
-    border-radius: 30px;
-    padding-inline: 2rem;
-    height: 2rem;
-    background-color: rgb(221, 221, 221);
-    border: 1px solid grey;
-}
-#h-collection {
-    color: white;
-    background-color: green;
-    border: 5px solid green;
-    border-radius: 0 1em 1em 0;
-}
-#h-collection > div {
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 85%;
-    height: 85%;
-}
-#h-collection > div > h1 {
-    font-size: 3rem;
-}
-#h-collection > div > p {
-    font-size: 1.5rem;
-}
 @media only screen and (max-width: 1480px) {
     #h-mailing > div > h1 {
         font-size: 3rem;
@@ -135,21 +82,20 @@ h1 {
     #h-wrapper {
         grid-template: 1fr 1fr / 1fr;
     }
-    #h-mailing {
-        border-radius: 1em 1em 0 0;
+    #h-mailing > div {
+        width: 92%;
     }
     #h-mailing > div > h1 {
-        font-size: 3rem;
+        word-wrap: break-word;
+        width: 80%;
+        font-size: 2.5rem;
     }
     #h-mailing > div > p {
-        font-size: 1.5rem;
-    }
-    #h-collection {
-        border-radius: 0 0 1em 1em;
+        font-size: 1.3rem;
     }
 }
 @media only screen and (max-width: 768px) {
     #h-mailing > div {
-        width: 85%;
+        width: 90%;
     }
 }

@@ -1,31 +1,11 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-Y9MvN-eZ.css",
+    "file": "assets/app-B5HGJ1vL.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/css/carousel.css": {
-    "file": "assets/carousel-WoZVr5aB.css",
-    "src": "resources/css/carousel.css",
-    "isEntry": true
-  },
-  "resources/css/menu.css": {
-    "file": "assets/menu-CsvWA5wz.css",
-    "src": "resources/css/menu.css",
-    "isEntry": true
-  },
-  "resources/css/searchbar.css": {
-    "file": "assets/searchbar-C5zeF1Hq.css",
-    "src": "resources/css/searchbar.css",
-    "isEntry": true
-  },
-  "resources/css/tags.css": {
-    "file": "assets/tags-vjct5EPT.css",
-    "src": "resources/css/tags.css",
-    "isEntry": true
-  },
   "resources/js/app.js": {
-    "file": "assets/app-CTBPFcCf.js",
+    "file": "assets/app-Crso2Zzq.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

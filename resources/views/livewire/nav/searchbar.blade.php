@@ -3,7 +3,7 @@
         <form action="">
             @csrf <!-- {{ csrf_field() }} -->
             <div id="s-container"> <input placeholder="Lets eat!" name="search" wire:model.live="type"
-                    wire:change="clickAway()" type="search"></input>
+                    type="search"></input>
                 <div id="s-btn" class="center"><i class="bi bi-search h2"></i>
                 </div>
             </div>
