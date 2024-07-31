@@ -34,20 +34,22 @@ class FileController extends Controller
         }
 
         $run = shell_exec(".\..\.venv\Scripts\python.exe .\..\app\Http\Controllers\FileController.py  $filename $ext .\..\images\ 2>&1");
-        dd($run);
+        if(str_contains($run,"success")){
+            return file_get_contents(base_path('images\\'.$filename.'.webp'));
+        }
     }
 
     /**
      * Store File in GitHub repo
      * - Store the file in the github repo and return cdn link
      */
-    public static function storeImageFile($filename, $ext, $file)
+    public static function storeImageFile($filename, $file)
     {
         self::convertToWebp($filename, $file);
-        // if (isset($file)) {
-        //     $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . '.'.$ext, ['message' => 'image', 'content' => base64_encode($file->get())]);
-        //     return $resp->created();
-        // }
+        if (isset($file)) {
+            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . '.webp', ['message' => 'image', 'content' => base64_encode(self::convertToWebp($filename, $file))]);
+            return $resp->created();
+        }
     }
 
     /**

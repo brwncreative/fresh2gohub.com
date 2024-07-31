@@ -39,8 +39,8 @@ class DashboardProducts extends Component
      */
     public function create()
     { 
-        $resp = FileController::storeImageFile($this->name, str_replace('image/', '', $this->image->getMimeType()), $this->image);
-        ProductController::create($this->name, $this->description, self::serializeTags(), $this->in_stock, $this->stock, $this->options, $this->price);
+        $resp = FileController::storeImageFile(str_replace(' ','_',$this->name), $this->image);
+        ProductController::create(str_replace(' ','_',$this->name), $this->description, self::serializeTags(), $this->in_stock, $this->stock, $this->options, $this->price);
         redirect(route('dashboard-products'));
     }
 
