@@ -12,7 +12,7 @@
     <title>{{ config('app.name') }}</title>
     {{-- Favicon --}}
     <link rel="icon" type="svg"
-        href="{{ App\Http\Controllers\FileController::serveImageFile('favicon', 'svg') }}">
+        href="{{ App\Http\Controllers\FileController::serveImageFile('favicon', 'ico') }}">
 
     <!-- Fonts and CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
