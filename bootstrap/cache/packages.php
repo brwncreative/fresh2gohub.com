@@ -1,4 +1,15 @@
 <?php return array (
+  'buglinjo/laravel-webp' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Buglinjo\\LaravelWebp\\WebpServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Webp' => 'Buglinjo\\LaravelWebp\\Webp',
+    ),
+  ),
   'erlandmuchasaj/laravel-gzip' => 
   array (
     'providers' => 

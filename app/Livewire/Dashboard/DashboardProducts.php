@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use App\Models\Product;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\ProductController;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -33,11 +34,12 @@ class DashboardProducts extends Component
         $this->products = self::list();
     }
     /**
-     * Create a product
+     * Create a product with image
      * @return void
      */
     public function create()
-    {
+    { 
+        $resp = FileController::storeImageFile($this->name, str_replace('image/', '', $this->image->getMimeType()), $this->image);
         ProductController::create($this->name, $this->description, self::serializeTags(), $this->in_stock, $this->stock, $this->options, $this->price);
         redirect(route('dashboard-products'));
     }

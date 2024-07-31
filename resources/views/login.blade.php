@@ -18,7 +18,7 @@
         defer>
 
     {{-- Vite assets from production --}}
-    @vite(['resources/css/login.css','resources/css/errors.css'])
+    @vite(['resources/js/app.js','resources/css/app.css'])
 </head>
 
 <body>
