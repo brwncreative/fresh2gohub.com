@@ -37,6 +37,10 @@ class FeatProducts extends Component
         }
     }
 
+    public function addToCart($name){
+ 
+    }
+
     public function render()
     {
         return view('livewire.main.feat-products');

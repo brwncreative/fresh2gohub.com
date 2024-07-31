@@ -1,7 +1,9 @@
 <div>
     <div id="pcc-actions">
+        <h3>See whats popular!</h3>
+        <div class="spacer-small"></div>
         <i class="bi bi-chevron-left pcc-left"></i>
-        <div id="spacer"></div>
+        <div class="spacer"></div>
         <i class="bi bi-chevron-right pcc-right"></i>
     </div>
     <div id="ftp-container">
@@ -26,7 +28,7 @@
                         </div>
                         <div class="pc-info middle">
                             <div class="card-text pc-price">${{ $product->price }}</div>
-                            <div class="pc-actions"><i class="bi bi-plus-circle"></i></div>
+                            <div class="pc-actions"><i class="bi bi-plus-circle" wire:click.prevent="addToCart(@js($product->id))"></i></div>
                         </div>
                     </div>
                 </div>

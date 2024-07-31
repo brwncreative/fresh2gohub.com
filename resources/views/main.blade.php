@@ -11,7 +11,7 @@
 
     <title>{{ config('app.name') }}</title>
     {{-- Favicon --}}
-    <link rel="icon" type="svg"
+    <link rel="icon" type="ico"
         href="{{ App\Http\Controllers\FileController::serveImageFile('favicon', 'ico') }}">
 
     <!-- Fonts and CSS-->
@@ -71,7 +71,7 @@
             </div>
             {{-- Menu --}}
             <menu id="menu" class="nav-element center">
-                @livewire('nav.menu', ['menuItems' => ['packages', 'seasonings', 'fish','fish','fish', 'fish','fish','fish', 'fish','fish','fish']])
+                @livewire('nav.menu', ['menuItems' => ['mixed packages', 'vegetables', 'prepackaged fruit and platters','paste/mash','sauces', 'seasonings','dry rubs(packs)','meats', 'seafood','marinades','others']])
             </menu>
             {{-- Filters --}}
             <div id="filters" class="nav-element">

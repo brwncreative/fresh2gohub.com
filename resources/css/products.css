@@ -3,9 +3,14 @@
     font-size: 1.2rem;
     display: flex;
     flex-direction: row;
-    justify-content: right;
-    margin-inline: 1rem;
+    justify-content: left;
+    align-items: center;
+
     color: grey;
+}
+#pcc-actions > h3{
+    text-decoration: underline;
+    font-size: 1.2rem;
 }
 #pcc-actions > i{
     -webkit-text-stroke: .1rem;

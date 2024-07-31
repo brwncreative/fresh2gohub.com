@@ -2,7 +2,7 @@
     display: grid;
     width: 100%;
     height: inherit;
-    grid-template: 1fr / 1.2fr 1fr;
+    grid-template: 1fr / 1fr 1fr;
 }
 #h-mailing {
     position: relative;
@@ -18,7 +18,7 @@
     margin: .8rem;
 }
 #h-mailing > div > h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 #h-mailing > div > p {
     font-size: 1.2rem;
@@ -75,7 +75,7 @@
 }
 @media only screen and (max-width: 1480px) {
     #h-mailing > div > h1 {
-        font-size: 3rem;
+        font-size: 2rem;
     }  
 }
 @media only screen and (max-width: 1366px) {
@@ -88,7 +88,6 @@
     #h-mailing > div > h1 {
         word-wrap: break-word;
         width: 80%;
-        font-size: 2.5rem;
     }
     #h-mailing > div > p {
         font-size: 1.3rem;

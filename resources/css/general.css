@@ -2,15 +2,18 @@ p {
     margin: 0;
     padding: 0;
 }
-h1 {
+h1 , h2, h3, h4 {
     margin: 0;
     padding: 0;
 }
-#spacer{
+.spacer-small{
+    width: 2rem;
+}
+.spacer{
     width: 5rem;
 }
 .divider {
-    margin-block: 3.5rem;
+    margin-block: 3rem;
     width: 95%;
     border-top: 1px solid #adadad;
     content: "";
