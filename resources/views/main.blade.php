@@ -22,10 +22,10 @@
         defer>
 
     {{-- Vite assets from production --}}
-    @vite(['resources/js/app.js','resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
-<body>
+<body class="inter-font">
     {{-- Navigation --}}
     <header>
         <nav id="main-nav">
@@ -71,7 +71,7 @@
             </div>
             {{-- Menu --}}
             <menu id="menu" class="nav-element center">
-                @livewire('nav.menu', ['menuItems' => ['packages', 'seasonings', 'fish']])
+                @livewire('nav.menu', ['menuItems' => ['packages', 'seasonings', 'fish','fish','fish', 'fish','fish','fish', 'fish','fish','fish']])
             </menu>
             {{-- Filters --}}
             <div id="filters" class="nav-element">
@@ -83,13 +83,14 @@
     <main>
         <div id="push"></div>
         <div id="content" class="center">
-            <section id="hero" class="center">
+            <section id="hero" class="center section">
                 @livewire('main.carousel', ['title' => $title])
             </section>
-
-            <section>
-            
+            <div class="divider"></div>
+            <section id="aboutus" class="section center">
+                @livewire('main.section', ['heading' => 'Why choose Fresh2Go?', 'text' => "When you're passionate about something, ideas tend to expand and eventually become the sparks for action. We at Fresh2GoHub believe in better ingredients, better food and the best quality to go"])
             </section>
+            <div class="divider"></div>
         </div>
     </main>
 

@@ -6,9 +6,32 @@ h1 {
     margin: 0;
     padding: 0;
 }
+#spacer{
+    width: 5rem;
+}
+.divider {
+    margin-block: 3.5rem;
+    width: 95%;
+    border-top: 1px solid #adadad;
+    content: "";
+}
 
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.middle {
+    display: flex;
+    align-items: center;
+}
+
+*::-webkit-scrollbar {
+    width: 0.2rem;
+    height: 0.3rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: lightgrey;
+    border-radius: 2rem;
 }

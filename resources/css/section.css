@@ -1,0 +1,10 @@
+#section-container{
+    width: 90%;
+    min-height: 10rem;
+    display: grid;
+    grid-template: 1fr 1fr / 2fr 1fr;
+}
+
+#section-info{
+    grid-area: 2 / 1 / 2 / 1;
+}

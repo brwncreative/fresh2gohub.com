@@ -9,15 +9,6 @@
     width: 90%;
     min-width: 20rem;
 }
-#menu > #m-layout::-webkit-scrollbar {
-    width: 0.2rem;
-    height: 0.3rem;
-}
-
-#menu > #m-layout::-webkit-scrollbar-thumb {
-    background: lightgrey;
-    border-radius: 2rem;
-}
 #m-wrapper {
     position: absolute;
     display: flex;
@@ -41,8 +32,15 @@
     font-size: 0.8rem;
     font-weight: 500;
 }
+@media only screen and (max-width: 1600px) {
+    .m-item > img {
+        height: 25px !important;
+    }
+}
 @media only screen and (max-width: 1366px) {
-
+    .m-item > img {
+        height: 25px !important;
+    }
 }
 @media only screen and (max-width: 715px) {
     #m-layout {
@@ -50,4 +48,3 @@
         justify-content: start !important;
     }
 }
-

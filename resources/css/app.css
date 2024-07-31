@@ -10,6 +10,13 @@
 @import url(./main.css);
 @import url(./menu.css);
 @import url(./searchbar.css);
+@import url(./section.css);
 @import url(./tags.css);
-@import url(./user.css);
 @import url(./products.css);
+
+.inter-font{
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

@@ -21,7 +21,7 @@
     @vite(['resources/js/app.js','resources/css/app.css'])
 </head>
 
-<body>
+<body class="inter-font">
     <main>
         @livewire('login')
     </main>

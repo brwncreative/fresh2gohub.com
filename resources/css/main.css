@@ -13,7 +13,7 @@ p {
     top: 0;
     width: 100vw;
     display: grid;
-    grid-template: 2rem 5rem 5rem 4rem / 1.1fr 1.3fr 1.3fr 1.3fr 1fr 1fr;
+    grid-template: 1.5rem 5rem 4rem 4rem / 1.1fr 1.3fr 1.3fr 1.3fr 1fr 1fr;
 }
 .nav-element {
     height: 100%;
@@ -34,6 +34,7 @@ p {
     background-color: white;
 }
 #links {
+    font-size: .8rem;
     z-index: 3;
     grid-area: 1 / 5 / 1 / 7;
     justify-content: right;
@@ -190,11 +191,14 @@ main {
 #hero {
     width: 100%;
 }
+#aboutus{
+    width: 100%;
+}
 #content {
     flex-direction: column !important;
 }
 @media only screen and (max-width: 715px) {
     main {
-        grid-template: 13rem 1fr / 1fr;
+        grid-template: 14rem 1fr / 1fr;
     }
 }
