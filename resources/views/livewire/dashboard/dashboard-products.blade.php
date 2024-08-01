@@ -47,6 +47,7 @@
                 <input placeholder="Stock" wire:model='stock' type="number" name="stock">
                 <input placeholder="Options" wire:model='options' name="options">
                 <input placeholder="Price" step="0.01" wire:model='price' type="number" name="price">
+                <input placeholder="metric" wire:model='metric' name="metric">
                 <button type="submit">Add Product</button>
             </form>
         </div>

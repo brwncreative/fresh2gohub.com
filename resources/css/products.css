@@ -1,4 +1,4 @@
-#pcc-actions{
+#pcc-actions {
     font-weight: 800;
     font-size: 1.2rem;
     display: flex;
@@ -8,12 +8,12 @@
 
     color: grey;
 }
-#pcc-actions > h3{
+#pcc-actions > h3 {
     text-decoration: underline;
     font-size: 1.2rem;
 }
-#pcc-actions > i{
-    -webkit-text-stroke: .1rem;
+#pcc-actions > i {
+    -webkit-text-stroke: 0.1rem;
     font-size: 1.1rem;
 }
 #ftp-container {
@@ -28,13 +28,14 @@
 #ftp-wrapper {
     position: absolute;
     display: flex;
-    gap: 1rem;
+    gap: .8rem;
     flex-direction: row;
     transition: 1s;
 }
 .ftp-card {
-    height: 18rem;
-    width: 15rem;
+    overflow: hidden;
+    height: 15rem;
+    width: 14rem;
     border-radius: 1rem;
     border: 1px solid grey;
 }
@@ -45,37 +46,45 @@
     grid-template: 3fr 1fr 1.2fr 1.2fr 1.2fr / 1fr;
 }
 .card-text {
-    margin-inline: .8rem;
+    margin-inline: 0.8rem;
 }
-.pc-logo{
+.pc-image {
     overflow: hidden;
 }
-.pc-name{
+.pc-image > img{
+    height: 12rem;
+}
+.pc-name {
     font-size: 1.1rem;
     font-weight: 500;
     text-transform: capitalize;
 }
-.pc-options > select{
-   width: 100%;
-   height: 80%;
-   border-radius: 10px;
+.pc-options > select {
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
 }
-.pc-info{
+.pc-info {
     display: flex;
 }
-.pc-price{
-    font-size: .8rem;
+.pc-price {
+    font-size: 0.8rem;
     flex: 73% 0;
 }
-.pc-actions > i{
+.pc-actions > i {
     color: green;
     font-size: 1.6rem;
 }
 @media only screen and (max-width: 1366px) {
     #ftp-container {
-        margin-inline: 1.5rem;
+        margin-inline: 1rem;
     }
-    #pcc-actions{
+    #pcc-actions {
         margin-inline: 1.5rem;
     }
 }
+
+@media only screen and (max-width: 715px) {
+
+}
+

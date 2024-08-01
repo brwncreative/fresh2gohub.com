@@ -22,12 +22,12 @@ class ProductController extends Controller
      */
     public static function indexSpecificTag($tags)
     {
-        return Product::where('tags','like','%'.$tags.'%');
+        return Product::where('tags', 'like', '%' . $tags . '%')->get();
     }
     /**
      * Create a product
      */
-    public static function create($name, $description,$tags, $in_stock, $stock, $options, $price)
+    public static function create($name, $description, $tags, $in_stock, $stock, $options, $price, $metric, $url)
     {
         Product::createOrFirst([
             'name' => $name,
@@ -36,7 +36,9 @@ class ProductController extends Controller
             'in_stock' => $in_stock,
             'stock' => $stock,
             'options' => $options,
-            'price' => $price
+            'price' => $price,
+            'metric' => $metric,
+            'url' => $url
         ]);
     }
 

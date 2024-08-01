@@ -1,7 +1,7 @@
 <div id="h-wrapper">
     <div id="h-mailing" class="center">
         <div>
-            <h1>{{$title}}</h1>
+            <h1 class="title">{{$title}}</h1>
             <br id="m-spacer">
             <p>Keep in the know about all things Fresh2Go!</p>
             <br>
@@ -21,7 +21,7 @@
             </form>
         </div>
     </div>
-    <div id="h-products">@livewire('main.feat-products')</div>
+    <div id="h-products">@livewire('main.feat-products',['pullOnly'=>''])</div>
     <div>
         
     </div>

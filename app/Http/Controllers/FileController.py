@@ -9,5 +9,8 @@ def convert_to_webp():
     if(sys.argv[2] == 'png'):
         img.save(sys.argv[3]+sys.argv[1]+'.webp', 'webp', lossless=True)
         print('success')
+    elif(sys.argv[2]=='jpg' or sys.argv[2] == 'jpeg'):
+        img.save(sys.argv[3]+sys.argv[1]+'.webp', 'webp', quality=85)
+        
 
 convert_to_webp()

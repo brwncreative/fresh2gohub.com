@@ -1,6 +1,6 @@
 <div id="section-container">
-    <div id="section-title">
-        <h3>{{ $heading }}</h3>
+    <div id="section-title" >
+        <h3 class="title">{{ $heading }}</h3>
         <p>{{ $text }}</p>
     </div>
     <div id="section-interact"></div>

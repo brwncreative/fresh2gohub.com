@@ -16,7 +16,7 @@
     column-gap: 2rem;
 }
 .m-item {
-    opacity: 0.5;
+    opacity: 0.4;
     color: black;
     font-size: 1rem;
     display: flex;
@@ -29,20 +29,26 @@
     margin: 0;
 }
 .m-item > p {
+    color: rgb(0, 0, 0) !important;
     font-size: 0.8rem;
     font-weight: 500;
+    text-transform: capitalize;
 }
 @media only screen and (max-width: 1600px) {
     .m-item > img {
-        height: 25px !important;
+        height: 20px !important;
     }
 }
 @media only screen and (max-width: 1366px) {
     .m-item > img {
         height: 25px !important;
     }
+    #m-layout {
+        overflow-x: scroll !important;
+        justify-content: start !important;
+    }
 }
-@media only screen and (max-width: 715px) {
+@media only screen and (max-width: 1140px) {
     #m-layout {
         overflow-x: scroll !important;
         justify-content: start !important;

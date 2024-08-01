@@ -9,29 +9,7 @@
     <div id="ftp-container">
         <div id="ftp-wrapper">
             @foreach ($products as $product)
-                <div class="ftp-card">
-                    <div class="ftp-contents">
-                        <div class="pc-logo"><img
-                                src="{{ App\Http\Controllers\FileController::serveImageFile($product->name, 'webp') }}"
-                                alt="Fresh2Go Product"></div>
-                        <div class="card-text pc-tags middle">
-                            @foreach ($product->tags as $tag)
-                                <div class="pc-tag tag-{{ $tag }}">{{ $tag }}</div>
-                            @endforeach
-                        </div>
-                        <div class="card-text pc-name">{{ $product->name }}</div>
-                        <div class="card-text pc-options middle"><select name="options">
-                                @foreach ($product->options as $option)
-                                    <option value="{{ $option }}">{{ $option }}</option>
-                                @endforeach
-                                < </select>
-                        </div>
-                        <div class="pc-info middle">
-                            <div class="card-text pc-price">${{ $product->price }}</div>
-                            <div class="pc-actions"><i class="bi bi-plus-circle" wire:click.prevent="addToCart(@js($product->id))"></i></div>
-                        </div>
-                    </div>
-                </div>
+            @livewire('main.product-card',['id'=>$product->id,'url'=>$product->url,'tags'=>$product->tags,'name'=>$product->name,'options'=>$product->options,'price'=>$product->price,'metric'=>$product->metric])
             @endforeach
         </div>
     </div>

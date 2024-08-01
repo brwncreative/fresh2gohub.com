@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->boolean('in_stock')->nullable();
             $table->integer('stock');
-            $table->string('options');
+            $table->string('options')->nullable();
             $table->float('price');
+            $table->string('metric');
+            $table->string('url');
         });
     }
 

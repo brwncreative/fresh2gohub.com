@@ -71,7 +71,7 @@
             </div>
             {{-- Menu --}}
             <menu id="menu" class="nav-element center">
-                @livewire('nav.menu', ['menuItems' => ['mixed packages', 'vegetables', 'prepackaged fruit and platters','paste/mash','sauces', 'seasonings','dry rubs(packs)','meats', 'seafood','marinades','others']])
+                @livewire('nav.menu', ['menuItems' => ['mixed packages', 'vegetables', 'prepackaged fruit and platters','mash','sauces', 'seasonings','dry rubs(packs)','meats', 'seafood','marinades']])
             </menu>
             {{-- Filters --}}
             <div id="filters" class="nav-element">

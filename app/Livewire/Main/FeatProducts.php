@@ -8,7 +8,7 @@ use Livewire\Component;
 class FeatProducts extends Component
 {
     public $products;
-    public $tags;
+    public $pullOnly;
 
     public function unserializeTags($products)
     {
@@ -22,23 +22,27 @@ class FeatProducts extends Component
             $product->options = explode(",", $product->options);
         }
     }
+    public function unserializeItemName()
+    {
+        foreach($this->products as $product){
+            $product->name = str_replace('_',' ',$product->name);
+        }
+    }
 
     public function boot()
     {
 
-        if (isset(self::$tags)) {
-            $this->products = ProductController::indexSpecificTag($this->tags);
+        if (isset($this->pullOnly)) {
+            $this->products = ProductController::indexSpecificTag($this->pullOnly);
             self::unserializeTags($this->products);
             self::unserializeOptions($this->products);
+            self::unserializeItemName();
         } else {
             $this->products = ProductController::index();
             self::unserializeTags($this->products);
             self::unserializeOptions($this->products);
+            self::unserializeItemName();
         }
-    }
-
-    public function addToCart($name){
- 
     }
 
     public function render()

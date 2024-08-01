@@ -2,14 +2,23 @@ p {
     margin: 0;
     padding: 0;
 }
-h1 , h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     margin: 0;
     padding: 0;
 }
-.spacer-small{
+.title{
+    font-weight: 600;
+}
+.spacer-smallest {
+    width: .5rem;
+}
+.spacer-small {
     width: 2rem;
 }
-.spacer{
+.spacer {
     width: 5rem;
 }
 .divider {
@@ -37,4 +46,10 @@ h1 , h2, h3, h4 {
 *::-webkit-scrollbar-thumb {
     background: lightgrey;
     border-radius: 2rem;
+}
+
+@media only screen and (max-width: 715px) {
+    .divider {
+        margin-block: 2rem;
+    }
 }

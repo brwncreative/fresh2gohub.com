@@ -19,3 +19,5 @@ Route::group(['prefix' => 'dashboard/'], function () {
     Route::get('/mailing-list', function(){ return view('dashboard');})->name('dashboard-mailing-list');
     Route::get('/users', function(){ return view('dashboard');})->name('dashboard-users');
 });
+
+Route::get('/mail',function(){ return view('mail.welcome')->with('recipient',$recipient = 'User');})->name('mail');
