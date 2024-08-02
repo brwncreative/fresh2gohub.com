@@ -31,12 +31,18 @@ class FileController extends Controller
             $conn = fopen(base_path('images\\'.$filename.'.'.$ext), 'w');
             fwrite($conn, $stream);
             fclose($conn);
+            
+            $py = Http::post('http://127.0.0.1:5001/webp',['filename'=>$filename,'ext'=>$ext,'content'=>base64_encode($file->get())]);
+            dd($py->body());
+            return 'yes';
         }
 
-        $run = shell_exec(".\..\.venv\Scripts\python.exe .\..\app\Http\Controllers\FileController.py  $filename $ext .\..\images\ 2>&1");
-        if(str_contains($run,"success")){
-            return file_get_contents(base_path('images\\'.$filename.'.webp'));
-        }
+
+        // $run = shell_exec(".\..\.venv\Scripts\python.exe .\..\app\Http\Controllers\FileController.py  $filename $ext .\..\images\ 2>&1");
+        // if(str_contains($run,"success")){
+        //     return file_get_contents(base_path('images\\'.$filename.'.webp'));
+        //     return file_get_contents(base_path('images/'.$filename.'.webp')); -> production
+        // }
     }
 
     /**
