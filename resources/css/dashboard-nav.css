@@ -3,13 +3,21 @@
     position: fixed;
     width: 100vw;
     display: grid;
-    grid-template: 5rem 3rem 5rem / 1fr;
+    grid-template: 5rem 3rem  / 1fr;
 }
 #dashboard-actions {
     display: flex;
     gap: 2rem;
 }
 #dashboard-actions > .action {
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#dashboard-actions > .action  a{
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,10 +26,10 @@
 #d-menu-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 2rem;
 }
 .dm-item > a {
-    color: rgb(149, 149, 149);
+    color: rgb(79, 79, 79);
     text-decoration: none;
 }
 .d-active {

@@ -1,12 +1,9 @@
-footer{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
 #footer{
 font-size: .8rem;
 display: flex;
 justify-content: center;
+align-items: center;
+text-align: center;
 width: 80%;
 margin-bottom: 2rem;
 }

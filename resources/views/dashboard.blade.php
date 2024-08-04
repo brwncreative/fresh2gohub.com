@@ -18,31 +18,35 @@
         defer>
 
     {{-- Vite assets from production --}}
-    @vite(['resources/js/app.js','resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
 <body class="inter-font">
     <header>
         <nav id="dashboard-nav">
-            <div id="dashboard-logo" class="center">
-                <a href="{{ route('dashboard') }}">
-                    <picture>
-                        <img src="{{ App\Http\Controllers\FileController::serveImageFile('fresh2go_logo', 'svg') }}"
-                            height="55px" width="auto" fetchpriority="high" loading="eager"
-                            alt="Fresh2Go Logo"></img>
-                    </picture>
-                </a>
-            </div>
+
             <div id="dashboard-actions" class="center">
-                <div class="action"><a href="{{route('/')}}"><i class="bi bi-box-arrow-right"></i>Logout</div></a>
+                <div class="action"><a href="{{ route('/') }}"><i class="bi bi-box-arrow-right"></i>Logout</div></a>
                 <div class="action"><i class="bi bi-people"></i>Switch User</div>
                 <div class="action"><i class="bi bi-telephone"></i>Contact Dev</div>
+                <div class="action"><a href="{{ route('dashboard') }}"><i class="bi bi-house"></i></i>Home</a></div>
             </div>
             <div id="dashboard-menu" class="center">@livewire('dashboard.dashboard-menu', ['menu_items' => ['products', 'mailing-list', 'users']])</div>
         </nav>
     </header>
     <main id="dashboard-content">
         <div></div>
+        @if (request()->is('dashboard'))
+            <div id="dashboard-welcome" class="center">
+                <div id="dw-content" class="center">
+                    <h1>
+                        <strong>Welcome</strong>
+                        to your dashboard
+                    </h1>
+                    <p>Edit and add products, interact with your mailing list and manage the users of Fresh2GoHub
+                </div>
+            </div>
+        @endif
         @if (request()->is('dashboard/products'))
             @livewire('dashboard.dashboard-products')
         @endif

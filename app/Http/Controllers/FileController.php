@@ -24,13 +24,14 @@ class FileController extends Controller
     public static function convertToWebp($filename, $file)
     {
         $ext = str_replace('image/', '', $file->getMimeType());
-        $conv = null;
+        $conn = Http::post('http://127.0.0.1:5001/webp', ['filename' => $filename, 'ext' => $ext, 'content' => base64_encode($file->get())]);
 
-        $conv = Http::post('http://127.0.0.1:5001/webp', ['filename' => $filename, 'ext' => $ext, 'content' => base64_encode($file->get())]);
-        dd($conv->body());
-
-        if (str_contains($conv->body(), "success")) {
-            return base64_decode(file_get_contents(base_path('images\\' . $filename . '.jpeg')));
+        if (str_contains($conn->body(), "success")) {
+            if(file_exists(base_path('images\\' . $filename . '.webp'))){
+                $conv_img = base64_decode(file_get_contents(base_path('images\\' . $filename . '.webp')));
+                unlink(base_path('images\\' . $filename . '.webp'));
+                return $conv_img;
+            }
         }
     }
 
@@ -40,9 +41,8 @@ class FileController extends Controller
      */
     public static function storeImageFile($filename, $file)
     {
-        self::convertToWebp($filename, $file);
         if (isset($file)) {
-            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . '.jpeg', ['message' => 'image', 'content' => base64_encode(self::convertToWebp($filename, $file))]);
+            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . '.webp', ['message' => 'image', 'content' => base64_encode(self::convertToWebp($filename, $file))]);
             return $resp->created();
         }
     }

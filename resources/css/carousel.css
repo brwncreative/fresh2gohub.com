@@ -17,9 +17,6 @@
     content: "";
     margin: .8rem;
 }
-#h-mailing > div > h1 {
-    font-size: 2rem;
-}
 #h-mailing > div > p {
     font-size: 1.2rem;
 }
@@ -74,9 +71,7 @@
     position: absolute;
 }
 @media only screen and (max-width: 1480px) {
-    #h-mailing > div > h1 {
-        font-size: 2rem;
-    }  
+
 }
 @media only screen and (max-width: 1366px) {
     #h-wrapper {
@@ -87,10 +82,10 @@
     }
     #h-mailing > div > h1 {
         word-wrap: break-word;
-        width: 80%;
+        width: 60%;
     }
     #h-mailing > div > p {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
 }
 @media only screen and (max-width: 768px) {
@@ -98,6 +93,6 @@
         width: 90%;
     }
     #h-wrapper {
-    gap: 2rem;
+    gap: 1.5rem;
     }
 }

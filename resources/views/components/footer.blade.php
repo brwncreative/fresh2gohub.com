@@ -1,3 +1,4 @@
 <div id="footer">
- Fresh2GoHub and all trademarks are owned by Fresh2Go and their partners
+    <p>Fresh2GoHub: Powered by Brwncreative
+        All visual iconography are original and protected please</p>
 </div>

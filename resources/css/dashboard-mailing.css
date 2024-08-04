@@ -1,24 +1,31 @@
 #mailing-container {
     display: grid;
-    grid-template: 1fr 1fr / 2fr 1fr;
+    grid-template: 1fr 1fr 1fr / 2fr 1fr;
 }
 #mailing-list {
-    display: flex;
-    justify-content: center;
-}
-#ml-wrapper {
-    background-color: rgb(255, 255, 255);
-    width: 95%;
-    border-radius: 5px;
-}
-#ml-wrapper > table {
     width: 100%;
+    height: 100%;
 }
-#ml-headings {
-    border-bottom: 1px solid rgb(128, 128, 128);
+#ml-wrapper{
+    width: 100%;
+    height: 100%;
 }
-#ml-headings > th {
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 500 !important;
+#ml-tb-wrapper{
+    height: 100%;
+    width: 23.5rem;
+    overflow: auto;
+}
+#ml-tb-wrapper > table{
+    width:20rem;
+}
+
+
+@media only screen and (max-width: 1366px) {
+}
+
+@media only screen and (max-width: 768px) {
+    #mailing-container {
+        display: grid;
+        grid-template: 30rem 1fr 2rem / 1fr;
+    }
 }

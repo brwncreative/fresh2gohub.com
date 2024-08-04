@@ -1,11 +1,16 @@
 <div id="login-container" class="center">
     <div id="login-wrapper">
+        <div id="login-logo">
+            <img src="{{ App\Http\Controllers\FileController::serveImageFile('fresh2go_logo', 'svg') }}" height="55px"
+                width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
+        </div>
         <h1>Welcome Back</h1>
         <p> Let's get you something to eat!</p>
-        <p class='{{$evp_status ? 'account-found' : 'account-nfound'}}'>{{$login_message}}</p>
+        <p class='{{ $evp_status ? 'account-found' : 'account-nfound' }}'>{{ $login_message }}</p>
         <br>
         <form wire:submit='login'>
-            <div id="login-ui" class="center"><input wire:model.live.debounce.250ms="email" name="email" placeholder="E-mail"></input></div>
+            <div id="login-ui" class="center"><input wire:model.live.debounce.250ms="email" name="email"
+                    placeholder="E-mail"></input></div>
             @error('email')
                 <div id="username-error" class="login-error">
                     <div id="ue-content">
@@ -14,8 +19,8 @@
                 </div>
             @enderror
             <br>
-            <div id="login-pi" class="center"><input type="password" wire:model="password" name="password"
-                    placeholder="Password"></input></div>
+            <div id="login-pi" class="center"><input type="password" wire:model.live.debounce.250ms="password"
+                    name="password" placeholder="Password"></input></div>
             @error('password')
                 <div id="password-error" class="login-error">
                     <div id="pe-content">

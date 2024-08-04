@@ -1,23 +1,15 @@
-p {
-    margin: 0;
-}
-h1 {
-    margin: 0;
-}
-.center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#login-main{
+    width: 100vw;
+    height: 100vh;
 }
 #login-container {
     border: 2px solid rgb(207, 207, 207);
     width: 30rem;
-    padding-block: 3rem;
+    padding-block: 2rem;
     border-radius: 1em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+#login-logo{
+    margin-bottom: 1rem;
 }
 #login-wrapper {
     height: 95%;
@@ -26,8 +18,7 @@ h1 {
     flex-direction: column;
 }
 #login-ui {
-    border: 1px solid black;
-    border: 2px solid black;
+    border: 2px solid grey;
     border-radius: 1em;
     height: 3rem;
 }
@@ -40,7 +31,7 @@ h1 {
     outline: none;
 }
 #login-pi {
-    border: 2px solid black;
+    border: 2px solid grey;
     border-radius: 1em;
     height: 3rem;
 }
@@ -68,4 +59,13 @@ h1 {
 }
 .account-nfound {
     color: rgb(255, 0, 0);
+}
+
+@media only screen and (max-width: 1366px) {
+}
+
+@media only screen and (max-width: 768px) {
+    #login-container {
+        width: 90vw;
+    }
 }

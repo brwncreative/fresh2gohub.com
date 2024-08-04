@@ -22,7 +22,7 @@
 </head>
 
 <body class="inter-font">
-    <main>
+    <main id="login-main" class="center">
         @livewire('login')
     </main>
 </body>
