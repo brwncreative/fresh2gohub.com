@@ -24,21 +24,13 @@ class FileController extends Controller
     public static function convertToWebp($filename, $file)
     {
         $ext = str_replace('image/', '', $file->getMimeType());
-        $conn = null;
+        $conv = null;
 
-        if (isset($file)) {
-            $stream = $file->get();
-            $conn = fopen(base_path('images\\'.$filename.'.'.$ext), 'w');
-            fwrite($conn, $stream);
-            fclose($conn);
-            
-            $conv = Http::post('http://127.0.0.1:5001/webp',['filename'=>$filename,'ext'=>$ext,'content'=>base64_encode($file->get())]);
-        }
-        if(str_contains($conv,"success")){
-            dd(file_get_contents(base_path('images\\'.$filename.'.webp')));
-            return file_get_contents(base_path('images\\'.$filename.'.webp'));
+        $conv = Http::post('http://127.0.0.1:5001/webp', ['filename' => $filename, 'ext' => $ext, 'content' => base64_encode($file->get())]);
+        dd($conv->body());
 
-            // return file_get_contents(base_path('images/'.$filename.'.webp')); -> production
+        if (str_contains($conv->body(), "success")) {
+            return base64_decode(file_get_contents(base_path('images\\' . $filename . '.jpeg')));
         }
     }
 
@@ -50,7 +42,7 @@ class FileController extends Controller
     {
         self::convertToWebp($filename, $file);
         if (isset($file)) {
-            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . '.webp', ['message' => 'image', 'content' => base64_encode(self::convertToWebp($filename, $file))]);
+            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . '.jpeg', ['message' => 'image', 'content' => base64_encode(self::convertToWebp($filename, $file))]);
             return $resp->created();
         }
     }
