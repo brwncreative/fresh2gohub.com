@@ -1,0 +1,67 @@
+#standard-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+
+#standard-nav {
+    section {
+        padding-inline: 1rem;
+        a {
+            color: black;
+            text-decoration: none;
+        }
+    }
+    #nav-links {
+        height: 1.5rem; /* Buffer height to compensate for display none*/
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+    #nav-main {
+        background-color: lightgrey;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        div{
+            height: 3rem;
+        }
+        #logo {
+            background-color: red;
+            flex: 0 30%;
+        }
+        #searchbar {
+            background-color: green;
+            flex-grow: 2;
+        }
+        #actions {
+            background-color: blue;
+            flex-grow: 1;
+        }
+        #menu{
+            flex: 0 100%;
+        }
+    }
+    #nav-filters{
+        height: 2rem;
+        background-color: burlywood;
+    }
+}
+@media only screen and (max-width: 860px) {
+    #nav-links > * {
+        display: none !important;
+    }
+    #logo {
+        flex: unset !important;
+        flex-grow: 1 !important;
+    }
+    #searchbar {
+        flex: 0 100%;
+        order: 3;
+    }
+    #menu{
+        order: 4;
+    }
+}
