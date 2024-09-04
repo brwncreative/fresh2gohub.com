@@ -23,7 +23,7 @@
                 <div id="logo">Logo</div>
                 <div id="searchbar">SearchBar</div>
                 <div id="actions">Actions</div>
-                <div id="menu">Menu</div>
+                <div id="menu"><x-helpers.menu> </x-helpers.menu></div>
             </section>
             <section id="nav-filters">Filters</section>
         </nav>

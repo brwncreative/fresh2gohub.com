@@ -14,6 +14,7 @@
         }
     }
     #nav-links {
+        background-color: white;
         height: 1.5rem; /* Buffer height to compensate for display none*/
         display: flex;
         align-items: center;
@@ -25,6 +26,8 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        height: max-content;
+
         div{
             height: 3rem;
         }
