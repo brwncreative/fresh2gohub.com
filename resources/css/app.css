@@ -1,14 +1,57 @@
-body{
+/* General Theme */
+:root {
+    --light-grey: rgb(219, 219, 219);
+    --small: 0.8rem;
+    --medium: 0.9rem;
+    --big: 1.1rem;
+    --large: 2rem;
+}
+body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     margin: 0;
     color: black;
-}
-main{
-    margin-top: 12rem;
-}
-@media only screen and (max-width: 860px) {
-    main{
-        margin-top: 14rem;
+    a {
+        color: green;
+    }
+    i {
+        margin: 0 !important;
+    }
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    main {
+        margin-top: 13rem;
+        @media only screen and (max-width: 1070px) {
+            margin-top: 18rem;
+        }
+    }
+    *::-webkit-scrollbar {
+        width: 0.2rem;
+        height: 0.3rem;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background: lightgrey;
+        border-radius: 2rem;
     }
 }
+
+/* Custom Classes */
+.small-title {
+    font-size: var(--big);
+    -webkit-text-stroke: 0.3px;
+}
+.title {
+    font-size: var(--large);
+    -webkit-text-stroke: 0.3px;
+}
+.paragraph {
+    font-size: var(--medium);
+    color: grey;
+}
+.bold {
+    -webkit-text-stroke: 0.3px;
+}
+/* --- */

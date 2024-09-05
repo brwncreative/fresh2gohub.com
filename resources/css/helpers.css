@@ -1,0 +1,21 @@
+/* Notification */
+.notification{
+    background-color: rgb(116, 175, 227);
+    color: grey;
+    display: flex;
+    flex-direction: column;
+    padding-inline: .5rem;
+    padding-block: .25rem;
+    border-radius: 10px;
+    .bucket{
+        padding: .5rem;
+        background-color: white;
+        border-radius: 10px;
+        .title{
+            font-size: var(--big);
+        }
+        .text{
+            font-size: var(--medium);
+        }
+    }
+}

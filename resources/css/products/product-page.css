@@ -1,0 +1,23 @@
+#product-page {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    .bucket {
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        transition: 1s;
+    }
+    .active {
+        top: 0rem;
+    }
+    .in-active {
+        pointer-events: none;
+        top: 100vh;
+    }
+}

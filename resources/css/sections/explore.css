@@ -1,0 +1,76 @@
+#explore {
+    margin-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    height: max-content;
+    #mailing-cta {
+        padding: 1rem;
+        flex: 0 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        @media only screen and (max-width: 1070px){
+            flex: 0 100%;
+            padding-inline: 0;
+        }
+        div {
+            margin-block: 2rem;
+            position: relative;
+            input {
+                background: transparent;
+                padding-inline: 1rem;
+                padding-inline-end: 5.5rem;
+                padding-block: 0.5rem;
+                border: 2px solid grey;
+                width: 80%;
+                border-radius: 10px;
+            }
+            input:focus{
+                outline: 1px solid green;
+            }
+            .input-btn {
+                pointer-events: none;
+                color: green;
+                margin: 0;
+                position: absolute !important;
+                top: 0;
+                height: 100%;
+                width: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: right;
+                i {
+                    cursor:auto;
+                    pointer-events: all !important;
+                    width: 4rem;
+                    display: flex;
+                    justify-content: center;
+                    transition: .2s;
+                }
+                i:hover{
+                   cursor: pointer;
+                }
+            }
+        }
+    }
+    #featured-products {
+        flex: 0 50%;
+        @media only screen and (max-width: 1070px){
+            flex: 0 100%;
+        }
+        .products{
+            height: 25rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            .bucket{
+                position: absolute;
+               display: flex;
+               flex-direction: row;
+               gap: 2rem;
+            }
+        }
+    }
+}
