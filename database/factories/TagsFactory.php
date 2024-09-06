@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Options>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tags>
  */
-class OptionsFactory extends Factory
+class TagsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class OptionsFactory extends Factory
     public function definition(): array
     {
         return [
-            'option' => fake()->name(),
-            'value' => fake()->randomFloat(2, 9.99, 30),
+            'tag'=>fake()->name(),
             'product_id' => fake()->numberBetween(1, 3)
         ];
     }

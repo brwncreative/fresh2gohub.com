@@ -17,7 +17,9 @@ class PricesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'value' => fake()->randomFloat(2, 9.99, 30),
+            'metric' => fake()->text(5),
+            'product_id' => fake()->numberBetween(1, 3)
         ];
     }
 }

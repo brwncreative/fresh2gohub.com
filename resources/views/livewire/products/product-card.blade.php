@@ -1,27 +1,54 @@
 <div class="product-card">
+    {{-- Image --}}
     <div class="image" wire:click='callPage'><img src="" alt="">
         <div></div>
     </div>
-    <div class="tags">tags</div>
-    <div class="identifiers" wire:click='callPage'>Provider : <span class="small-title">Name</span></div>
-    <div class="description paragraph">Paragraph</div>
-    <div class="options">
-        <select name="options">
-            <option value="">dsada</option>
-        </select>
+    {{-- Tags --}}
+    <div class="tags">
+        @foreach ($tags as $tag)
+            <small class="tag">
+                <p>{{ $tag->tag }}</p>
+            </small>
+        @endforeach
     </div>
+    {{-- ID --}}
+    <div class="identifiers" wire:click='callPage'>{{ $provider }} : <span
+            class="small-title">{{ $name }}</span></div>
+    <div class="description paragraph">{{ $description }}</div>
+    {{-- Options --}}
+    <div class="options">
+        <select wire:model='selectedOpt' class="option-{{ $id }}" name="options">
+            <option value='{"option":"Check Options", "value":0}'>Check Options</option>
+            @foreach ($options as $option)
+                <option value="{{ $option }}">{{ $option->option }}</option>
+            @endforeach
+        </select>
+        @script
+            <script>
+                $wire.set('selectedOpt', document.querySelector(".option-{{ $id }}").value)
+            </script>
+        @endscript
+    </div>
+    {{-- Prices and Actions --}}
     <div class="main-actions">
         <div class="prices">
-            <select name="prices">
-                <option value="">9.99</option>
+            <select wire:model="selectedPri" class="price-{{ $id }}" name="prices">
+                @foreach ($prices as $price)
+                    <option value="{{ $price }}">{{ $price->value }} / {{ $price->metric }}</option>
+                @endforeach
             </select>
+            @script
+                <script>
+                    $wire.set('selectedPri', document.querySelector(".price-{{ $id }}").value)
+                </script>
+            @endscript
         </div>
         <div class="btns">
-            <i class="bi bi-dash-circle minus h4"></i>
+            <i class="bi bi-dash-circle minus h4" wire:click="addToCart('-')"></i>
             <p>
                 {{ $quantity }}
             </p>
-            <i class="bi bi-plus-circle add h4"></i>
+            <i class="bi bi-plus-circle add h4" wire:click="addToCart('+')"></i>
         </div>
     </div>
 </div>

@@ -1,0 +1,19 @@
+@import url('/resources/css/checkout/checkout.css');
+@import url('/resources/css/checkout/orders.css');
+
+#cart{
+    position: relative;
+    p{
+        position: absolute;
+        background-color: beige;
+        padding: .5rem;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 1rem;
+        left: 1rem;
+        border-radius: 3rem;
+    }
+}

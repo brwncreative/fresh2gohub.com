@@ -1,0 +1,43 @@
+#orders {
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        .searchbar {
+            flex: 0 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            input {
+                width: 90%;
+                border-radius: 10px;
+                padding-inline: 1rem;
+                padding-block: 0.2rem;
+                border: 1px solid grey;
+            }
+            input:focus {
+                outline: none;
+                border: 2px solid green;
+            }
+        }
+        .print {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+           
+        }
+    }
+    .bucket{
+        .order{
+            padding: 1rem;
+            border: 2px solid var(--light-grey);
+            border-radius: 10px;
+            display: grid;
+            grid-template: 1fr / 1fr 5fr;
+            div{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}

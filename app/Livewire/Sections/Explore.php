@@ -5,10 +5,11 @@ namespace App\Livewire\Sections;
 use Livewire\Component;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 class Explore extends Component
 {
-    public $title = "Join our mailing list!", $email;
+    public $title = "Join our mailing list!", $email, $products, $find;
 
     public function handleInvitee()
     {
@@ -18,6 +19,12 @@ class Explore extends Component
         if ($response == 1) {
             $this->title = 'Thank you for joining us';
         }
+    }
+    public function featureProducts(){
+        $this->products = ProductController::findBy($this->find, 'tag');
+    }
+    public function mount(){
+        Self::featureProducts();
     }
     public function render()
     {

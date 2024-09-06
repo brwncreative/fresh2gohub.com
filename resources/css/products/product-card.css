@@ -15,37 +15,46 @@
             border-radius: 10px;
         }
     }
-    .options{
-        select{
+    .description {
+        height: 2.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: initial;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    .options {
+        select {
             width: 100%;
             height: 70%;
             border-radius: 10px;
         }
     }
-    .main-actions{
-        padding-block: .05px;
+    .main-actions {
+        padding-block: 0.05px;
         display: flex;
         flex-direction: row;
-        *{
-            flex:0 50%;
+        * {
+            flex: 0 50%;
         }
-        .prices{
-            select{
+        .prices {
+            select {
                 border: none;
                 width: 90%;
             }
         }
-        .btns{
+        .btns {
             display: flex;
             * {
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-            .minus{
+            .minus {
                 color: red;
             }
-            .add{
+            .add {
                 color: green;
             }
         }

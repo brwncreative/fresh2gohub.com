@@ -1,4 +1,6 @@
 #standard-nav {
+    z-index: 1;
+    padding-inline: 3rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -6,7 +8,6 @@
 }
 #standard-nav {
     section {
-        padding-inline: 3rem;
         a {
             color: black;
             text-decoration: none;
@@ -19,7 +20,6 @@
         align-items: center;
         justify-content: flex-end;
         gap: 1.5rem;
-
         a {
             color: grey !important;
         }
@@ -43,6 +43,7 @@
             min-height: 4rem;
         }
         #logo {
+            background-color: white;
             flex: 0 20%;
             justify-content: start;
             position: relative;
@@ -66,7 +67,8 @@
             }
         }
         #searchbar {
-            flex: 0 40%;
+            background-color: white;
+            flex: 0 50%;
             display: flex;
             @media only screen and (max-width: 1070px) {
                 flex: 0 100% !important;
@@ -115,6 +117,7 @@
             }
         }
         #actions {
+            background-color: white;
             flex-grow: 1;
             display: flex;
             align-items: center;
@@ -153,6 +156,7 @@
             }
         }
         #menu {
+            background-color: white;
             flex: 0 100%;
             @media only screen and (max-width: 1070px) {
                 order: 4;
@@ -172,7 +176,7 @@
                     display: flex;
                     gap: 2rem;
                     .item {
-                        opacity: 0.7;
+                        opacity: 0.55;
                         display: flex;
                         width: max-content;
                         a {
@@ -200,6 +204,7 @@
         }
     }
     #nav-shopby {
+        background-color: white;
         height: 3rem;
         display: flex;
         justify-content: right;

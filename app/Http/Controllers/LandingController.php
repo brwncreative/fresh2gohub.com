@@ -17,4 +17,10 @@ class LandingController extends Controller
     public function results(){
         return view('results');
     }
+    public function orders(){
+        return view('orders');
+    }
+    public function checkout(){
+        return view('checkout');
+    }
 }

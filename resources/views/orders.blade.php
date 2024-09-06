@@ -1,3 +1,3 @@
 <x-layouts.standard>
-   @livewire('utilities.results')
+   @livewire('utilities.orders')
 </x-layouts.standard>

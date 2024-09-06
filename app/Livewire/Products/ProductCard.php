@@ -1,14 +1,60 @@
 <?php
 
 namespace App\Livewire\Products;
+
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ProductCard extends Component
-{ public $quantity = 0;
+{
+    public $id,
+        $tags,
+        $name,
+        $provider,
+        $description,
+        $options,
+        $prices,
+        $selectedOpt,
+        $selectedPri;
+    public $quantity = 0;
 
-    public function callPage(){
+    public function callPage()
+    {
         $this->dispatch('call-page');
+    }
+    public function addToCart($how)
+    {
+        switch ($how) {
+            case '+':
+                $this->quantity++;
+                break;
+            case '-':
+                $this->quantity--;
+                break;
+        }
+        $this->dispatch(
+            'addToCart',
+            how: $how,
+            id: $this->id,
+            tags: $this->tags,
+            name: $this->name,
+            provider: $this->provider,
+            description: $this->description,
+            selectedOpt: $this->selectedOpt,
+            selectedPri: $this->selectedPri
+        );
+        self::save();
+    }
+    public function updated($property) {}
+    public function save()
+    {
+        session(['product: ' . $this->id => $this->quantity]);
+    }
+    public function mount()
+    {
+        if (session('product: ' . $this->id)) {
+            $this->quantity = session('product: ' . $this->id);
+        }
     }
     public function render()
     {

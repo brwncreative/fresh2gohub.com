@@ -16,7 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->float('value');
             $table->string('metric');
-            $table->integer('product_id');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

@@ -13,7 +13,9 @@ export default defineConfig({
                 "resources/css/sections/explore.css",
                 "resources/css/products/product-card.css",
                 "resources/css/login/login.css",
-                "resources/css/products/products.css"
+                "resources/css/products/products.css",
+                "resources/css/results/results.css",
+                "resources/css/checkout/cart.css"
             ],
             refresh: true,
         }),

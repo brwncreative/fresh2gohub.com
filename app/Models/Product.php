@@ -14,8 +14,10 @@ class Product extends Model
     public function options(): HasMany{
         return $this->hasMany(Options::class);
     }
-
     public function prices(): HasMany{
         return $this->hasMany(Prices::class);
+    }
+    public function tags(): HasMany{
+        return $this->hasMany(Tags::class);
     }
 }

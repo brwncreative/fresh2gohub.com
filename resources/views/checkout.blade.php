@@ -1,3 +1,3 @@
 <x-layouts.standard>
-   @livewire('utilities.results')
+    @livewire('utilities.checkout')
 </x-layouts.standard>

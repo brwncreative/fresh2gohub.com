@@ -1,0 +1,14 @@
+#results {
+    padding-inline: 3rem;
+    .bucket {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        #filters{
+            flex: 0 20%;
+        }
+        #products{
+            flex-grow: 3;
+        }
+    }
+}
