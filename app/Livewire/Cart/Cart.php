@@ -10,10 +10,18 @@ class Cart extends Component
     public $items = 0;
     public $cart = [];
 
+    public function updateQuantity($id, $quantity)
+    {
+        if ($quantity == 0) {
+            session()->remove('product: ' . $id);
+        }
+        session(['product: ' . $id => $quantity]);
+    }
     #[On('addToCart')]
     public function addToCart(
         $how,
         $id,
+        $source = '?',
         $tags = '?',
         $name = '?',
         $provider = '?',
@@ -29,10 +37,12 @@ class Cart extends Component
                     if ($item['id'] == $id) {
                         $this->cart[$count]['quantity']++;
                         self::save();
-                        dump($this->cart);
+                        if ($source != '?') {
+                            self::updateQuantity($id, $this->cart[$count]['quantity']);
+                        }
                         return;
                     }
-                   
+
                     $count++;
                 }
                 array_push($this->cart, [
@@ -42,11 +52,13 @@ class Cart extends Component
                     'quantity' => 1,
                     'provider' => $provider,
                     'description' => $description,
-                    'selectedOpt' => $selectedOpt,
+                    'selectedOpt' =>  $selectedOpt,
                     'selectedPri' => $selectedPri
                 ]);
-                dump($this->cart);
                 self::save();
+                if ($source != '?') {
+                    self::updateQuantity($id, 1);
+                }
                 return;
                 // Remove from cart
             case '-':
@@ -57,10 +69,16 @@ class Cart extends Component
                             unset($this->cart[$count]);
                             $this->cart = array_values($this->cart);
                             self::save();
+                            if ($source != '?') {
+                                self::updateQuantity($item['id'], 0);
+                            }
                             return;
                         }
                         $this->cart[$count]['quantity']--;
                         self::save();
+                        if ($source != '?') {
+                            self::updateQuantity($item['id'], $this->cart[$count]['quantity']);
+                        }
                         return;
                     }
                     $count++;
@@ -69,12 +87,18 @@ class Cart extends Component
         }
     }
     #[On('removeFromCart')]
-    public function removeFromCart($id)
+    public function removeFromCart($id, $source = '?')
     {
         $count = 0;
         foreach ($this->cart as $item) {
             if ($item['id'] == $id) {
-                if ($item['quantity'] - 1 === 0) {
+                if (session('product: ' . $item['id'])) {
+                    session(['product: ' . $item['id'] => 0]);
+
+                    if ($source != '?') {
+                        self::updateQuantity($item['id'], 0);
+                    }
+
                     unset($this->cart[$count]);
                     $this->cart = array_values($this->cart);
                     self::save();
@@ -86,11 +110,42 @@ class Cart extends Component
         return;
     }
     #[On('updateCart')]
-    public function updateCart() {}
+    public function updateCart($how, $id, $selectedOpt = null, $selectedPri = null)
+    {
+        switch ($how) {
+            case 'option':
+                if (count($this->cart) > 0) {
+                    $count = 0;
+                    foreach ($this->cart as $item) {
+                        if ($item['id'] == $id) {
+                            $this->cart[$count]['selectedOpt'] = $selectedOpt;
+                            self::save();
+                            return;
+                        }
+                        $count++;
+                    }
+                }
+                return;
+            case 'price':
+                if (count($this->cart) > 0) {
+                    $count = 0;
+                    foreach ($this->cart as $item) {
+                        if ($item['id'] == $id) {
+                            $this->cart[$count]['selectedPri'] = $selectedPri;
+                            self::save();
+                            return;
+                        }
+                        $count++;
+                    }
+                }
+                return;
+        }
+    }
     public function save()
     {
         session(['cart' => $this->cart]);
         $this->items = count($this->cart);
+        $this->dispatch('test');
     }
 
     public function mount()

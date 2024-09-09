@@ -1,6 +1,6 @@
 /* Notification */
 .notification {
-    background-color: rgb(116, 175, 227);
+    background-color: green;
     color: grey;
     display: flex;
     flex-direction: column;

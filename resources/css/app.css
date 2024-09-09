@@ -1,46 +1,53 @@
 /* General Theme */
 :root {
     --light-grey: rgb(219, 219, 219);
+    --grey: rgb(169, 169, 169);
+
     --small: 0.8rem;
-    --medium: 0.9rem;
+    --medium: 0.85rem;
     --big: 1.1rem;
-    --bigger:1.3rem;
+    --bigger: 1.3rem;
     --large: 2rem;
+
+    --wide-screen: 3rem;
+    --mobile: 1.5rem;
 }
 /* Custom Classes */
 .small-title {
     font-size: var(--big);
     -webkit-text-stroke: 0.3px;
 }
-.medium-title{
+.medium-title {
     font-size: var(--bigger);
     -webkit-text-stroke: 0.3px;
 }
-.medium-title::first-letter{
-   text-transform: capitalize;
+.medium-title::first-letter {
+    text-transform: capitalize;
 }
 .title {
     font-size: var(--large);
     -webkit-text-stroke: 0.3px;
 }
-.title::first-letter{
+.title::first-letter {
     text-transform: capitalize;
 }
 .paragraph {
     font-size: var(--medium);
     color: grey;
 }
+.paragraph-reg {
+    font-size: var(--medium);
+}
 .bold {
     -webkit-text-stroke: 0.3px;
 }
 /* --- */
 body {
-    padding-inline: 3rem;
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     margin: 0;
     color: black;
-    hr{
+    hr {
         z-index: -1;
     }
     a {
@@ -50,10 +57,25 @@ body {
         margin: 0 !important;
     }
     p {
+        font-size: var(--medium);
         margin: 0;
         padding: 0;
     }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
     main {
+        /* Buffer at screen edge */
+        padding-inline: var(--wide-screen);
+        @media only screen and (max-width: 1070px) {
+            padding-inline: var(--mobile);
+        }
+        /* --- */
         margin-top: 13rem;
         @media only screen and (max-width: 1070px) {
             margin-top: 18rem;
@@ -69,4 +91,3 @@ body {
         border-radius: 2rem;
     }
 }
-

@@ -10,7 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" defer>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         defer>
-    @vite(['resources/css/checkout/cart.css','resources/css/results/results.css','resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/explore.css'])
+    @vite(['resources/css/checkout/cart.css', 'resources/css/results/results.css', 'resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/sections.css'])
 </head>
 
 <body>
@@ -25,9 +25,9 @@
             </section>
             <section id="nav-main">
                 <div id="logo">
-                    <a href="{{route('welcome')}}"> <img src="{{ App\Http\Controllers\MediaController::serveImage('logo', 'svg') }}"
-                            height="50px" width="auto" fetchpriority="high" loading="eager"
-                            alt="Fresh2Go Logo"></img>
+                    <a href="{{ route('welcome') }}"> <img
+                            src="{{ App\Http\Controllers\MediaController::serveImage('logo', 'svg') }}" height="50px"
+                            width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
                     </a>
                     <div class="v-divider"></div>
                 </div>
@@ -40,11 +40,14 @@
                         <div><a href="{{ route('login') }}"><i class="bi bi-person h3"></i></a></div>
                     @endguest
                     @auth
-                        <div class="auth-greeting"><span class="paragraph">Hi</span>
-                            <span><small>{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</small></span>
+                        <div class="auth-greeting">
+                            <a href="{{ Auth::user()->role != 'guest' ? route('dashboard') : route('logout') }}">
+                                <span class="paragraph">Hi</span>
+                                <span><small>{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</small></span>
+                            </a>
                         </div>
                     @endauth
-                    <div><a href="{{route('orders')}}"><i class="bi bi-receipt h3"></i></a></div>
+                    <div><a href="{{ route('orders') }}"><i class="bi bi-receipt h3"></i></a></div>
                     <div>@livewire('cart.cart')</div>
                     {{-- Mobile Conditional --}}
                     <div><a href=""><i class="bi bi-list h3"></i></a></div>
@@ -70,7 +73,7 @@
     </header>
     {{ $slot }}
     <footer>
-
+        Powered by Brwncreative, all logos, images and general media belong or have been licensed to Fresh2GoHub
     </footer>
 </body>
 

@@ -24,9 +24,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => '123'
         ]);
+        User::factory()->create([
+            'role' => 'admin',
+            'name' => 'Root',
+            'email' => 'root@example.com',
+            'password' => '123'
+        ]);
         Product::factory(3)->create();
         Options::factory(3)->create();
         Prices::factory(3)->create();
-        Tags::factory(3)->create(['tag'=>'popular']);
+        Tags::factory(3)->create(['tag' => 'popular']);
     }
 }

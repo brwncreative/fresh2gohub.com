@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('provider')->default('Fresh2GoHub');
             $table->text('name');
             $table->longText('description')->nullable();
-            $table->boolean('available')->default(0);
+            $table->boolean('available')->index('in stock')->default(1);
             $table->integer('stock');
         });
     }

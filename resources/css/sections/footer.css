@@ -1,0 +1,10 @@
+footer {
+    /* Buffer at screen edge */
+    padding-inline: var(--wide-screen);
+    @media only screen and (max-width: 1070px) {
+        padding-inline: var(--mobile);
+    }
+    /* --- */
+    margin-block-start: 5rem;
+    height: 10rem;
+}

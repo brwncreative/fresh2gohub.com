@@ -5,12 +5,13 @@ namespace App\Livewire\Utilities;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Checkout extends Component
 {
     public $cart,
+        $total,
         $paymentOption = 'bank',
-        $total, $strtotal = '0.00',
         $ticket,
         $fname,
         $lname,
@@ -34,7 +35,6 @@ class Checkout extends Component
                 $this->total += $item['selectedOpt']['value'] * $item['quantity'];
             }
         }
-        $this->strtotal =  number_format($this->total, 2, '.', '');
     }
     /**
      * Make order ticket
@@ -81,7 +81,7 @@ class Checkout extends Component
                         'order_id' => $this->ticket,
                         'origin' => 'Fresh2GoHub',
                         'response_url' => route('checkout-response'),
-                        'total' => $this->total_formatted,
+                        'total' => number_format($this->total, 2, '.', ''),
                         'addr1' => $this->address,
                         'city' => $this->area,
                         'email' => $this->email,
@@ -95,7 +95,6 @@ class Checkout extends Component
                 // Bank Method
             case 'bank':
                 self::makeOrderTicket();
-                // $this->dispatch('order');
                 OrderController::create(
                     $this->cart,
                     $this->ticket,
@@ -111,13 +110,23 @@ class Checkout extends Component
                 return redirect()->route('orders', ['ticket' => $this->ticket]);
         }
     }
-    public function mount()
+
+    #[On('post-created')]
+    public function prepCheckout()
     {
         if (session('cart')) {
             $this->cart = session('cart');
             self::unserializeJson($this->cart);
             self::sum();
+        } else {
+            $this->cart = [];
+            $this->total = 0;
         }
+    }
+
+    public function mount()
+    {
+        self::prepCheckout();
     }
     public function unserializeJson($cart)
     {

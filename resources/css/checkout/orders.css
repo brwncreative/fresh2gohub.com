@@ -3,6 +3,7 @@
         display: flex;
         flex-wrap: wrap;
         .searchbar {
+            position: relative;
             flex: 0 50%;
             display: flex;
             justify-content: center;
@@ -18,25 +19,59 @@
                 outline: none;
                 border: 2px solid green;
             }
+            div {
+                padding-block: 0.2rem;
+                display: flex;
+                padding-inline-end: 1rem;
+                justify-content: right;
+                position: absolute;
+                width: 90%;
+                pointer-events: none;
+                i {
+                    pointer-events: all;
+                }
+            }
         }
         .print {
             display: flex;
             flex-grow: 1;
             justify-content: center;
             align-items: center;
-           
         }
     }
-    .bucket{
-        .order{
+    .bucket {
+        .order {
             padding: 1rem;
             border: 2px solid var(--light-grey);
             border-radius: 10px;
-            display: grid;
-            grid-template: 1fr / 1fr 5fr;
-            div{
+            .order-information {
                 display: flex;
-                flex-direction: column;
+                flex-wrap: wrap;
+                gap: 1rem;
+                div {
+                    flex: 0 30%;
+                }
+                .payment-details {
+                    .status-unpaid {
+                        color: red;
+                    }
+                }
+            }
+            .order-transactions {
+                margin-block: 1rem;
+                .transaction {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1rem;
+                    div:nth-child(1) {
+                        width: 0.5rem;
+                        border-radius: 10px;
+                        background-color: var(--light-grey);
+                    }
+                    div:nth-child(2) {
+                        flex: 0 90%;
+                    }
+                }
             }
         }
     }

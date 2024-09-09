@@ -45,7 +45,17 @@ class ProductCard extends Component
         );
         self::save();
     }
-    public function updated($property) {}
+    public function updated($property)
+    {
+        switch ($property) {
+            case 'selectedOpt':
+                $this->dispatch('updateCart', how: 'option', id: $this->id, selectedOpt: $this->selectedOpt, selectedPri: $this->selectedPri);
+                break;
+            case 'selectedPri':
+                $this->dispatch('updateCart', how: 'price', id: $this->id, selectedOpt: null, selectedPri: $this->selectedPri);
+                break;
+        }
+    }
     public function save()
     {
         session(['product: ' . $this->id => $this->quantity]);

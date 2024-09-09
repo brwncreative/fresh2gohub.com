@@ -14,13 +14,20 @@ class LandingController extends Controller
     {
         return view('login');
     }
-    public function results(){
+    public function results()
+    {
         return view('results');
     }
-    public function orders(){
+    public function orders()
+    {
         return view('orders');
     }
-    public function checkout(){
+    public function checkout()
+    {
         return view('checkout');
+    }
+    public function dashboard($purpose = '/')
+    {
+        return view('dashboard', ['purpose' => $purpose]);
     }
 }

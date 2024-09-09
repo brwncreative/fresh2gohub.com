@@ -10,13 +10,17 @@ class Orders extends Component
 {
     #[Url(keep: true)]
     public $ticket;
-    public $order;
+    public $orders = [], $user_id;
 
     public function mount()
     {
         if ($this->ticket) {
-            $this->order = OrderController::find($this->ticket);
+            $this->orders = OrderController::find($this->ticket);
         }
+    }
+    public function find()
+    {
+        $this->orders = OrderController::find($this->ticket);
     }
     public function render()
     {

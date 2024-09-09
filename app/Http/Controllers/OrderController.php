@@ -9,7 +9,9 @@ class OrderController extends Controller
 {
     public static function find($ticket)
     {
-        return Order::where('ticket', 'like', $ticket)->join('transactions', 'order.id', '=', 'transactions.order_id')->get();
+        //Order::where('ticket', 'like', $ticket)->join('transactions', 'orders.id', '=', 'transactions.order_id')->get();
+        $orders = Order::where('ticket', 'like', $ticket)->get();
+        return $orders;
     }
     public static function create(
         $cart,

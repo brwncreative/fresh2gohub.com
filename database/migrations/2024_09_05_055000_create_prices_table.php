@@ -17,7 +17,7 @@ return new class extends Migration
             $table->float('value');
             $table->string('metric');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

@@ -1,10 +1,13 @@
-<main id="checkout">
-    <p class="medium-title">Checkout ${{ $strtotal }}</p>
+<main id="checkout" wire:poll='prepCheckout'>
+    <p class="medium-title">Checkout ${{ number_format($total, 2, '.', '') }}</p>
     <p>Lets get you those eats!</p>
     <p class="paragraph">Please note additional costs for the different payment options</p>
     <hr>
     <div class="bucket">
         <div id="cart-items">
+            @if (count($cart) < 1)
+                <p class="mediuum-title"> See what we have in store and come back!</p>
+            @endif
             @isset($cart)
                 @foreach ($cart as $item)
                     <div class="item">
@@ -31,7 +34,13 @@
                             </span>
                         </div>
                         <div class="actions">
-                            <i class="bi bi-trash h6 delete"></i>
+                            <i class="bi bi-trash h6 delete"
+                                wire:click="$dispatch('removeFromCart',{id: {{ $item['id'] }}, source: 'checkout'})"></i>
+                            <i class="bi bi-dash-circle remove h4"
+                                wire:click="$dispatch('addToCart',{how: '-', id: {{ $item['id'] }}, source: 'checkout'})"></i>
+                            <button
+                                wire:click="$dispatch('addToCart',{how: '+',id: {{ $item['id'] }}, source: 'checkout'})"><i
+                                    class="bi bi-plus h4"></i></button>
                         </div>
                     </div>
                 @endforeach

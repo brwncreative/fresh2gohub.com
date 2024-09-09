@@ -17,7 +17,7 @@
     <div class="description paragraph">{{ $description }}</div>
     {{-- Options --}}
     <div class="options">
-        <select wire:model='selectedOpt' class="option-{{ $id }}" name="options">
+        <select wire:model.live='selectedOpt' class="option-{{ $id }}" name="options">
             <option value='{"option":"Check Options", "value":0}'>Check Options</option>
             @foreach ($options as $option)
                 <option value="{{ $option }}">{{ $option->option }}</option>
@@ -32,7 +32,7 @@
     {{-- Prices and Actions --}}
     <div class="main-actions">
         <div class="prices">
-            <select wire:model="selectedPri" class="price-{{ $id }}" name="prices">
+            <select wire:model.live="selectedPri" class="price-{{ $id }}" name="prices">
                 @foreach ($prices as $price)
                     <option value="{{ $price }}">{{ $price->value }} / {{ $price->metric }}</option>
                 @endforeach
@@ -44,11 +44,11 @@
             @endscript
         </div>
         <div class="btns">
-            <i class="bi bi-dash-circle minus h4" wire:click="addToCart('-')"></i>
+            <i class="bi bi-dash-circle minus h5" wire:click="addToCart('-')"></i>
             <p>
                 {{ $quantity }}
             </p>
-            <i class="bi bi-plus-circle add h4" wire:click="addToCart('+')"></i>
+            <i class="bi bi-plus-circle add h5" wire:click="addToCart('+')"></i>
         </div>
     </div>
 </div>
