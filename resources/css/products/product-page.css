@@ -5,13 +5,76 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    z-index: 1;
+    z-index: 2;
     .bucket {
+        padding: var(--desktop);
         background-color: white;
         height: 100%;
         width: 100%;
         position: absolute;
         transition: 1s;
+        .image {
+            width: 30rem;
+            height: 15rem;
+            .lazy-load {
+                width: 95%;
+                height: 95%;
+                background-color: var(--grey);
+                border-radius: 10px;
+            }
+        }
+        .id {
+            .description {
+                text-wrap: wrap;
+                width: 20rem;
+            }
+            .in-stock {
+                color: green;
+            }
+            .out-stock {
+                color: red;
+            }
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            padding-block: .5rem;
+            gap: .5rem;
+            button {
+                min-width: 3rem;
+                padding-inline: .2rem;
+                border: none;
+                border-radius: 10px;
+            }
+            .remove {
+                background-color: pink;
+                color: red;
+            }
+            .minus {
+                background-color: pink;
+                color: red;
+            }
+            .add {
+                width: 5rem;
+                background-color: var(--green);
+            }
+            .quantity{
+                display: flex;
+                align-items: center;
+                height: 1.5rem;
+                padding-inline-start: .5rem;
+                padding-inline-end: .2rem;
+                border-radius: 2px;
+                background-color: var(--light-grey);
+                p{
+                    border-radius: 2px;
+                    display: flex;
+                    background-color: white;
+                    padding-inline: .5rem;
+                    height: 80%;
+                }
+            }
+        }
     }
     .active {
         top: 0rem;

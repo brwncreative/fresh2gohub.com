@@ -14,13 +14,29 @@ class ProductCard extends Component
         $description,
         $options,
         $prices,
+        $available,
+        $category,
         $selectedOpt,
         $selectedPri;
     public $quantity = 0;
 
-    public function callPage()
+    public function callPage($id)
     {
-        $this->dispatch('call-page');
+        $this->dispatch(
+            'call-page',
+            id: $id,
+            category: $this->category,
+            available: $this->available,
+            tags: $this->tags,
+            name: $this->name,
+            provider: $this->provider,
+            description: $this->description,
+            options: $this->options,
+            prices: $this->prices,
+            selectedOpt: $this->selectedOpt,
+            selectedPri: $this->selectedPri,
+            quantity: $this->quantity,
+        );
     }
     public function addToCart($how)
     {
@@ -40,8 +56,11 @@ class ProductCard extends Component
             name: $this->name,
             provider: $this->provider,
             description: $this->description,
+            options: $this->options,
+            prices: $this->prices,
             selectedOpt: $this->selectedOpt,
-            selectedPri: $this->selectedPri
+            selectedPri: $this->selectedPri,
+            quantity: $this->quantity
         );
         self::save();
     }

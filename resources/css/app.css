@@ -2,6 +2,7 @@
 :root {
     --light-grey: rgb(219, 219, 219);
     --grey: rgb(169, 169, 169);
+    --green: rgb(190, 255, 92);
 
     --small: 0.8rem;
     --medium: 0.85rem;
@@ -9,7 +10,7 @@
     --bigger: 1.3rem;
     --large: 2rem;
 
-    --wide-screen: 3rem;
+    --desktop: 3rem;
     --mobile: 1.5rem;
 }
 /* Custom Classes */
@@ -71,7 +72,7 @@ body {
     }
     main {
         /* Buffer at screen edge */
-        padding-inline: var(--wide-screen);
+        padding-inline: var(--desktop);
         @media only screen and (max-width: 1070px) {
             padding-inline: var(--mobile);
         }

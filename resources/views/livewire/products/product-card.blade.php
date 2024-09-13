@@ -1,6 +1,6 @@
 <div class="product-card">
     {{-- Image --}}
-    <div class="image" wire:click='callPage'><img src="" alt="">
+    <div class="image" wire:click='callPage({{$id}})'><img src="" alt="">
         <div></div>
     </div>
     {{-- Tags --}}
@@ -12,7 +12,7 @@
         @endforeach
     </div>
     {{-- ID --}}
-    <div class="identifiers" wire:click='callPage'>{{ $provider }} : <span
+    <div class="identifiers" wire:click='callPage({{$id}})'>{{ $provider }} : <span
             class="small-title">{{ $name }}</span></div>
     <div class="description paragraph">{{ $description }}</div>
     {{-- Options --}}
