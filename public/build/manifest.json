@@ -1,11 +1,11 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-BrzxY7In.css",
+    "file": "assets/app-BRT9f7v5.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/checkout/cart.css": {
-    "file": "assets/cart-DVkLrLEr.css",
+    "file": "assets/cart-DL8csMBS.css",
     "src": "resources/css/checkout/cart.css",
     "isEntry": true
   },
@@ -35,7 +35,7 @@
     "isEntry": true
   },
   "resources/css/products/products.css": {
-    "file": "assets/products-E9Oidort.css",
+    "file": "assets/products-aSl4LKDN.css",
     "src": "resources/css/products/products.css",
     "isEntry": true
   },
