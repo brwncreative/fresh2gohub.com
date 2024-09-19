@@ -7,7 +7,8 @@ use Livewire\Component;
 
 class ProductCard extends Component
 {
-    public $id,
+    public $type = 'scroll',
+        $id,
         $tags,
         $name,
         $provider,
@@ -43,26 +44,37 @@ class ProductCard extends Component
         switch ($how) {
             case '+':
                 $this->quantity++;
+                $this->dispatch(
+                    'addToCart',
+                    how: $how,
+                    id: $this->id,
+                    tags: $this->tags,
+                    name: $this->name,
+                    provider: $this->provider,
+                    description: $this->description,
+                    selectedOpt: $this->selectedOpt,
+                    selectedPri: $this->selectedPri
+                );
+                self::save();
                 break;
             case '-':
-                $this->quantity--;
+                if ($this->quantity > 0) {
+                    $this->quantity--;
+                    $this->dispatch(
+                        'addToCart',
+                        how: $how,
+                        id: $this->id,
+                        tags: $this->tags,
+                        name: $this->name,
+                        provider: $this->provider,
+                        description: $this->description,
+                        selectedOpt: $this->selectedOpt,
+                        selectedPri: $this->selectedPri
+                    );
+                    self::save();
+                }
                 break;
         }
-        $this->dispatch(
-            'addToCart',
-            how: $how,
-            id: $this->id,
-            tags: $this->tags,
-            name: $this->name,
-            provider: $this->provider,
-            description: $this->description,
-            options: $this->options,
-            prices: $this->prices,
-            selectedOpt: $this->selectedOpt,
-            selectedPri: $this->selectedPri,
-            quantity: $this->quantity
-        );
-        self::save();
     }
     public function updated($property)
     {
@@ -77,7 +89,11 @@ class ProductCard extends Component
     }
     public function save()
     {
-        session(['product: ' . $this->id => $this->quantity]);
+        if ($this->quantity == 0) {
+            session()->remove('product: ' . $this->id);
+        }else{
+            session(['product: ' . $this->id => $this->quantity]);
+        }
     }
     public function mount()
     {

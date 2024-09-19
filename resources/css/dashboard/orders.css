@@ -1,0 +1,44 @@
+#orders-bucket {
+    width: 100%;
+    gap: 1rem;
+    #order-container {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        .order {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            .order-details {
+                position: absolute;
+                background-color: white;
+                width: 100%;
+                cursor: pointer;
+                z-index: 1;
+                padding-inline: 0.8rem;
+                padding-block: 0.5rem;
+                border: 1px solid grey;
+                border-radius: 10px;
+                box-shadow: 0 0 5px 5px var(--light-grey);
+            }
+            .transactions {
+                display: flex;
+                padding: 1rem;
+                min-height: 13rem;
+                width: 100%;
+                border: 2px solid var(--grey);
+                border-radius: 10px;
+
+                z-index: 0 !important;
+                .transaction {
+                    transition: .5s;
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+            .active {
+                margin-top: 12rem;
+            }
+        }
+    }
+}

@@ -8,6 +8,7 @@ use App\Models\Prices;
 use App\Models\Options;
 use App\Models\Tags;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductController extends Controller
 {
@@ -16,14 +17,17 @@ class ProductController extends Controller
      * @param mixed $find
      * @param mixed $by
      */
-    public static function findBy($find, $by)
+    public static function findBy($find)
     {
-        switch ($by) {
-            case 'tag':
-                return Product::all();
-            case 'category':
-                return;
-        }
+        return Product::whereAny(['category', 'name'], 'like', '%' . $find . '%')->orWhereHas('tags', function (Builder $query) use ($find) {
+            $query->where('tag', 'like', '%' . $find . '%');
+        })->get();
+    }
+    public static function filter($price)
+    {
+        return Product::whereHas('prices', function (Builder $query) use ($price) {
+            $query->where('value', '<=', $price);
+        })->get();
     }
     /**
      * Create Product

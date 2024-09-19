@@ -1,8 +1,12 @@
 <div id="explore">
+    {{-- Mailing List CTA --}}
     <div id="mailing-cta">
+        {{-- <div id="confetti">
+            <canvas id="confetti-canvas"></canvas>
+        </div> --}}
         <p class="title">{{ $title }}</p>
         <p clas="paragraph">Updates, deals, news?! Keep in the know about all things fresh2go-hub!</p>
-        <div>
+        <div id="mcta-inputs">
             <input type="email" placeholder="Join us!" name="email" wire:model='email'>
             <div class="input-btn" wire:click='handleInvitee'><i class="bi bi-envelope h3"></i></div>
         </div>
@@ -10,6 +14,7 @@
             {{ $message }}
         @enderror
     </div>
+    {{-- Feature products --}}
     <div id="featured-products">
         <div>
             <hgroup>
@@ -28,3 +33,22 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+@script
+    <script>
+        $wire.on('confetti', () => {
+            // Canvas
+            canvas = document.querySelector("#confetti-canvas");
+            // Confetti
+            let play = confetti.create(canvas);
+            play({
+                particleCount: 200,
+                spread: 500,
+                startVelocity: 15,
+                scalar: .6,
+                ticks: 120,
+            });
+        });
+    </script>
+@endscript

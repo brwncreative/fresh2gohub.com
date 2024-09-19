@@ -55,23 +55,37 @@ class ProductPage extends Component
         switch ($how) {
             case '+':
                 $this->quantity++;
+                $this->dispatch(
+                    'addToCart',
+                    how: $how,
+                    id: $this->id,
+                    tags: $this->tags,
+                    name: $this->name,
+                    provider: $this->provider,
+                    description: $this->description,
+                    selectedOpt: $this->selectedOpt,
+                    selectedPri: $this->selectedPri
+                );
+                self::save();
                 break;
             case '-':
-                $this->quantity--;
+                if ($this->quantity > 0) {
+                    $this->quantity--;
+                    $this->dispatch(
+                        'addToCart',
+                        how: $how,
+                        id: $this->id,
+                        tags: $this->tags,
+                        name: $this->name,
+                        provider: $this->provider,
+                        description: $this->description,
+                        selectedOpt: $this->selectedOpt,
+                        selectedPri: $this->selectedPri
+                    );
+                    self::save();
+                }
                 break;
         }
-        $this->dispatch(
-            'addToCart',
-            how: $how,
-            id: $this->id,
-            tags: $this->tags,
-            name: $this->name,
-            provider: $this->provider,
-            description: $this->description,
-            selectedOpt: $this->selectedOpt,
-            selectedPri: $this->selectedPri
-        );
-        self::save();
     }
     public function updated($property)
     {
@@ -84,13 +98,18 @@ class ProductPage extends Component
                 break;
         }
     }
-    public function test()
-    {
-        dump('tes');
-    }
     public function save()
     {
-        session(['product: ' . $this->id => $this->quantity]);
+        if ($this->quantity == 0) {
+            session()->remove('product: ' . $this->id);
+        } else {
+            session(['product: ' . $this->id => $this->quantity]);
+        }
+    }
+    public function removeAll()
+    {
+        $this->dispatch('removeFromCart', id: $this->id);
+        $this->quantity = 0;
     }
     public function render()
     {

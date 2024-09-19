@@ -12,7 +12,6 @@
         defer>
     @vite(['resources/css/dashboard/dashboard.css', 'resources/css/app.css'])
 </head>
-
 <body>
     <header>
         <nav id="dashboard-nav">
@@ -26,7 +25,7 @@
                 <a href="{{ route('welcome') }}">Website home</a>
             </div>
             <div id="menu">
-                <x-helpers.dashboard.menu :items="['products', 'users', 'mail', 'employee-chat', 'whatsapp']"></x-helpers.dashboard.menu>
+                <x-helpers.dashboard.menu :items="['products','orders', 'users', 'whatsapp']"></x-helpers.dashboard.menu>
             </div>
         </nav>
     </header>

@@ -12,6 +12,10 @@
             @livewire('dashboard.whatsapp')
         @break
 
+        @case('orders')
+            @livewire('dashboard.orders')
+        @break
+
         @default
     @endswitch
 </x-layouts.dashboard>

@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public static function index()
+    {
+        return Order::all();
+    }
     public static function find($ticket)
     {
-        //Order::where('ticket', 'like', $ticket)->join('transactions', 'orders.id', '=', 'transactions.order_id')->get();
         $orders = Order::where('ticket', 'like', $ticket)->get();
         return $orders;
     }
@@ -18,6 +21,7 @@ class OrderController extends Controller
         $ticket,
         $method,
         $name,
+        $email,
         $contact,
         $area,
         $address,
@@ -30,6 +34,7 @@ class OrderController extends Controller
             'ticket' =>  $ticket,
             'method' =>  $method,
             'name' =>  $name,
+            'email' => $email,
             'contact' => $contact,
             'area' =>  $area,
             'address' => $address,
@@ -52,7 +57,7 @@ class OrderController extends Controller
             } else {
                 array_push($transactions, [
                     'option' => null,
-                    'metric' => $item['selectedPri']['option'],
+                    'metric' => $item['selectedPri']['metric'],
                     'value' => $item['selectedPri']['value'],
                     'quantity' => $item['quantity'],
                     'product_id' => $item['id'],
@@ -61,5 +66,10 @@ class OrderController extends Controller
             }
         }
         $order->transactions()->createMany($transactions);
+        return $order;
+    }
+    public static function update($ticket, $status)
+    {
+        Order::where('ticket', '=', $ticket)->update(['status' => $status]);
     }
 }

@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 
 class MediaController extends Controller
 {
+    public static function saveOrderImageLocal($ticket, $file)
+    {
+        if (isset($file)) {
+            $ext = str_replace('image/', '', $file->getMimeType());
+            $local = fopen(base_path('images\\orders\\' . $ticket . '.' . $ext), 'w');
+            fwrite($local, $file->get());
+            fclose($local);
+        }
+    }
     /**
      * Serve Image file
      *  - serve an image file url

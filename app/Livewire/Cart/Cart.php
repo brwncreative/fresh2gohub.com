@@ -10,6 +10,7 @@ class Cart extends Component
     public $items = 0;
     public $cart = [];
 
+    // Update product quantity in session to reflect cart quantity
     public function updateQuantity($id, $quantity)
     {
         if ($quantity == 0) {
@@ -17,6 +18,7 @@ class Cart extends Component
         }
         session(['product: ' . $id => $quantity]);
     }
+    // Add to cart
     #[On('addToCart')]
     public function addToCart(
         $how,
@@ -30,7 +32,6 @@ class Cart extends Component
         $selectedPri = '?'
     ) {
         switch ($how) {
-                // Add to cart
             case '+':
                 $count = 0;
                 foreach ($this->cart as $item) {
@@ -39,6 +40,7 @@ class Cart extends Component
                         self::save();
                         if ($source != '?') {
                             self::updateQuantity($id, $this->cart[$count]['quantity']);
+                            $this->dispatch('updateCheckout');
                         }
                         return;
                     }
@@ -58,6 +60,7 @@ class Cart extends Component
                 self::save();
                 if ($source != '?') {
                     self::updateQuantity($id, 1);
+                    $this->dispatch('updateCheckout');
                 }
                 return;
                 // Remove from cart
@@ -71,6 +74,7 @@ class Cart extends Component
                             self::save();
                             if ($source != '?') {
                                 self::updateQuantity($item['id'], 0);
+                                $this->dispatch('updateCheckout');
                             }
                             return;
                         }
@@ -78,6 +82,7 @@ class Cart extends Component
                         self::save();
                         if ($source != '?') {
                             self::updateQuantity($item['id'], $this->cart[$count]['quantity']);
+                            $this->dispatch('updateCheckout');
                         }
                         return;
                     }
@@ -86,6 +91,7 @@ class Cart extends Component
                 return;
         }
     }
+    // Remove all items from cart by product ID
     #[On('removeFromCart')]
     public function removeFromCart($id, $source = '?')
     {
@@ -93,10 +99,11 @@ class Cart extends Component
         foreach ($this->cart as $item) {
             if ($item['id'] == $id) {
                 if (session('product: ' . $item['id'])) {
-                    session(['product: ' . $item['id'] => 0]);
+                    session()->remove('product: ' . $id);
 
                     if ($source != '?') {
                         self::updateQuantity($item['id'], 0);
+                        $this->dispatch('updateCheckout');
                     }
 
                     unset($this->cart[$count]);
@@ -109,6 +116,7 @@ class Cart extends Component
         }
         return;
     }
+    // Update cart if option changed while product is added
     #[On('updateCart')]
     public function updateCart($how, $id, $selectedOpt = null, $selectedPri = null)
     {
@@ -141,11 +149,11 @@ class Cart extends Component
                 return;
         }
     }
+    // Save cart to session
     public function save()
     {
         session(['cart' => $this->cart]);
         $this->items = count($this->cart);
-        $this->dispatch('test');
     }
 
     public function mount()

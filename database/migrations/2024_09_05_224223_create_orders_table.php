@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('method');
             $table->string('name');
             $table->string('contact');
+            $table->string('email');
             $table->string('area')->index('area');
             $table->string('address')->nullable();
             $table->string('instructions')->nullable();
@@ -26,7 +27,6 @@ return new class extends Migration
             $table->string('status')->default('unpaid')->nullable()->index('status');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-    
         });
     }
 

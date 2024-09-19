@@ -1,20 +1,37 @@
 #explore {
-    margin-block: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    height: max-content;
+    margin-block-end: 1rem;
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    @media only screen and (max-width: 1070px) {
+        grid-template: max-content 1fr/ 1fr;
+    }
     #mailing-cta {
         padding: 1rem;
-        flex: 0 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         @media only screen and (max-width: 1070px) {
-            flex: 0 100%;
             padding-inline: 0;
+        } 
+        #confetti {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            #confetti-canvas {
+                scale: 1.5;
+                position: absolute;
+            }
         }
-        div {
-            margin-block: 2rem;
+        #mcta-inputs {
+            margin-block-start: 2rem;
+            margin-block-end: 1rem;
             position: relative;
             input {
                 background: transparent;
@@ -24,6 +41,9 @@
                 border: 2px solid grey;
                 width: 80%;
                 border-radius: 10px;
+                @media only screen and (max-width: 1070px) {
+                    width: 100%;
+                }
             }
             input:focus {
                 outline: 1px solid green;
@@ -39,6 +59,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: right;
+                @media only screen and (max-width: 1070px) {
+                    width: 100%;
+                }
                 i {
                     cursor: auto;
                     pointer-events: all !important;
@@ -51,7 +74,7 @@
                     cursor: pointer;
                 }
             }
-        }
+        } 
     }
     #featured-products {
         flex: 0 50%;

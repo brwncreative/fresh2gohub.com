@@ -6,6 +6,7 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use App\Http\Controllers\MailController;
 
 class Checkout extends Component
 {
@@ -60,6 +61,7 @@ class Checkout extends Component
                     $this->ticket,
                     $this->paymentOption,
                     $this->fname . ' ' . $this->lname,
+                    $this->email,
                     $this->contact,
                     $this->area,
                     $this->address,
@@ -80,7 +82,7 @@ class Checkout extends Component
                         'method' => 'credit_card',
                         'order_id' => $this->ticket,
                         'origin' => 'Fresh2GoHub',
-                        'response_url' => route('checkout-response'),
+                        'response_url' => route('orders'),
                         'total' => number_format($this->total, 2, '.', ''),
                         'addr1' => $this->address,
                         'city' => $this->area,
@@ -95,11 +97,12 @@ class Checkout extends Component
                 // Bank Method
             case 'bank':
                 self::makeOrderTicket();
-                OrderController::create(
+                $order = OrderController::create(
                     $this->cart,
                     $this->ticket,
                     $this->paymentOption,
                     $this->fname . ' ' . $this->lname,
+                    $this->email,
                     $this->contact,
                     $this->area,
                     $this->address,
@@ -107,11 +110,12 @@ class Checkout extends Component
                     $this->via,
                     $this->total
                 );
+                MailController::send('invoice', $this->email, $order);
                 return redirect()->route('orders', ['ticket' => $this->ticket]);
         }
     }
 
-    #[On('post-created')]
+    #[On('updateCheckout')]
     public function prepCheckout()
     {
         if (session('cart')) {

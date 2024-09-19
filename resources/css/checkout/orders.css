@@ -1,7 +1,90 @@
 #orders {
+    #response {
+        pointer-events: none;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        .active {
+            pointer-events: all !important;
+            opacity: 1 !important;
+        }
+        .vail-active {
+            pointer-events: all !important;
+            opacity: 0.3 !important;
+        }
+        #response-container {
+            pointer-events: none;
+            transition: 0.5s;
+            opacity: 0;
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            height: max-content;
+            width: 50vw;
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            #close-response {
+                cursor: pointer;
+                position: absolute;
+                right: 2%;
+                font-size: large;
+                -webkit-text-stroke: 0.05rem;
+            }
+            #response-details {
+                margin-block: 1rem;
+                padding: 0.5rem;
+                border: 1px solid var(--grey);
+                display: grid;
+                grid-template: 1fr / 1fr 5fr;
+            }
+        }
+        #vail {
+            pointer-events: none;
+            transition: 0.5s;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-grey);
+        }
+    }
     .toolbar {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template: 1fr / max-content 2.5fr 1fr;
+        @media only screen and (max-width: 1070px) {
+            grid-template: 1fr 1fr max-content/ max-content 1fr;
+        }
+        .greeting {
+            @media only screen and (max-width: 1070px) {
+                grid-area: 1 / 1 / 1 / 1;
+            }
+        }
+        .searchbar {
+            @media only screen and (max-width: 1070px) {
+                grid-area: 2 / 1 / 2 / 3;
+                input {
+                    width: 100% !important;
+                }
+                div {
+                    width: 100% !important;
+                }
+            }
+        }
+        .print {
+            @media only screen and (max-width: 1070px) {
+                grid-area: 3 / 1 / 3 / 3;
+            }
+        }
         .searchbar {
             position: relative;
             flex: 0 50%;
@@ -33,28 +116,25 @@
             }
         }
         .print {
+            color: green;
+            text-decoration: underline;
             display: flex;
-            flex-grow: 1;
-            justify-content: center;
+            width: 100%;
+            justify-content: start;
             align-items: center;
+            cursor: pointer;
         }
     }
     .bucket {
+        margin-top: 1rem;
         .order {
-            padding: 1rem;
+            padding-block: 0.8rem;
+            padding-inline: 0.8rem;
             border: 2px solid var(--light-grey);
             border-radius: 10px;
             .order-information {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1rem;
-                div {
-                    flex: 0 30%;
-                }
-                .payment-details {
-                    .status-unpaid {
-                        color: red;
-                    }
+                .status-unpaid {
+                    color: red;
                 }
             }
             .order-transactions {
@@ -62,8 +142,8 @@
                 .transaction {
                     display: flex;
                     flex-direction: row;
-                    gap: 1rem;
                     div:nth-child(1) {
+                        margin-inline-end: 0.5rem;
                         width: 0.5rem;
                         border-radius: 10px;
                         background-color: var(--light-grey);
@@ -73,6 +153,27 @@
                     }
                 }
             }
+            #actions {
+                margin-top: 1rem;
+                display: flex;
+                gap: 1rem;
+                button {
+                    margin: 0 !important;
+                    padding: 0;
+                    display: flex;
+                    gap: 0.5rem;
+                    color: rgb(32, 105, 160);
+                    margin-top: 1rem;
+                    font-size: 0.9rem;
+                    border-radius: 10px;
+                    padding-inline: 0.8rem;
+                    border: 1px solid rgb(66, 156, 156);
+                    background-color: lightblue;
+                }
+            }
+        }
+        #history {
+            margin-block: 1rem;
         }
     }
 }

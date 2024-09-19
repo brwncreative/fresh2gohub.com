@@ -1,4 +1,5 @@
 @import url("./products.css");
+@import url("./orders.css");
 #dashboard-nav {
     /* Buffer at screen edge */
     padding-inline: var(--desktop);

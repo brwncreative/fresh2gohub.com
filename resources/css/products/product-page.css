@@ -4,29 +4,54 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
     z-index: 2;
+    .active {
+        top: 0rem !important;
+    }
     .bucket {
-        padding: var(--desktop);
+        will-change: top;
+        transition: 0.5s;
+        position: absolute;
+        top: 100vh;
+        display: grid;
         background-color: white;
         height: 100%;
         width: 100%;
-        position: absolute;
-        transition: 1s;
+        grid-template: 1fr / 1fr 1fr;
+        gap: 1rem;
+        padding-block: 2rem;
+        padding-inline: var(--desktop);
+        @media only screen and (max-width: 1070px) {
+            padding-inline: var(--mobile);
+            grid-template:
+                1fr max-content
+                / 1fr;
+        }
+        .close{
+            position: absolute;
+            right: 3%;
+            top: 2%;
+            font-size: 1.2rem;
+            -webkit-text-stroke: .1rem;
+        }
         .image {
-            width: 30rem;
+            width: 100%;
             height: 15rem;
             .lazy-load {
-                width: 95%;
-                height: 95%;
+                width: inherit;
+                height: inherit;
                 background-color: var(--grey);
                 border-radius: 10px;
             }
         }
         .id {
+            margin-bottom: 2rem;
+            .tags {
+                display: flex;
+                gap: 0.5rem;
+            }
             .description {
                 text-wrap: wrap;
-                width: 20rem;
             }
             .in-stock {
                 color: green;
@@ -37,50 +62,56 @@
         }
         .actions {
             display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             align-items: center;
-            padding-block: .5rem;
-            gap: .5rem;
-            button {
-                min-width: 3rem;
-                padding-inline: .2rem;
-                border: none;
-                border-radius: 10px;
-            }
-            .remove {
-                background-color: pink;
-                color: red;
-            }
-            .minus {
-                background-color: pink;
-                color: red;
-            }
-            .add {
-                width: 5rem;
-                background-color: var(--green);
-            }
-            .quantity{
+            .options {
+                flex: 0 100%;
                 display: flex;
-                align-items: center;
-                height: 1.5rem;
-                padding-inline-start: .5rem;
-                padding-inline-end: .2rem;
-                border-radius: 2px;
-                background-color: var(--light-grey);
-                p{
-                    border-radius: 2px;
+                gap: 0.5rem;
+                select {
+                    flex-grow: 1;
+                }
+                select {
+                    appearance: none;
+                    padding-block: 0.2rem;
+                    padding-inline: 0.5rem;
+                    border-radius: 10px;
+                }
+                select:focus {
+                    outline: 0;
+                }
+            }
+            .buttons {
+                flex: 0 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                .todowCart {
+                    flex-grow: 1;
+                    width: 5rem;
                     display: flex;
-                    background-color: white;
-                    padding-inline: .5rem;
-                    height: 80%;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-around;
+                    border-radius: 10px;
+                    gap: 0.5rem;
+                    border: 1px solid grey;
+                    .add {
+                        cursor: pointer;
+                    }
+                    .minus {
+                        cursor: pointer;
+                    }
+                }
+                .remove {
+                    flex: 0 30%;
+                    border-radius: 10px;
+                    border: none;
+                    color: red;
+                    background-color: pink;
                 }
             }
         }
-    }
-    .active {
-        top: 0rem;
-    }
-    .in-active {
-        pointer-events: none;
-        top: 100vh;
     }
 }

@@ -1,4 +1,4 @@
-<main id="checkout" wire:poll='prepCheckout'>
+<main id="checkout">
     <p class="medium-title">Checkout ${{ number_format($total, 2, '.', '') }}</p>
     <p>Lets get you those eats!</p>
     <p class="paragraph">Please note additional costs for the different payment options</p>
@@ -6,7 +6,7 @@
     <div class="bucket">
         <div id="cart-items">
             @if (count($cart) < 1)
-                <p class="mediuum-title"> See what we have in store and come back!</p>
+                <p class="medium-title"> See what we have in store and come back!</p>
             @endif
             @isset($cart)
                 @foreach ($cart as $item)

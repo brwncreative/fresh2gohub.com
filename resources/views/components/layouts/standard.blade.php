@@ -15,7 +15,9 @@
 
 <body>
     <header>
+        {{-- Navigation container --}}
         <nav id="standard-nav">
+            {{-- Navigation Links --}}
             <section id="nav-links">
                 <a href=""><small>About</small></a>
                 <a href=""><small>Contact</small></a>
@@ -23,15 +25,19 @@
                 <a href=""><small>Terms and Conditions</small></a>
                 <a href=""><small>Delivery</small></a>
             </section>
+            {{-- Main nav elements --}}
             <section id="nav-main">
-                <div id="logo">
+                {{-- Logo --}}
+                <div id="logo" class="center">
                     <a href="{{ route('welcome') }}"> <img
                             src="{{ App\Http\Controllers\MediaController::serveImage('logo', 'svg') }}" height="50px"
                             width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
                     </a>
                     <div class="v-divider"></div>
                 </div>
-                <div id="searchbar"><livewire:utilities.search-bar></livewire:utilities.search-bar></div>
+                {{-- Searchbar --}}
+                <div id="searchbar" class="center"><livewire:utilities.search-bar></livewire:utilities.search-bar></div>
+                {{-- Actions --}}
                 <div id="actions">
                     @auth
                         <div><a href=""><i class="bi bi-truck h3"></i></a></div>
@@ -48,11 +54,21 @@
                         </div>
                     @endauth
                     <div><a href="{{ route('orders') }}"><i class="bi bi-receipt h3"></i></a></div>
-                    <div>@livewire('cart.cart')</div>
-                    {{-- Mobile Conditional --}}
-                    <div><a href=""><i class="bi bi-list h3"></i></a></div>
+                    <div id="cart-action">@livewire('cart.cart')</div>
+                    <div id="mobile-menu-action">
+                        <i class="bi bi-list h3" onclick="callMenu()"></i>
+                        @livewire('helpers.mobile-nav')
+                    </div>
+                    {{-- Livewire interaction - Mobile menu --}}
+                    <script>
+                        function callMenu() {
+                            Livewire.dispatch('toggle');
+                        }
+                    </script>
+                    {{-- --- --}}
                 </div>
-                <div id="menu"><x-helpers.menu :items="[
+                {{-- Menu --}}
+                <div id="menu" class="center"><x-helpers.menu :items="[
                     'mixed packages',
                     'vegetables',
                     'prepackaged fruit and platters',
@@ -63,8 +79,10 @@
                     'meats',
                     'seafood',
                     'marinades',
-                ]"> </x-helpers.menu></div>
+                ]"> </x-helpers.menu>
+                </div>
             </section>
+            {{-- Nav shopy by filters --}}
             <section id="nav-shopby">
                 <x-helpers.shop-by :items="['Healthy', 'Popular', 'Diwali']">
                 </x-helpers.shop-by>
@@ -76,5 +94,21 @@
         Powered by Brwncreative, all logos, images and general media belong or have been licensed to Fresh2GoHub
     </footer>
 </body>
+<script>
+    const menuArea = document.querySelector("#menu");
+    const menu = document.querySelector("#menu-bucket");
+    const filters = document.querySelector("#nav-shopby");
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            menuArea.classList.add("hide-menu");
+            menu.classList.add("hide-menu");
+            filters.style.display = 'none';
+        } else {
+            menuArea.classList.remove("hide-menu");
+            menu.classList.remove("hide-menu");
+            filters.style.display = 'flex';
+        }
+    })
+</script>
 
 </html>

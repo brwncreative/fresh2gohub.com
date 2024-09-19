@@ -13,17 +13,22 @@ class Explore extends Component
 
     public function handleInvitee()
     {
-        $this->validate(['email' => 'required|email']);
-        $response = UserController::create($this->email, 1, 'guest');
+        $this->validate(['email' => 'required|email|unique:users,email']);
+        $response = UserController::create($this->email, true, 'guest');
         // On successful entry into database
         if ($response == 1) {
+            $this->dispatch('confetti');
             $this->title = 'Thank you for joining us';
+            $this->dispatch('confetti');
+            MailController::send('marketing', $this->email);
         }
     }
-    public function featureProducts(){
+    public function featureProducts()
+    {
         $this->products = ProductController::findBy($this->find, 'tag');
     }
-    public function mount(){
+    public function mount()
+    {
         Self::featureProducts();
     }
     public function render()
