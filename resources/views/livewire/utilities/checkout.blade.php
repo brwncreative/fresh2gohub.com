@@ -70,8 +70,8 @@
             </form>
             <div id="payment">
                 <div id="payment-options">
-                    <button wire:click="updatePaymentOption('bank')">Bank</button>
-                    <button wire:click="updatePaymentOption('wipay')" class="wipay-btn">WiPay</button>
+                    <button wire:click="$set('paymentOption','bank')">Bank</button>
+                    <button wire:click="$set('paymentOption','wipay')" class="wipay-btn">WiPay</button>
                 </div>
                 <div id="payment-actions">
                     @if ($paymentOption === 'bank')

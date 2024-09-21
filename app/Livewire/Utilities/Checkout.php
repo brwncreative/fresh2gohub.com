@@ -23,21 +23,6 @@ class Checkout extends Component
         $instructions,
         $via;
     /**
-     * Calculate total
-     * @return void
-     */
-    public function sum()
-    {
-        $this->total = 0;
-        foreach ($this->cart as $item) {
-            if ($item['selectedOpt']['option'] == 'Check Options') {
-                $this->total += $item['selectedPri']['value'] * $item['quantity'];
-            } else {
-                $this->total += $item['selectedOpt']['value'] * $item['quantity'];
-            }
-        }
-    }
-    /**
      * Make order ticket
      * @return void
      */
@@ -115,37 +100,40 @@ class Checkout extends Component
         }
     }
 
-    #[On('updateCheckout')]
-    public function prepCheckout()
+    #[On('handshakeCheckout')]
+    public function handshake()
     {
+        $unserialize = function () {
+            foreach ($this->cart as $item) {
+                $this->cart['product: ' . $item['id']]['selectedPri'] = json_decode($item['selectedPri'], true);
+                $this->cart['product: ' . $item['id']]['selectedOpt'] = json_decode($item['selectedOpt'], true);
+            }
+        };
+        $calc = function () {
+            $this->total = 0;
+            foreach ($this->cart as $item) {
+                if ($item['selectedOpt']['option'] == 'Check Options') {
+                    $this->total += $item['selectedPri']['value'] * $item['quantity'];
+                } else {
+                    $this->total += $item['selectedOpt']['value'] * $item['quantity'];
+                }
+            }
+        };
+
         if (session('cart')) {
             $this->cart = session('cart');
-            self::unserializeJson($this->cart);
-            self::sum();
+            $unserialize();
+            $calc();
         } else {
             $this->cart = [];
             $this->total = 0;
         }
     }
-
     public function mount()
     {
-        self::prepCheckout();
+        self::handshake();
     }
-    public function unserializeJson($cart)
-    {
-        $count = 0;
-        foreach ($cart as $item) {
-            $cart[$count]['selectedPri'] = json_decode($item['selectedPri'], true);
-            $cart[$count]['selectedOpt'] = json_decode($item['selectedOpt'], true);
-            $count++;
-        }
-        return $this->cart = $cart;
-    }
-    public function updatePaymentOption($case)
-    {
-        $this->paymentOption = $case;
-    }
+
     public function render()
     {
         return view('livewire.utilities.checkout');

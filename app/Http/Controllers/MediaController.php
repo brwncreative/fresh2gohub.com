@@ -15,6 +15,24 @@ class MediaController extends Controller
             fclose($local);
         }
     }
+
+    public static function saveFile($stream, $filename = '?', $destination = '?')
+    {
+        // Remove filename old ext
+        $fn = function () use ($filename) {
+            return str_replace(['.jpg', '.jpeg', '.png', '.webp'], '', $filename);
+        };
+        // Create from byte stream
+        $image = imagecreatefromstring($stream);
+        // Scale Image down
+        $scaled = imagescale($image, (imagesx($image) - imagesx($image) * .35));
+        imagedestroy($image);
+        // Convert to Webp
+        imagewebp($scaled, base_path('resources/' . $fn() . '.webp'), 75);
+        imagedestroy($scaled);
+    }
+
+    
     /**
      * Serve Image file
      *  - serve an image file url

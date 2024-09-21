@@ -66,7 +66,6 @@ class ProductPage extends Component
                     selectedOpt: $this->selectedOpt,
                     selectedPri: $this->selectedPri
                 );
-                self::save();
                 break;
             case '-':
                 if ($this->quantity > 0) {
@@ -82,7 +81,6 @@ class ProductPage extends Component
                         selectedOpt: $this->selectedOpt,
                         selectedPri: $this->selectedPri
                     );
-                    self::save();
                 }
                 break;
         }
@@ -98,12 +96,13 @@ class ProductPage extends Component
                 break;
         }
     }
-    public function save()
+    #[On('handshakePage')]
+    public function handshake()
     {
-        if ($this->quantity == 0) {
-            session()->remove('product: ' . $this->id);
+        if (array_key_exists('product: ' . $this->id, session('cart'))) {
+            $this->quantity = session('cart')['product: ' . $this->id]['quantity'];
         } else {
-            session(['product: ' . $this->id => $this->quantity]);
+            $this->quantity = 0;
         }
     }
     public function removeAll()

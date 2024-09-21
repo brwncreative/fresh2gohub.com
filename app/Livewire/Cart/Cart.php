@@ -10,14 +10,22 @@ class Cart extends Component
     public $items = 0;
     public $cart = [];
 
-    // Update product quantity in session to reflect cart quantity
-    public function updateQuantity($id, $quantity)
+
+    // Handshake
+    public function handshake()
     {
-        if ($quantity == 0) {
-            session()->remove('product: ' . $id);
-        }
-        session(['product: ' . $id => $quantity]);
+        self::save();
+        $this->dispatch('handshakeCard');
+        $this->dispatch('handshakePage');
+        $this->dispatch('handshakeCheckout');
     }
+    // Save cart to session
+    public function save()
+    {
+        session(['cart' => $this->cart]);
+        $this->items = count($this->cart);
+    }
+
     // Add to cart
     #[On('addToCart')]
     public function addToCart(
@@ -32,128 +40,72 @@ class Cart extends Component
         $selectedPri = '?'
     ) {
         switch ($how) {
+                /**
+             * Add to cart case
+             */
             case '+':
-                $count = 0;
-                foreach ($this->cart as $item) {
-                    if ($item['id'] == $id) {
-                        $this->cart[$count]['quantity']++;
-                        self::save();
-                        if ($source != '?') {
-                            self::updateQuantity($id, $this->cart[$count]['quantity']);
-                            $this->dispatch('updateCheckout');
-                        }
-                        return;
-                    }
-
-                    $count++;
+                if (!(array_key_exists('product: ' . $id, $this->cart))) {
+                    $this->cart += array('product: ' . $id => [
+                        'id' => $id,
+                        'tags' => $tags,
+                        'name' => $name,
+                        'quantity' => 1,
+                        'provider' => $provider,
+                        'description' => $description,
+                        'selectedOpt' =>  $selectedOpt,
+                        'selectedPri' => $selectedPri
+                    ]);
+                    self::handshake();
+                } else if (array_key_exists('product: ' . $id, $this->cart)) {
+                    $this->cart['product: ' . $id]['quantity'] = $this->cart['product: ' . $id]['quantity'] + 1;
+                    self::handshake();
                 }
-                array_push($this->cart, [
-                    'id' => $id,
-                    'tags' => $tags,
-                    'name' => $name,
-                    'quantity' => 1,
-                    'provider' => $provider,
-                    'description' => $description,
-                    'selectedOpt' =>  $selectedOpt,
-                    'selectedPri' => $selectedPri
-                ]);
-                self::save();
-                if ($source != '?') {
-                    self::updateQuantity($id, 1);
-                    $this->dispatch('updateCheckout');
-                }
-                return;
-                // Remove from cart
+                break;
+                /**
+                 * Remove from cart case
+                 */
             case '-':
-                $count = 0;
-                foreach ($this->cart as $item) {
-                    if ($item['id'] == $id) {
-                        if ($item['quantity'] - 1 === 0) {
-                            unset($this->cart[$count]);
-                            $this->cart = array_values($this->cart);
-                            self::save();
-                            if ($source != '?') {
-                                self::updateQuantity($item['id'], 0);
-                                $this->dispatch('updateCheckout');
-                            }
-                            return;
-                        }
-                        $this->cart[$count]['quantity']--;
-                        self::save();
-                        if ($source != '?') {
-                            self::updateQuantity($item['id'], $this->cart[$count]['quantity']);
-                            $this->dispatch('updateCheckout');
-                        }
-                        return;
+                if (array_key_exists('product: ' . $id, $this->cart)) {
+                    if ($this->cart['product: ' . $id]['quantity'] - 1 == 0) {
+                        unset($this->cart['product: ' . $id]);
+                        $this->cart = array_values($this->cart);
+                    } else {
+                        $this->cart['product: ' . $id]['quantity'] = $this->cart['product: ' . $id]['quantity'] - 1;
                     }
-                    $count++;
+                    self::handshake();
                 }
-                return;
+                break;
         }
     }
     // Remove all items from cart by product ID
     #[On('removeFromCart')]
     public function removeFromCart($id, $source = '?')
     {
-        $count = 0;
-        foreach ($this->cart as $item) {
-            if ($item['id'] == $id) {
-                if (session('product: ' . $item['id'])) {
-                    session()->remove('product: ' . $id);
-
-                    if ($source != '?') {
-                        self::updateQuantity($item['id'], 0);
-                        $this->dispatch('updateCheckout');
-                    }
-
-                    unset($this->cart[$count]);
-                    $this->cart = array_values($this->cart);
-                    self::save();
-                    return;
-                }
-            }
-            $count++;
+        if (array_key_exists('product: ' . $id, $this->cart)) {
+            unset($this->cart['product: ' . $id]);
+            $this->cart = array_values($this->cart);
         }
-        return;
+        self::handshake();
     }
+
     // Update cart if option changed while product is added
     #[On('updateCart')]
-    public function updateCart($how, $id, $selectedOpt = null, $selectedPri = null)
+    public function updateCart($how, $id, $selectedOpt = '?', $selectedPri = '?')
     {
         switch ($how) {
             case 'option':
-                if (count($this->cart) > 0) {
-                    $count = 0;
-                    foreach ($this->cart as $item) {
-                        if ($item['id'] == $id) {
-                            $this->cart[$count]['selectedOpt'] = $selectedOpt;
-                            self::save();
-                            return;
-                        }
-                        $count++;
-                    }
+                if (array_key_exists('product: ' . $id, $this->cart)) {
+                    $this->cart['product: ' . $id]['selectedOpt'] = $selectedOpt;
+                    self::handshake();
                 }
-                return;
+                break;
             case 'price':
-                if (count($this->cart) > 0) {
-                    $count = 0;
-                    foreach ($this->cart as $item) {
-                        if ($item['id'] == $id) {
-                            $this->cart[$count]['selectedPri'] = $selectedPri;
-                            self::save();
-                            return;
-                        }
-                        $count++;
-                    }
+                if (array_key_exists('product: ' . $id, $this->cart)) {
+                    $this->cart['product: ' . $id]['selectedPri'] = $selectedPri;
+                    self::handshake();
                 }
-                return;
+                break;
         }
-    }
-    // Save cart to session
-    public function save()
-    {
-        session(['cart' => $this->cart]);
-        $this->items = count($this->cart);
     }
 
     public function mount()

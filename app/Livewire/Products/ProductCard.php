@@ -55,7 +55,6 @@ class ProductCard extends Component
                     selectedOpt: $this->selectedOpt,
                     selectedPri: $this->selectedPri
                 );
-                self::save();
                 break;
             case '-':
                 if ($this->quantity > 0) {
@@ -71,7 +70,6 @@ class ProductCard extends Component
                         selectedOpt: $this->selectedOpt,
                         selectedPri: $this->selectedPri
                     );
-                    self::save();
                 }
                 break;
         }
@@ -87,19 +85,18 @@ class ProductCard extends Component
                 break;
         }
     }
-    public function save()
+    #[On('handshakeCard')]
+    public function handshake()
     {
-        if ($this->quantity == 0) {
-            session()->remove('product: ' . $this->id);
-        }else{
-            session(['product: ' . $this->id => $this->quantity]);
+        if (array_key_exists('product: ' . $this->id, session('cart'))) {
+            $this->quantity = session('cart')['product: ' . $this->id]['quantity'];
+        } else {
+            $this->quantity = 0;
         }
     }
     public function mount()
     {
-        if (session('product: ' . $this->id)) {
-            $this->quantity = session('product: ' . $this->id);
-        }
+        self::handshake();
     }
     public function render()
     {
