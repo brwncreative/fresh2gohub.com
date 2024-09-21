@@ -68,7 +68,6 @@ class Cart extends Component
                 if (array_key_exists('product: ' . $id, $this->cart)) {
                     if ($this->cart['product: ' . $id]['quantity'] - 1 == 0) {
                         unset($this->cart['product: ' . $id]);
-                        $this->cart = array_values($this->cart);
                     } else {
                         $this->cart['product: ' . $id]['quantity'] = $this->cart['product: ' . $id]['quantity'] - 1;
                     }
@@ -83,7 +82,6 @@ class Cart extends Component
     {
         if (array_key_exists('product: ' . $id, $this->cart)) {
             unset($this->cart['product: ' . $id]);
-            $this->cart = array_values($this->cart);
         }
         self::handshake();
     }

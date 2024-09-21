@@ -105,8 +105,10 @@ class Checkout extends Component
     {
         $unserialize = function () {
             foreach ($this->cart as $item) {
-                $this->cart['product: ' . $item['id']]['selectedPri'] = json_decode($item['selectedPri'], true);
-                $this->cart['product: ' . $item['id']]['selectedOpt'] = json_decode($item['selectedOpt'], true);
+                if (array_key_exists('product: ' . $item['id'], $this->cart)) {
+                    $this->cart['product: ' . $item['id']]['selectedPri'] = json_decode($item['selectedPri'], true);
+                    $this->cart['product: ' . $item['id']]['selectedOpt'] = json_decode($item['selectedOpt'], true);
+                }
             }
         };
         $calc = function () {
