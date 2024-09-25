@@ -27,7 +27,7 @@ class Order extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Invoice: ' . $this->order,
+            subject: 'Invoice: ' . $this->order->ticket,
         );
     }
 

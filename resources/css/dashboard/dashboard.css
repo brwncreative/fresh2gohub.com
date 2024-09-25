@@ -1,50 +1,64 @@
 @import url("./products.css");
 @import url("./orders.css");
+@import url("./users.css");
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed !important;
+    background: linear-gradient(
+        180deg,
+        rgba(80, 80, 80, 1) 0%,
+        rgba(54, 54, 54, 1) 100%
+    );
+}
 #dashboard-nav {
     /* Buffer at screen edge */
     padding-inline: var(--desktop);
     @media only screen and (max-width: 1070px) {
         padding-inline: var(--mobile);
     }
-    background-color: white;
+
+    backdrop-filter: blur(20px);
     border-radius: 0 0 10px 10px;
-    box-shadow: 0 0 4px 2px var(--light-grey);
     /* --- */
     z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    padding-block: 1rem;
+    padding-block: .5rem;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr;
+    gap: 0.3rem;
 }
 #dashboard-nav {
-    box-shadow: 0 0 5px 2px var(--light-grey);
     #id-actions {
         display: flex;
         gap: 1rem;
-        margin-bottom: 1rem;
         a {
             display: flex;
             align-items: center;
             text-decoration: none;
-            color: black;
+            color: var(--light-grey);
         }
     }
     #menu {
+        overflow-y: hidden;
+        overflow-x: auto;
         .bucket {
             .items {
                 display: flex;
-                gap: 0.8rem;
+                gap: 2rem;
                 .item {
+                    width: max-content;
                     text-decoration: none;
-                    color: unset !important;
-                    background-color: var(--light-grey);
-                    padding-inline: 0.8rem;
-                    padding-block: 0.2rem;
-                    border-radius: 10px;
                     a {
                         text-transform: capitalize;
-                        color: black;
+                        color: var(--light-grey) !important;
                         text-decoration: none;
                     }
                 }
@@ -53,19 +67,20 @@
     }
 }
 #dashboard {
-
-    margin-block-start: 8rem;
+    color: white;
+    margin-block-start: 6rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    gap: 1rem;
-    .bubble {
-        height: 10rem;
-        min-width: 10rem;
-        border-radius: 15px;
-        padding: 1rem;
-        padding-inline-end: 2rem;
-        box-shadow: 0 1px 3px 1px var(--grey);
+    #role-bubble{
+        margin-block: .4rem;
+        padding-block: .2rem;
+        padding-inline: .5rem;
+        width: max-content;
+        border-radius: 10px;
+        background-color: rgba(173, 216, 230,.3);
+        border: 1px solid rgb(173, 216, 230);
+        color: lightblue;
     }
     .sales {
     }

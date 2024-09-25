@@ -8,6 +8,10 @@
             @livewire('dashboard.products')
         @break
 
+        @case('users')
+        @livewire('dashboard.users')
+        @break
+
         @case('whatsapp')
             @livewire('dashboard.whatsapp')
         @break

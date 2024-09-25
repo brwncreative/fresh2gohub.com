@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('via');
             $table->float('total');
             $table->string('status')->default('unpaid')->nullable()->index('status');
+            $table->string('stage')->default('received')->nullable()->index('stage');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
         });

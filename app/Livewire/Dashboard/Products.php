@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard;
 
 use Livewire\Attributes\On;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MediaController;
 use Livewire\Component;
 
 class Products extends Component
@@ -19,72 +20,36 @@ class Products extends Component
     public function prepProducts()
     {
         $this->products = ProductController::index();
+        $this->dispatch('$refresh');
     }
-    public function create()
-    {
+    #[On('update')]
+    public function create(
+        $id = '?',
+        $category = '?',
+        $provider = '?',
+        $name = '?',
+        $description = '?',
+        $available = '?',
+        $stock = '?',
+        $tags = '?',
+        $options = '?',
+        $prices = '?',
+    ) {
         ProductController::create(
-            $this->category,
-            $this->provider,
-            $this->name,
-            $this->description,
-            $this->available,
-            $this->stock,
-            $this->tags,
-            $this->options,
-            $this->prices,
+            $id == '?' ? $this->id : $id,
+            $category == '?' ? $this->category : $category,
+            $provider == '?' ?  $this->provider : $provider,
+            $name === '?' ? $this->name : $name,
+            $description == '?' ? $this->description : $description,
+            $available == '?' ? $this->available : $available,
+            $stock == '?'  ? $this->stock : $stock,
+            $tags == '?' ? $this->tags : $tags,
+            $options == '?' ? $this->options :  $options,
+            $prices == '?' ? $this->prices :  $prices,
         );
         $this->dispatch('reloadProducts')->self();
     }
-    public function letsUpdate($id)
-    {
-        $temp = $this->products->find($id);
-        $this->provider = $temp->provider;
-        $this->category = $temp->category;
-        $this->name = $temp->name;
-        // Quick conversions for use in form input
-        $tags = function () use ($temp) {
-            $string = (string)'';
-            $count = 0;
-            foreach ($temp->tags as $tag) {
-                $string .= $tag['tag'];
-                if (!count($temp->tags) == ($count + 1)) {
-                    $string .= ',';
-                }
-                $count++;
-            }
-            return $string;
-        };
-        $options = function () use ($temp) {
-            $string = (string)'';
-            $count = 0;
-            foreach ($temp->options as $option) {
-                $string .= $option['option'] . '/' . $option['value'];
-                if (!count($temp->tags) == ($count + 1)) {
-                    $string .= ',';
-                }
-                $count++;
-            }
-            return $string;
-        };
-        $prices = function () use ($temp) {
-            $string = (string)'';
-            $count = 0;
-            foreach ($temp->prices as $price) {
-                $string .= $price['value'] . '/' . $price['metric'];
-                if (!count($temp->prices) == ($count + 1)) {
-                    $string .= ',';
-                }
-                $count++;
-            }
-            return $string;
-        };
-        $this->tags = $tags();
-        $this->options = $options();
-        $this->prices = $prices();
-        $this->description = $temp->description;
-        $this->available = $temp->available;
-        $this->stock = $temp->stock;
-    }
+    #[On('remove')]
     public function remove($id)
     {
         ProductController::remove($id);

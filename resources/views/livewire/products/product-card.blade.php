@@ -25,8 +25,7 @@
     <div class="pc-bucket" style="{{ $type == 'list' ? 'width:100%' : '' }}">
         {{-- Image --}}
         <div class="image" wire:click="callPage('{{ $id }}')">
-            <img src="" alt="" />
-            <div></div>
+            <div> <img src="{{ App\Http\Controllers\MediaController::serveImage($name, 'webp') }}" alt="" /></div>
         </div>
         {{-- Tags --}}
         <div class="tags">

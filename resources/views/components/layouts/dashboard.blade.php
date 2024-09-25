@@ -12,20 +12,21 @@
         defer>
     @vite(['resources/css/dashboard/dashboard.css', 'resources/css/app.css'])
 </head>
+
 <body>
     <header>
         <nav id="dashboard-nav">
             <div id="id-actions">
+                <a href="{{ route('dashboard') }}">
+                    <p class="small-title">Hi <span class="bold">{{ Auth::user()->name }}</span></p>
+                </a>
+                <a href="{{ route('welcome') }}">Site Home</a>
                 <a href="{{ route('logout') }}">
                     <i class="bi bi-box-arrow-left h3"></i>
                 </a>
-                <a href="{{ route('dashboard') }}">
-                    <p class="small-title">Welcome <span class="bold">{{ Auth::user()->name }}</span></p>
-                </a>
-                <a href="{{ route('welcome') }}">Website home</a>
             </div>
             <div id="menu">
-                <x-helpers.dashboard.menu :items="['products','orders', 'users', 'whatsapp']"></x-helpers.dashboard.menu>
+                <x-helpers.dashboard.menu :items="['products', 'orders', 'users', 'whatsapp']"></x-helpers.dashboard.menu>
             </div>
         </nav>
     </header>

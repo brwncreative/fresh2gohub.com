@@ -10,9 +10,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public static function index()
     {
-        //
+        return User::all()->reverse();
     }
 
     /**
@@ -32,6 +32,10 @@ class UserController extends Controller
         }
     }
 
+    public static function change()
+    {
+       User::updateOrCreate();
+    }
     /**
      * Store a newly created resource in storage.
      */

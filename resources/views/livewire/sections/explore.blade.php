@@ -11,7 +11,9 @@
             <div class="input-btn" wire:click='handleInvitee'><i class="bi bi-envelope h3"></i></div>
         </div>
         @error('email')
-            {{ $message }}
+            <div class="error">
+                <i class="bi bi-exclamation-circle"></i> {{ $message }}
+            </div>
         @enderror
     </div>
     {{-- Feature products --}}

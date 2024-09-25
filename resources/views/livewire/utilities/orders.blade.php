@@ -3,7 +3,7 @@
     @if ($response)
         <div id="response">
             <div id="response-container" class="{{ $resp_active ? 'active' : '' }}">
-                <i wire:click="$toggle('resp_active')" id="close-response" class="bi bi-x-lg"></i>
+                <a href="{{route('orders',['ticket'=>$response['order_id']])}}"><i id="close-response" class="bi bi-x-lg"></i></a>
                 <p class="medium-title bold">Transaction details: </p>
                 <p class="paragraph">Review your wipay transaction details below</p>
                 <div id="response-details">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div id="vail" class="vail-{{ $resp_active ? 'active' : '' }}">></div>
+            <div id="vail" class="vail-{{ $resp_active ? 'active' : '' }}"></div>
         </div>
     @endif
     {{-- Toolbar --}}
@@ -144,9 +144,13 @@
                     </div>
                     <p class="total">Total: <span class="medium-title">{{ $order->total }}</span></p>
                     <div id="actions">
-                        <button><i class="bi bi-camera"></i>Upload screenshot</button>
                         <button>Send message</button>
-                        <button>Feedback</button>
+                        @if ($order->status == 'unpaid')
+                        <input wire:model='image' id="screenshot" type="file" hidden>
+                        <label for="screenshot"><i class="bi bi-camera"></i>Upload screenshot</label>
+                        <p>File</p>
+                        <a href="{{route('checkout')}}"><button>Pay Via Card</button></a>
+                        @endif
                     </div>
                 @endforeach
             </div>

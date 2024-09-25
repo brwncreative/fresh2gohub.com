@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class MediaController extends Controller
@@ -10,9 +11,23 @@ class MediaController extends Controller
     {
         if (isset($file)) {
             $ext = str_replace('image/', '', $file->getMimeType());
-            $local = fopen(base_path('images\\orders\\' . $ticket . '.' . $ext), 'w');
-            fwrite($local, $file->get());
+            $local = fopen(base_path('resources/media/orders/' . $ticket . '.' . $ext), 'w');
+            fwrite($local, $file->getContent());
             fclose($local);
+        }
+    }
+
+    /**
+     * Save image in git cloud
+     * @param mixed $stream
+     * @return void
+     */
+    public static function saveImageCloud($filename, $ext = '.webp')
+    {
+        $previous = Http::withToken(env('GITHUB_TOKEN'))->get(env('GITHUB_STORE') . $filename . $ext);
+        $sha = $previous ? $previous->json('sha') : '';
+        if (file_exists(base_path('resources/media/' . $filename . $ext))) {
+            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . $ext, ['message' => "image upload", 'content' => base64_encode(file_get_contents(base_path('resources/media/' . $filename . $ext))), 'sha' => $sha]);
         }
     }
 
@@ -28,11 +43,11 @@ class MediaController extends Controller
         $scaled = imagescale($image, (imagesx($image) - imagesx($image) * .35));
         imagedestroy($image);
         // Convert to Webp
-        imagewebp($scaled, base_path('resources/' . $fn() . '.webp'), 75);
+        imagewebp($scaled, base_path('resources/media/' . $fn() . '.webp'), 75);
         imagedestroy($scaled);
     }
 
-    
+
     /**
      * Serve Image file
      *  - serve an image file url

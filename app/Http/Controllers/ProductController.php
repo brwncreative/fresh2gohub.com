@@ -43,6 +43,7 @@ class ProductController extends Controller
      * @return void
      */
     public static function create(
+        $id,
         $category,
         $provider,
         $name,
@@ -55,12 +56,7 @@ class ProductController extends Controller
     ) {
         // Create product
         $product = Product::updateOrCreate([
-            'category' => $category,
-            'provider' => $provider,
-            'name' => $name,
-            'description' => $description,
-            'available' => $available,
-            'stock' => $stock
+            'id' => $id,
         ], [
             'category' => $category,
             'provider' => $provider,
@@ -83,6 +79,9 @@ class ProductController extends Controller
         $tags_array = [];
         $temp = explode(',', $tags);
         foreach ($temp as $tag) {
+            if (strlen($tag) < 1 || $tag == null) {
+                $tag = 'tag';
+            }
             array_push($tags_array, ['tag' => $tag, 'product_id' => $id]);
         }
         return $tags_array;
@@ -122,7 +121,6 @@ class ProductController extends Controller
     {
         DB::table('products')->delete($id);
     }
-    public static function update() {}
 
     public static function index()
     {

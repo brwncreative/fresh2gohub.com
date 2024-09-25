@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Utilities;
 
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -12,7 +13,7 @@ class Orders extends Component
     use WithFileUploads;
     #[Url(keep: true)]
     public $ticket;
-    public $orders = [], $history = [], $user_id, $response;
+    public $orders = [], $history = [], $user_id, $response, $image;
     public $resp_active = false;
 
     public function wiPayHandshake()
@@ -21,7 +22,7 @@ class Orders extends Component
             $this->resp_active = true;
             $this->response = request()->query();
             if (isset($this->response['status']) & ($this->response['status'] == 'success')) {
-                OrderController::update($this->order_ticket, 'paid');
+                OrderController::update($this->response['order_id'], 'paid');
             }
         }
     }
@@ -34,6 +35,12 @@ class Orders extends Component
         self::wiPayHandshake();
         if ($this->ticket) {
             self::find();
+        }
+    }
+    public function updated($property)
+    {
+        if ($property == 'image') {
+            MediaController::saveOrderImageLocal($this->orders[0]->ticket, $this->image);
         }
     }
     public function render()

@@ -19,7 +19,7 @@
         <div id="products">
             <div>
                 <p class="medium-title">{{ $find ? $find : 'Click an option!' }}</p>
-                <p class="paragraph bold">Lets see what we have here..</p>
+                <p class="paragraph ">Lets see what we have here..</p>
             </div>
             @if (count($products) > 0)
             <div id="product-container">
