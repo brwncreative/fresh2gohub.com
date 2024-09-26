@@ -23,39 +23,20 @@
             font-optical-sizing: auto;
         }
 
-        pre {
-            font-size: 1rem;
-            font-family: "Inter", sans-serif;
-            font-optical-sizing: auto;
+        tbody>tr>td:first-child {
+            width: 8rem;
         }
     </style>
 </head>
 
-
 <body>
     <center>
-        <table style="margin-top:1rem; width: 30rem">
-            <tbody>
-                <tr>
-                    <td>Welcome <span style="font-weight: 600"> {{ $recipient }}</span>!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <h4>Thank you so much for joining us <3< /h4>
-                                <p>
-                                    At Fresh2GoHub we hope to bring the wholesale needs of Trinidad much more
-                                    convenient, quality assured and approachable. When we say 'lets get you something to
-                                    eat'
-                                    We're not kidding!
-                                </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Stay tuned for deals, updates and more @fresh2GoHub</p>
-                    </td>
-                </tr>
-            </tbody>
+        <table style="margin-top: 1rem">
+            <table style="width: 30rem">
+                <tbody>
+                    {{ $custom }}
+                </tbody>
+            </table>
         </table>
     </center>
 </body>

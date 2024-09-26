@@ -117,7 +117,7 @@
                                         <p class="paragraph">status:</p>
                                     </td>
                                     <td>
-                                        <p><span class="status-{{ $order->status }}">{{ $order->status }}</span></p>
+                                        <p><span class="status-{{ $order->status ? 'paid' : 'unpaid'}}">{{ $order->status ? 'paid' : 'unpaid'}}</span></p>
                                     </td>
                                 </tr>
                             </tbody>

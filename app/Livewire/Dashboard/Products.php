@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard;
 
+use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MediaController;
@@ -9,8 +10,19 @@ use Livewire\Component;
 
 class Products extends Component
 {
+    use WithFileUploads;
     public $products;
-    public $category, $provider = 'Fresh2GoHub', $name, $description, $tags, $options, $prices, $available, $stock;
+    public $category,
+        $provider = 'Fresh2GoHub',
+        $name,
+        $description,
+        $tags,
+        $options,
+        $prices,
+        $available = false,
+        $stock,
+        $creating = false,
+        $image;
 
     /**
      * Prep products
@@ -36,7 +48,7 @@ class Products extends Component
         $prices = '?',
     ) {
         ProductController::create(
-            $id == '?' ? $this->id : $id,
+            $id == '?' ? null : $id,
             $category == '?' ? $this->category : $category,
             $provider == '?' ?  $this->provider : $provider,
             $name === '?' ? $this->name : $name,
@@ -54,6 +66,13 @@ class Products extends Component
     {
         ProductController::remove($id);
         $this->dispatch('reloadProducts')->self();
+    }
+    public function updated($property)
+    {
+        if ($property === 'image') {
+            MediaController::saveFile($this->image->getContent(), $this->name);
+            MediaController::saveImageCloud($this->name);
+        }
     }
     public function mount()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Utilities;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
@@ -36,6 +37,11 @@ class Checkout extends Component
     {
         // Run Validation
         // $this->validate([]);
+        $user = function () {
+            if (Auth::user()) {
+                return Auth::user()->id;
+            }
+        };
 
         switch ($this->paymentOption) {
                 // WiPay method
@@ -52,8 +58,10 @@ class Checkout extends Component
                     $this->address,
                     $this->instructions,
                     $this->via,
-                    $this->total
+                    $this->total,
+                    $user()
                 );
+       
                 $response = Http::withHeaders(['Authorization' => '123'])->accept('application/json')->post(
                     'https://tt.wipayfinancial.com/plugins/payments/request',
                     [
@@ -93,7 +101,8 @@ class Checkout extends Component
                     $this->address,
                     $this->instructions,
                     $this->via,
-                    $this->total
+                    $this->total,
+                    $user()
                 );
                 MailController::send('invoice', $this->email, $order);
                 return redirect()->route('orders', ['ticket' => $this->ticket]);

@@ -1,0 +1,114 @@
+#users {
+    height: rem;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    #user-container {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+    .user {
+        border-radius: 10px;
+        min-width: 15rem;
+        min-height: 10rem;
+        max-width: 20rem;
+        background-color: rgb(232, 232, 232);
+        color: black;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        .pic {
+            height: 2rem;
+            width: 2rem;
+            border-radius: 20px;
+            background-color: var(--grey);
+        }
+        .information {
+            margin-block: 0.5rem;
+            .name-role {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                .role {
+                    font-size: 0.8rem;
+                    padding-inline: 0.5rem;
+                    background-color: var(--light-grey);
+                    border-radius: 15px;
+                }
+            }
+        }
+        .actions {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 0.5rem;
+            button {
+                border-radius: 8px;
+                border: none;
+            }
+            button:focus {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+#mail {
+    background-color: rgb(232, 232, 232);
+    width: 100%;
+    min-height: 30rem;
+    margin-block: 1rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    .input {
+        padding-block: 0.2rem;
+        padding-inline: 0.5rem;
+        display: grid;
+        grid-template: max-content max-content max-content max-content/ 1fr;
+        gap: 0.5rem;
+        span > div {
+            gap: 1rem;
+            display: flex;
+            input {
+                font-size: 0.9rem;
+                padding-block: 0.3rem;
+                padding-inline: 0.5rem;
+                border: none;
+                border-radius: 10px;
+                flex-grow: 1;
+            }
+            input:focus {
+                border: none;
+                outline: none;
+            }
+        }
+        .text-area {
+            textarea {
+                border-radius: 5px;
+                border: none;
+                padding: 0.5rem;
+                width: 100%;
+                height: 20rem;
+                max-height: 30rem;
+            }
+            textarea:focus {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+    #actions {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        button {
+            border-radius: 5px;
+            border: none;
+            background-color: grey;
+            color: white;
+            padding: 0.5rem;
+        }
+    }
+}

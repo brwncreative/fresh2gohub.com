@@ -5,7 +5,7 @@
             <canvas id="confetti-canvas"></canvas>
         </div> --}}
         <p class="title">{{ $title }}</p>
-        <p clas="paragraph">Updates, deals, news?! Keep in the know about all things fresh2go-hub!</p>
+        <p clas="paragraph">Updates, deals, news?! Keep in the know about all things fresh2gohub!</p>
         <div id="mcta-inputs">
             <input type="email" placeholder="Join us!" name="email" wire:model='email'>
             <div class="input-btn" wire:click='handleInvitee'><i class="bi bi-envelope h3"></i></div>

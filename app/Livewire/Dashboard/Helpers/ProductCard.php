@@ -85,7 +85,7 @@ class ProductCard extends Component
             provider: $this->provider,
             name: $this->name,
             description: $this->description,
-            available: $this->available,
+            available: $this->available ? 1 : 0,
             stock: $this->stock,
             tags: $this->tags,
             options: $this->options,

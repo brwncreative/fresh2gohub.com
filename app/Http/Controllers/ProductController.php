@@ -23,9 +23,14 @@ class ProductController extends Controller
             $query->where('tag', 'like', '%' . $find . '%');
         })->get();
     }
-    public static function filter($price)
+    public static function filter($find, $price)
     {
-        return Product::whereHas('prices', function (Builder $query) use ($price) {
+        return Product::withWhereHas(
+            'tags',
+            function ($query) use ($find) {
+                $query->where('tag', 'like', '%' . $find . '%');
+            }
+        )->whereHas('prices', function ($query) use ($price) {
             $query->where('value', '<=', $price);
         })->get();
     }
@@ -124,6 +129,6 @@ class ProductController extends Controller
 
     public static function index()
     {
-        return Product::all();
+        return Product::all()->reverse();
     }
 }

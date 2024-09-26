@@ -84,14 +84,31 @@
             </section>
             {{-- Nav shopy by filters --}}
             <section id="nav-shopby">
-                <x-helpers.shop-by :items="['Healthy', 'Popular', 'Diwali']">
+                <x-helpers.shop-by :items="['healthy', 'popular', 'diwali']">
                 </x-helpers.shop-by>
             </section>
         </nav>
     </header>
     {{ $slot }}
     <footer>
-        Powered by Brwncreative, all logos, images and general media belong or have been licensed to Fresh2GoHub
+        <div id="message">
+            <div class="disclaimer">
+                <p>We hope you enjoy Fresh2GoHub.com! If you have any feedback for us <br> don't be afraid to contact us
+                    and give us some feedback</p>
+            </div>
+            <div class="social-links">
+                <i class="bi bi-instagram"></i>
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-tiktok"></i>
+            </div>
+            <div class="tech"><a href="">Powered by Brwncreative</a></div>
+        </div>
+
+        {{-- <div id="footer-pattern">
+            <div class="mask"></div><img
+                src="{{ App\Http\Controllers\MediaController::serveImage('Fresh2GoHub_Pattern', 'svg') }}"
+                alt="">
+        </div> --}}
     </footer>
 </body>
 <script>

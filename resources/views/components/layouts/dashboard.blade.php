@@ -26,7 +26,7 @@
                 </a>
             </div>
             <div id="menu">
-                <x-helpers.dashboard.menu :items="['products', 'orders', 'users', 'whatsapp']"></x-helpers.dashboard.menu>
+                <x-helpers.dashboard.menu :items="['products', 'orders', 'users']"></x-helpers.dashboard.menu>
             </div>
         </nav>
     </header>

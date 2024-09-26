@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Livewire\Dashboard;
-
+use Livewire\Attributes\On;
 use App\Http\Controllers\OrderController;
 use Livewire\Component;
 
 class Orders extends Component
 {
     public $orders;
+    #[On('reload-orders')]
     public function prepOrders()
     {
         $this->orders = OrderController::index();

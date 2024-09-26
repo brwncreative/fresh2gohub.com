@@ -4,7 +4,7 @@
     <div wire:click='search' id="sb-actions">
         <div class="search-btn"> <i class="bi bi-search h5"></i></div>
     </div>
-    @if (strlen($find) > 0)
+    @if (count($products) > 1)
         <div id="results">
             <div id="results-container">
                 @foreach ($products as $product)

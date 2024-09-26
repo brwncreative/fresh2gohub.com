@@ -24,7 +24,7 @@ class Results extends Component
         switch ($case) {
             case 'filter':
                 $this->filter = true;
-                $this->products = ProductController::filter($this->price);
+                $this->products = ProductController::filter($this->find, $this->price);
                 break;
             case 'none':
                 $this->filter = false;

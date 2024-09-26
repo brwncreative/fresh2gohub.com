@@ -8,7 +8,7 @@ use \Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
-    public static function send($via, $recipient = '?', $order = '?', $message = '?')
+    public static function send($via, string|array $recipient = '?', $order = '?', $subject = '?', $message = '?')
     {
         switch ($via) {
             case 'marketing':
@@ -24,6 +24,9 @@ class MailController extends Controller
             case 'hr':
                 Config::set('mail.default', 'smtp');
                 Config::set('mail.from.address', 'marketing@fresh2gohub.com');
+                foreach ($recipient as $to) {
+                    Mail::to($to)->send(new \App\Mail\Template($subject, $message));
+                }
                 return;
         }
     }

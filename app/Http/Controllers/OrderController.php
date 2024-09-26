@@ -28,7 +28,13 @@ class OrderController extends Controller
         $instructions,
         $via,
         $total,
+        $user_id = '?'
     ) {
+        $user = function () use ($user_id) {
+            if ($user_id != '?') {
+                return $user_id;
+            }
+        };
         // Create order
         $order = Order::create([
             'ticket' =>  $ticket,
@@ -41,6 +47,7 @@ class OrderController extends Controller
             'instructions' => $instructions,
             'via' => $via,
             'total' => $total,
+            'user_id' => $user()
         ]);
         // Attach Transactions
         $transactions = [];
@@ -68,8 +75,15 @@ class OrderController extends Controller
         $order->transactions()->createMany($transactions);
         return $order;
     }
-    public static function update($ticket, $status)
+    public static function update($ticket, $paid = '?', $stage = '?')
     {
-        Order::where('ticket', '=', $ticket)->update(['status' => $status]);
+        if ($paid == true) {
+            Order::where('ticket', '=', $ticket)->update(['paid' => 1]);
+        }else{
+            Order::where('ticket', '=', $ticket)->update(['paid' => 0]);
+        }
+        if ($stage != '?') {
+            Order::where('ticket', '=', $ticket)->update(['stage' => $stage]);
+        }
     }
 }

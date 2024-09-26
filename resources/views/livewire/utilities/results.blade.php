@@ -6,7 +6,7 @@
             <div id="filter-container">
                 <div id="priceRange">
                     <p>Price: ${{ $price }}</p>
-                    <input type="range" wire:model.blur='price'min="0" max="30"></input>
+                    <input type="range" wire:model.blur='price'min="0" max="200"></input>
                 </div>
             </div>
             <div id="actions">
@@ -18,7 +18,7 @@
         </div>
         <div id="products">
             <div>
-                <p class="medium-title">{{ $find ? $find : 'Click an option!' }}</p>
+                <p class="title">{{ $find ? $find : 'Click an option!' }}</p>
                 <p class="paragraph ">Lets see what we have here..</p>
             </div>
             @if (count($products) > 0)

@@ -5,7 +5,6 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/css/dashboard/dashboard.css",
                 "resources/css/sections/sections.css",
@@ -17,6 +16,7 @@ export default defineConfig({
                 "resources/css/products/products.css",
                 "resources/css/results/results.css",
                 "resources/css/checkout/cart.css",
+                "resources/css/app.css",
             ],
             refresh: true,
         }),

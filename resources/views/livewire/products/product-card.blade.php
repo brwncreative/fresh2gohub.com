@@ -3,7 +3,7 @@
         <style>
             .product-card {
                 display: flex;
-                flex: 0 30%;
+                flex: 0 25%;
 
                 @media only screen and (max-width: 1070px) {
                     flex: 0 50%;
@@ -37,7 +37,7 @@
         </div>
         {{-- ID --}}
         <div class="identifiers" wire:click="callPage({{ $id }})">
-            {{ $provider }} : <span class="small-title">{{ $name }}</span>
+            {{ $provider }} : <span class=" bold">{{ $name }}</span>
         </div>
         <div class="description paragraph">{{ $description }}</div>
         {{-- Options --}}
@@ -93,9 +93,15 @@
                 @endscript
             </div>
             <div class="btns">
-                <i class="bi bi-dash-circle minus h5" wire:click="addToCart('-')"></i>
-                <p>
-                    {{ $quantity }}
+                <span>
+                    @if ($quantity >= 1)
+                        <i class="bi bi-dash-circle minus h5" wire:click="addToCart('-')"></i>
+                    @endif
+                </span>
+                <p style="pointer-events: none">
+                    @if ($quantity >= 1)
+                        {{ $quantity }}
+                    @endif
                 </p>
                 <i class="bi bi-plus-circle add h5" wire:click="addToCart('+')"></i>
             </div>

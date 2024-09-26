@@ -1,10 +1,16 @@
-<div class="order" wire:click="$toggle('active')">
+<div class="order">
     @if ($viewScreenshot)
         <div class="screenshot">dsad</div>
     @endif
     <div class="order-details order-{{ $order->ticket }}">
         {{-- Order details --}}
-        <p class="paragraph">Ticket: <span class="bold">{{ $order->ticket }}</span></p>
+        <div class="heading">
+            <p class="small-title">Ticket: <span class="bold">{{ $order->ticket }}</span></p>
+            <button wire:click="$toggle('viewScreenshot')"><i class="bi bi-receipt"></i></button>
+            <button wire:click="$toggle('active')"> Transactions</button>
+            <button><i class="bi bi-printer"></i></button>
+        </div>
+        <hr>
         <div class="order-information">
             <table class="information">
                 <tbody>
@@ -26,7 +32,7 @@
                     </tr>
                     <tr>
                         <td class="paragraph">Area:</td>
-                        <td class="paragraph-reg">{{ $order->area }} ; {{ $order->address }}</td>
+                        <td class="paragraph-reg">{{ $order->area }} : {{ $order->address }}</td>
                     </tr>
                     <tr>
                         <td class="paragraph">Via:</td>
@@ -34,8 +40,14 @@
                     </tr>
                     <tr>
                         <td class="paragraph">Status:</td>
-                        <td class="paragraph-reg" style="color:{{ $order->status == 'unpaid' ? 'red' : 'green' }}">
-                            {{ $order->status }}</td>
+                        <td class="paragraph-reg toggle-paid">
+                            <div class="toggle {{ $paid ? 'thumb-active' : '' }}" wire:click="$toggle('paid')">
+                                <div class="thumb"></div>
+                            </div>
+                            <p style="color:{{ $paid ? 'green' : 'red' }}">
+                                {{ $paid ? 'paid' : 'unpaid' }}
+                            </p>
+                        </td>
                     </tr>
                     <tr>
                         <td class="paragraph">Stage:</td>
@@ -57,9 +69,6 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="actions">
-                <button wire:click="$toggle('viewScreenshot')"><i class="bi bi-receipt"></i></button>
-            </div>
         </div>
     </div>
     {{-- Transactions --}}

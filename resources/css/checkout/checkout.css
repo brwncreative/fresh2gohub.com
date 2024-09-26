@@ -86,6 +86,7 @@
         }
         /* Checkout Form */
         #checkout-form {
+            color: black;
             padding-inline: 1rem;
             @media only screen and (max-width: 1070px) {
                 padding-inline: unset;
@@ -106,6 +107,7 @@
                 #payment-actions {
                     margin-top: 0.5rem;
                     .purchase-btn {
+                        color: black;
                         height: 2.5rem;
                         width: 100%;
                         margin-block: 1rem;
@@ -136,6 +138,7 @@
                     }
                 }
                 input {
+                    border-radius: none;
                     background: transparent;
                     padding-inline: 1rem;
                     padding-block: 0.5rem;

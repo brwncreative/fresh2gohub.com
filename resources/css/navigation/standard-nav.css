@@ -307,7 +307,6 @@ header {
             .tag-filter {
                 padding-inline: 0.8rem;
                 padding-block: 0.2rem;
-                background-color: var(--light-grey);
                 border-radius: 1rem;
                 border: 1px solid grey;
             }

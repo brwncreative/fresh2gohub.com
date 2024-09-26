@@ -22,7 +22,7 @@ class Orders extends Component
             $this->resp_active = true;
             $this->response = request()->query();
             if (isset($this->response['status']) & ($this->response['status'] == 'success')) {
-                OrderController::update($this->response['order_id'], 'paid');
+                OrderController::update($this->response['order_id'], true);
             }
         }
     }

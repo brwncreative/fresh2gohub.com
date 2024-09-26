@@ -27,7 +27,11 @@ class SearchBar extends Component
     public function updated($property)
     {
         if ($property == 'find') {
-            self::prepProducts();
+            if (strlen($this->find) < 1) {
+                $this->products = [];
+            } else {
+                self::prepProducts();
+            }
         }
     }
     public function render()

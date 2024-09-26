@@ -4,7 +4,9 @@
         <div id="main-product-details">
             {{-- Image --}}
             <div class="image">
-                <div class="lazy-load"></div>
+                <div class="img">
+                    <img src="{{ App\Http\Controllers\MediaController::serveImage($name, 'webp') }}" alt="" />
+                </div>
             </div>
             {{-- Id --}}
             <div class="id">
