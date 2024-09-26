@@ -13,26 +13,35 @@
     --desktop: 3rem;
     --mobile: 1.2rem;
 }
-.center{
+.center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 /* Custom Classes */
 .small-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     font-size: var(--big);
     -webkit-text-stroke: 0.3px;
 }
 .medium-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     font-size: var(--bigger);
-    -webkit-text-stroke: 0.3px;
+    -webkit-text-stroke: .6px;
 }
 .medium-title::first-letter {
     text-transform: capitalize;
 }
 .title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     font-size: var(--large);
-    -webkit-text-stroke: 1px;
+    -webkit-text-stroke: 0.7px;
 }
 .title::first-letter {
     text-transform: capitalize;

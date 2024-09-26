@@ -6,7 +6,7 @@
         <hr>
         <section>
             <div>
-                <p class="title">More than a website..</p>
+                <p class="medium-title">More than a website..</p>
                 <p>We're on a mission to revolutionaize the way you go about shopping </p>
                 <p class="paragraph">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vel maxime veniam itaque
