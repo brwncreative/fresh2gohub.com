@@ -237,6 +237,8 @@ header {
                             right: 5%;
                             color: var(--light-grey);
                         }
+                        a{width: 100%;
+                        }
                     }
                 }
             }

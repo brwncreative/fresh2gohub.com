@@ -1,9 +1,12 @@
 #login-container {
+    display: flex !important;
     position: relative;
     .active {
         opacity: 1 !important;
     }
     .bucket {
+        display: flex !important;
+        flex-direction: column ;
         transition: .5s;
         width: 18rem;
         right: 2%;
@@ -21,7 +24,8 @@
             color: var(--light-grey);
         }
         .intro {
-            margin-bottom: 1rem;
+            display: flex !important;
+            flex-direction: column ;
         }
         form {
             .errors{

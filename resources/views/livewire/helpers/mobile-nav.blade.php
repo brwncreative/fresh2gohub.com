@@ -7,7 +7,7 @@
             <a href="{{ route('logout') }}"><span class="paragraph">Hi</span> {{ Auth::user()->name }}</a>
         @endif
     @else
-        <a href="{{ route('login') }}">Login</a>
+        <livewire:utilities.login wire:key="mobile" :how="'text'"></livewire:utilities.login>
     @endif
     <a href="{{ route('welcome') }}">Home</a>
     <a href="{{ route('orders') }}">Orders</a>

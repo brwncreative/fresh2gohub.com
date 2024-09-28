@@ -17,8 +17,39 @@
         </section>
         <hr>
         <section>
-            <p class="small-title">Roadmap</p>
-            <p>Roadmap</p>
+            <p class="medium-title">Roadmap</p>
+            <p>Here's what were working on right now</p>
+            <div id="roadmap">
+                {{-- Milestone 1 --}}
+                <div class="rm rm-1">
+                    <span class="point">
+                        <div class="l" style="border-radius: 10px 10px 0 0"></div>
+                        <div class="p"></div>
+                    </span>
+                    <span class="milestone">
+                        <div class="milestone-container">
+                            <p class="small-title">Site Achievements</p>
+                            <p>The more you're here the more you'll be rewarded!</p>
+                        </div>
+                    </span>
+                </div>
+                {{-- --- --}}
+                {{-- Milestone 2 --}}
+                <div class="rm rm-2">
+                    <span class="point">
+                        <div class="l"></div>
+                        <div class="p"></div>
+                    </span>
+                    <span class="milestone">
+                        <div class="milestone-container">
+                            <p class="small-title">User preferences</p>
+                            <p>We'll be working on a comprehensive profile section for new users to manage their
+                                preferences, coupons and more!</p>
+                        </div>
+                    </span>
+                </div>
+                {{-- --- --}}
+            </div>
         </section>
         <hr>
     </main>

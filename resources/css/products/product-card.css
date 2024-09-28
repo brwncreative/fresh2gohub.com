@@ -20,6 +20,7 @@
         border-radius: 10px;
         overflow: hidden;
         div {
+            background-color: rgb(226, 226, 226);
             height: 100%;
             display: flex;
             justify-content: center;
@@ -30,6 +31,7 @@
         }
     }
     .tags {
+        padding-block: .2rem;
         display: flex;
         gap: 0.5rem;
         overflow: hidden;

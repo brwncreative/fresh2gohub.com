@@ -5,7 +5,8 @@
             {{-- Image --}}
             <div class="image">
                 <div class="img">
-                    <img src="{{ App\Http\Controllers\MediaController::serveImage($name, 'webp') }}" alt="" />
+                    <img src="{{ App\Http\Controllers\MediaController::serveImage('product-' . $id, 'webp') }}"
+                        alt="" />
                 </div>
             </div>
             {{-- Id --}}

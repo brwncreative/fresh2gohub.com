@@ -1,5 +1,22 @@
 <div id="login-container">
-    <div id="icon" wire:click="$toggle('state')"><i class="bi bi-person h3"></i></div>
+    @if ($type = 'text')
+        <style>
+            #login-container {
+                .bucket {
+                    right: -5% !important;
+                }
+            }
+        </style>
+    @endif
+    @switch($how)
+        @case('icon')
+            <div id="icon" wire:click="$toggle('state')"><i class="bi bi-person h3"></i></div>
+        @break
+        @case('text')
+            <a wire:click="$toggle('state')">Login</a>
+        @break
+    @endswitch
+
 
     <div class="bucket {{ $state ? 'active' : 'in-active' }}">
         <i class="bi bi-caret-up-fill tail"></i>

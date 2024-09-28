@@ -11,12 +11,18 @@
             }
 
             @media only screen and (max-width: 1070px) {
+                .product-card {
+                    border: none;
+                }
+
                 .product-card:nth-child(odd) {
+                    padding-left: 0rem;
                     padding-right: 0.8rem;
                 }
 
                 .product-card:nth-child(even) {
                     padding-left: 0.8rem;
+                    padding-right: 0rem;
                 }
             }
         </style>
@@ -25,7 +31,10 @@
     <div class="pc-bucket" style="{{ $type == 'list' ? 'width:100%' : '' }}">
         {{-- Image --}}
         <div class="image" wire:click="callPage('{{ $id }}')">
-            <div> <img src="{{ App\Http\Controllers\MediaController::serveImage($name, 'webp') }}" alt="" /></div>
+            <div>
+                <img src="{{ App\Http\Controllers\MediaController::serveImage('product-' . $id, 'webp') }}"
+                    alt="" />
+            </div>
         </div>
         {{-- Tags --}}
         <div class="tags">

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         defer>
     @vite(['resources/css/login/login.css', 'resources/css/checkout/cart.css', 'resources/css/results/results.css', 'resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/sections.css'])
+    <link rel="icon" type="image/x-icon" href="{{ App\Http\Controllers\MediaController::serveImage('favicon', 'ico') }}">
 </head>
 
 <body>
@@ -43,7 +44,9 @@
                         <div><a href=""><i class="bi bi-truck h3"></i></a></div>
                     @endauth
                     @guest
-                        <div>@livewire('utilities.login')</div>
+                        <div>
+                            <livewire:utilities.login :key="'mobile'" :type="'icon'" :how="'icon'"></livewire:utilities.login>
+                        </div>
                     @endguest
                     @auth
                         <div class="auth-greeting">
@@ -106,10 +109,13 @@
                 <i class="bi bi-facebook h4"></i>
                 <i class="bi bi-tiktok h4"></i>
             </span>
-            <span class="pattern">
-                <div class="pattern-container">
-                    {{-- <img src="{{ App\Http\Controllers\MediaController::serveImage('Fresh2GoHub_Pattern', 'svg') }}"
-                        alt=""> --}}
+            <span class="disclaimer">
+                <p class="bold">All rights reserved by Fresh2GoHub</p>
+                <div class="powered">
+                    <p>Powered by:</p>
+                    <img src="{{ App\Http\Controllers\MediaController::serveImage('brwncreative', 'svg') }}"
+                        height="25px" width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo">
+                    </img>
                 </div>
             </span>
         </div>

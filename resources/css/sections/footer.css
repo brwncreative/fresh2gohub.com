@@ -14,10 +14,19 @@ footer {
         /* --- */
         display: grid;
         grid-template: 1fr / 1fr 1fr 1fr;
+        @media only screen and (max-width: 1070px) {
+            grid-template: 1fr max-content 1fr/ 1fr;
+        }
     }
     .message {
         display: flex;
         align-items: center;
+        @media only screen and (max-width: 1070px) {
+            div {
+                text-align: center;
+                margin-block: 1rem;
+            }
+        }
     }
     .social-links {
         color: grey;
@@ -26,18 +35,16 @@ footer {
         justify-content: center;
         gap: 2rem;
     }
-    .pattern {
+    .disclaimer {
         height: 5rem;
-        overflow: hidden;
-        opacity: 0.3;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        .pattern-container {
-            overflow: hidden;
-            border-radius: 10px;
-            width: 90%;
-            height: 80%;
+        gap: 0.5rem;
+        .powered {
+            display: flex;
+            gap: 0.5rem;
         }
     }
 }

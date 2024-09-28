@@ -16,6 +16,7 @@
         opacity: 1 !important;
     }
     .bucket {
+        overflow-y: auto;
         padding-block: 2rem;
         padding-inline: 2rem;
         border-radius: 10px;
@@ -27,6 +28,11 @@
         background-color: white;
         height: max-content;
         min-width: 20rem;
+        @media only screen and (max-width: 1070px){
+            padding-inline: 1rem;
+            width: 90%;
+            height: 30rem;
+        }
         .close {
             position: absolute;
             right: 3%;
