@@ -10,7 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" defer>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         defer>
-    @vite(['resources/css/checkout/cart.css', 'resources/css/results/results.css', 'resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/sections.css'])
+    @vite(['resources/css/login/login.css', 'resources/css/checkout/cart.css', 'resources/css/results/results.css', 'resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/sections.css'])
 </head>
 
 <body>
@@ -43,7 +43,7 @@
                         <div><a href=""><i class="bi bi-truck h3"></i></a></div>
                     @endauth
                     @guest
-                        <div><a href="{{ route('login') }}"><i class="bi bi-person h3"></i></a></div>
+                        <div>@livewire('utilities.login')</div>
                     @endguest
                     @auth
                         <div class="auth-greeting">
@@ -91,24 +91,28 @@
     </header>
     {{ $slot }}
     <footer>
-        <div id="message">
-            <div class="disclaimer">
-                <p>We hope you enjoy Fresh2GoHub.com! If you have any feedback for us <br> don't be afraid to contact us
-                    and give us some feedback</p>
-            </div>
-            <div class="social-links">
-                <i class="bi bi-instagram"></i>
-                <i class="bi bi-facebook"></i>
-                <i class="bi bi-tiktok"></i>
-            </div>
-            <div class="tech"><a href="">Powered by Brwncreative</a></div>
+        <div class="f-container">
+            <span class="message">
+                <div>
+                    <p class="bold">Hey hey!</p>
+                    <p class="paragraph">We hope you enjoy your stay at Fresh2GoHub.com. We're always open to feedback
+                        so
+                        shoot
+                        us a message on one of our socials at any time</p>
+                </div>
+            </span>
+            <span class="social-links">
+                <i class="bi bi-instagram h4"></i>
+                <i class="bi bi-facebook h4"></i>
+                <i class="bi bi-tiktok h4"></i>
+            </span>
+            <span class="pattern">
+                <div class="pattern-container">
+                    {{-- <img src="{{ App\Http\Controllers\MediaController::serveImage('Fresh2GoHub_Pattern', 'svg') }}"
+                        alt=""> --}}
+                </div>
+            </span>
         </div>
-
-        {{-- <div id="footer-pattern">
-            <div class="mask"></div><img
-                src="{{ App\Http\Controllers\MediaController::serveImage('Fresh2GoHub_Pattern', 'svg') }}"
-                alt="">
-        </div> --}}
     </footer>
 </body>
 <script>

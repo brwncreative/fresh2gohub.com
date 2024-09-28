@@ -4,13 +4,10 @@
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: start;
-    .pcontainer {
-        padding-inline: 0.5rem;
-        margin-block-end: 2rem;
-    }
+    gap: 1rem;
 }
 #add-product {
-    opacity: .5;
+    opacity: 0.5;
     background-color: rgb(232, 232, 232);
     min-height: 10rem;
     height: max-content;
@@ -24,7 +21,7 @@
     @media only screen and (max-width: 1070px) {
     }
     .add-btn {
-        transition: .5s;
+        transition: 0.5s;
         font-size: 2rem;
         cursor: pointer;
         display: flex;
@@ -35,7 +32,7 @@
         border-radius: 30rem;
         box-shadow: 0 0 5px 2px rgb(162, 162, 162);
     }
-    .add-btn:hover{
+    .add-btn:hover {
         scale: 1.1;
     }
 }
@@ -59,12 +56,21 @@
     .image {
         width: 100%;
         display: flex;
-        justify-content: center;
         align-items: center;
         overflow: hidden;
-        height: 10rem;
+    margin-block-end: 1rem;
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 12rem;
+            width: 15rem;
+            background-color: grey;
+        }
         img {
-            height: 11rem;
+            height: 12rem;
         }
     }
     .buttons {

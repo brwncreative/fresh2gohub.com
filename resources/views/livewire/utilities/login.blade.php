@@ -1,16 +1,25 @@
-<div class="bucket">
-    <p class="title">Login</p>
-    <p>Welcome back!</p>
-    <a class="back" href="{{ route('welcome') }}"><i class="bi bi-arrow-90deg-left h3"></i></a>
-    <form wire:submit='login'>
-        <input placeholder="E-mail" type="text" name="email" wire:model='email'>
-        @error('email')
-            {{ $message }}
-        @enderror
-        <input placeholder="Password" type="password" name="password" wire:model='password'>
-        @error('password')
-            {{ $message }}
-        @enderror
-        <button class="bold">Login</button>
-    </form>
+<div id="login-container">
+    <div id="icon" wire:click="$toggle('state')"><i class="bi bi-person h3"></i></div>
+
+    <div class="bucket {{ $state ? 'active' : 'in-active' }}">
+        <i class="bi bi-caret-up-fill tail"></i>
+        <div class="intro">
+            <p class="small-title bold">Login</p>
+            <p>Welcome back!</p>
+            <hr>
+        </div>
+        <form wire:submit='login'>
+            <div class="errors">
+                @error('email')
+                    <div class="error"> {{ $message }}</div>
+                @enderror
+                @error('password')
+                    <div class='error'> {{ $message }}</div>
+                @enderror
+            </div>
+            <input placeholder="E-mail" type="text" name="email" wire:model='email'>
+            <input placeholder="Password" type="password" name="password" wire:model='password'>
+            <button class="bold">Login</button>
+        </form>
+    </div>
 </div>

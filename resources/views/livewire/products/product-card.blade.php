@@ -95,7 +95,7 @@
             <div class="btns">
                 <span>
                     @if ($quantity >= 1)
-                        <i class="bi bi-dash-circle minus h5" wire:click="addToCart('-')"></i>
+                        <i class="bi bi-dash-circle minus h4" wire:click="addToCart('-')"></i>
                     @endif
                 </span>
                 <p style="pointer-events: none">
@@ -103,7 +103,7 @@
                         {{ $quantity }}
                     @endif
                 </p>
-                <i class="bi bi-plus-circle add h5" wire:click="addToCart('+')"></i>
+                <i class="bi bi-plus-circle add h4" wire:click="addToCart('+')"></i>
             </div>
         </div>
     </div>

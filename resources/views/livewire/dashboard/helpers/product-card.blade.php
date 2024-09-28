@@ -1,7 +1,10 @@
 <div class="pcontainer">
     <div class="product">
         <div class="image">
-            <img src="{{ App\Http\Controllers\MediaController::serveImage($product->name, 'webp') }}" alt="">
+            <div class="image-container">
+                <img src="{{ App\Http\Controllers\MediaController::serveImage('product-' . $product->id, 'webp') }}"
+                    alt="">
+            </div>
         </div>
         <table class="product-details">
             <tbody>
@@ -92,6 +95,7 @@
         <div class="buttons">
             <button wire:click='remove' class="remove"><i class="bi bi-trash"></i></button>
             <button wire:click='update'>Update</button>
+            <button wire:click='removeImage'>Delete Image</button>
             <input wire:model='image' type="file" id="filebtn-hidden.{{ $product->id }}" hidden>
             <label for="filebtn-hidden.{{ $product->id }}"> <i class="bi bi-camera"></i> Upload image</label>
         </div>

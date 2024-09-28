@@ -1,7 +1,7 @@
 #explore {
     margin-block-end: 1rem;
     display: grid;
-    grid-template: 1fr / 1fr 1fr;
+    grid-template: 1fr / 1fr 1.2fr;
     @media only screen and (max-width: 1070px) {
         grid-template: max-content 1fr/ 1fr;
     }
@@ -39,11 +39,8 @@
                 padding-inline-end: 5.5rem;
                 padding-block: 0.5rem;
                 border: 2px solid grey;
-                width: 80%;
+                width: 100%;
                 border-radius: 10px;
-                @media only screen and (max-width: 1070px) {
-                    width: 100%;
-                }
             }
             input:focus {
                 outline: 1px solid green;
@@ -55,13 +52,10 @@
                 position: absolute !important;
                 top: 0;
                 height: 100%;
-                width: 80%;
+                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: right;
-                @media only screen and (max-width: 1070px) {
-                    width: 100%;
-                }
                 i {
                     cursor: auto;
                     pointer-events: all !important;

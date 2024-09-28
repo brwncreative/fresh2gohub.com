@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Login extends Component
 {
-    public $email, $password;
+    public $email, $password, $state = 0;
 
     public function login()
     {

@@ -160,12 +160,9 @@
                 @endif
             </div>
         </div>
-
-
         @foreach ($products as $product)
             <livewire:dashboard.helpers.product-card :key="$product->id" :product="$product"
                 @saved="update"></livewire:dashboard.helpers.product-card>
         @endforeach
-
     </div>
 </main>

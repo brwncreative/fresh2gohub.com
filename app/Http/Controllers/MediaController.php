@@ -22,15 +22,39 @@ class MediaController extends Controller
      * @param mixed $stream
      * @return void
      */
-    public static function saveImageCloud($filename, $ext = '.webp')
+    public static function saveProductImageCloud($filename, $id = '?', $ext = '.webp')
     {
-        $previous = Http::withToken(env('GITHUB_TOKEN'))->get(env('GITHUB_STORE') . $filename . $ext);
+        $previous = Http::withToken(env('GITHUB_TOKEN'))->get(env('GITHUB_STORE') . 'product-' . $id . $ext);
         $sha = $previous ? $previous->json('sha') : '';
         if (file_exists(base_path('resources/media/' . $filename . $ext))) {
-            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . $filename . $ext, ['message' => "image upload", 'content' => base64_encode(file_get_contents(base_path('resources/media/' . $filename . $ext))), 'sha' => $sha]);
+            $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . 'product-' . $id  . $ext, ['message' => "image upload", 'content' => base64_encode(file_get_contents(base_path('resources/media/' . $filename . $ext))), 'sha' => $sha]);
+        }
+        if ($resp->created()) {
+        }
+    }
+    /**
+     * Delete image from github
+     * @return void
+     */
+    public static function deleteProductImageCloud($id)
+    {
+        $previous = Http::withToken(env('GITHUB_TOKEN'))->get(env('GITHUB_STORE') . 'product-' . $id . '.webp');
+        $sha = $previous ? $previous->json('sha') : '';
+        if ($sha) {
+            $resp = Http::withToken(env('GITHUB_TOKEN'))->delete(env('GITHUB_STORE') . 'product-' . $id  . '.webp', ['message' => "image upload", 'sha' => $sha]);
+            if($resp->ok()){
+                dump('deleted');
+            }
         }
     }
 
+    /**
+     * Summary of saveFile
+     * @param mixed $stream
+     * @param mixed $filename
+     * @param mixed $destination
+     * @return void
+     */
     public static function saveFile($stream, $filename = '?', $destination = '?')
     {
         // Remove filename old ext

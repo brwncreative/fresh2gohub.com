@@ -1,4 +1,4 @@
-<div id="product-page" style="{{ $state ? 'pointer-events: all' : '' }}">
+<div id="product-page" class={{ $state ? 'active' : 'in-active' }}">
     <div class="bucket {{ $state ? 'active' : 'in-active' }}">
         <i class="bi bi-x-lg bold close" wire:click="$set('state',0)"></i>
         <div id="main-product-details">
@@ -65,9 +65,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="ft-related-products">
-            <p class="small-title">Products related to this -></p>
         </div>
     </div>
 </div>

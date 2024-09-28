@@ -1,3 +1,6 @@
+.active {
+    pointer-events: all;
+}
 #product-page {
     pointer-events: none;
     position: fixed;
@@ -5,30 +8,25 @@
     width: 100vw;
     height: 100vh;
     z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .active {
+        transform: translateY(0px) !important;
         opacity: 1 !important;
-        top: 0vh !important;
     }
     .bucket {
-        will-change: top;
+        padding-block: 2rem;
+        padding-inline: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 15px 5px var(--light-grey);
         transition: 0.5s;
         position: absolute;
         opacity: 0;
-        top: 20vh;
-        display: grid;
+        transform: translateY(20px);
         background-color: white;
-        height: 100%;
-        width: 100%;
-        grid-template: 1fr / 1fr 1fr;
-        gap: 1rem;
-        padding-block: 2rem;
-        padding-inline: var(--desktop);
-        @media only screen and (max-width: 1070px) {
-            padding-inline: var(--mobile);
-            grid-template:
-                1fr max-content
-                / 1fr;
-        }
+        height: max-content;
+        min-width: 20rem;
         .close {
             position: absolute;
             right: 3%;

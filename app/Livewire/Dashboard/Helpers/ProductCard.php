@@ -96,6 +96,10 @@ class ProductCard extends Component
     {
         $this->dispatch('remove', $this->product->id);
     }
+    public function removeImage()
+    {
+        MediaController::deleteProductImageCloud($this->product->id);
+    }
     public function mount()
     {
         $this->name = $this->product->name;
@@ -112,7 +116,7 @@ class ProductCard extends Component
     {
         if ($property === 'image') {
             MediaController::saveFile($this->image->getContent(), $this->name);
-            MediaController::saveImageCloud($this->name);
+            MediaController::saveProductImageCloud($this->name, $this->product->id);
         }
     }
     public function render()

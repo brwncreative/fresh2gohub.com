@@ -71,7 +71,7 @@ class Products extends Component
     {
         if ($property === 'image') {
             MediaController::saveFile($this->image->getContent(), $this->name);
-            MediaController::saveImageCloud($this->name);
+            MediaController::saveProductImageCloud($this->name, ($this->products->first()->id + 1));
         }
     }
     public function mount()

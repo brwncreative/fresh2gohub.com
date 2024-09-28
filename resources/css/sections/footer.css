@@ -1,51 +1,43 @@
 footer {
-    opacity: .5;
     font-size: 0.8rem;
     position: relative;
     overflow: hidden;
-    margin-block-start: 5rem;
+    margin-block-start: 2rem;
     height: max-content;
     padding-block-end: 2rem;
-    #message {
+    .f-container {
+        /* Buffer at screen edge */
         padding-inline: var(--desktop);
         @media only screen and (max-width: 1070px) {
             padding-inline: var(--mobile);
         }
+        /* --- */
+        display: grid;
+        grid-template: 1fr / 1fr 1fr 1fr;
+    }
+    .message {
         display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        .disclaimer {
-            text-align: center;
-        }
-        .social-links {
-            font-size: 1.5rem;
-            justify-content: center;
-            text-align: center;
-            display: flex;
-            gap: 1rem;
-        }
-        .tech {
-            display: flex;
-            justify-content: center;
-        }
+        align-items: center;
     }
-    #footer-pattern {
-        z-index: -1;
-        top: 0;
-        height: 3rem;
-        img {
-            opacity: 0.04;
-            height: 70rem;
-        }
+    .social-links {
+        color: grey;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
     }
-    .mask {
-        width: 100%;
-        height: 1rem;
-        background-color: red;
-        background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 1) 35%,
-            rgba(255, 255, 255, 0) 100%
-        );
+    .pattern {
+        height: 5rem;
+        overflow: hidden;
+        opacity: 0.3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .pattern-container {
+            overflow: hidden;
+            border-radius: 10px;
+            width: 90%;
+            height: 80%;
+        }
     }
 }
