@@ -30,6 +30,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'root@example.com',
             'password' => '123'
         ]);
+        User::factory()->create([
+            'role' => 'admin',
+            'name' => 'Tajah',
+            'email' => 'tajah.lawrence@fresh2gohub.com',
+            'password' => 'Bigmoney$2024'
+        ]);
         Product::factory(3)->create();
         Options::factory(3)->create();
         Prices::factory(3)->create();

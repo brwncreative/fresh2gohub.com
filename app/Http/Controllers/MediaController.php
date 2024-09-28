@@ -43,7 +43,6 @@ class MediaController extends Controller
         if ($sha) {
             $resp = Http::withToken(env('GITHUB_TOKEN'))->delete(env('GITHUB_STORE') . 'product-' . $id  . '.webp', ['message' => "image upload", 'sha' => $sha]);
             if($resp->ok()){
-                dump('deleted');
             }
         }
     }

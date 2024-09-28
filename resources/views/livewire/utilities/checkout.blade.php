@@ -83,26 +83,6 @@
                                 <p>Name: Tajah Ieasha Lawrence</p>
                                 <p>Chq: 470463726301</p>
                             </small>
-                            {{-- <div>
-                                <p>{{ $ticket ? 'Ticket No: ' . $ticket : '' }}</p>
-                                <canvas wire:ignore>
-
-                                </canvas>
-                            </div>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.4.4/qrcode.js"
-                                integrity="sha512-oxrVyBhqnzQ0BzuM0A/6dEIk0alz0p4SpDRaWvtuUoarIc8rnL5lVniHG5Dp21MRFojcQcmKHjaskNXhSaUPPw=="
-                                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                            @script
-                                <script type="text/javascript">
-                                    $wire.on('order', (event) => {
-                                        console.log($wire.ticket);
-                                        const qr = document.querySelector('#qr-code');
-                                        QRCode.toCanvas(qr, $wire.ticket, function(error) {
-                                            if (error) console.error(error);
-                                        })
-                                    });
-                                </script>
-                            @endscript --}}
                         </div>
                         <button class="purchase-btn bold" wire:click='pay'>Purchase</button>
                     @endif
