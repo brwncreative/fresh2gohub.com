@@ -22,7 +22,8 @@ class Products extends Component
         $available = false,
         $stock,
         $creating = false,
-        $image;
+        $image,
+        $created;
 
     /**
      * Prep products
@@ -47,7 +48,14 @@ class Products extends Component
         $options = '?',
         $prices = '?',
     ) {
-        ProductController::create(
+        $this->validate([
+            'image' => 'required_with:name',
+            'name' => 'required|min:3',
+            'stock' => 'required',
+            'tags' => 'required',
+            'category' => 'required'
+        ]);
+        $this->created = ProductController::create(
             $id == '?' ? null : $id,
             $category == '?' ? $this->category : $category,
             $provider == '?' ?  $this->provider : $provider,
@@ -59,6 +67,7 @@ class Products extends Component
             $options == '?' ? $this->options :  $options,
             $prices == '?' ? $this->prices :  $prices,
         );
+        MediaController::saveProductImageCloud($this->name, $this->created->id);
         $this->dispatch('reloadProducts')->self();
     }
     #[On('remove')]
@@ -71,7 +80,6 @@ class Products extends Component
     {
         if ($property === 'image') {
             MediaController::saveFile($this->image->getContent(), $this->name);
-            MediaController::saveProductImageCloud($this->name, ($this->products->first()->id + 1));
         }
     }
     public function mount()

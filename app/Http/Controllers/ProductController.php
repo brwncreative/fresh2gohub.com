@@ -35,7 +35,8 @@ class ProductController extends Controller
         })->get();
     }
     /**
-     * Create Product
+     * Summary of create
+     * @param mixed $id
      * @param mixed $category
      * @param mixed $provider
      * @param mixed $name
@@ -45,7 +46,7 @@ class ProductController extends Controller
      * @param mixed $tags
      * @param mixed $options
      * @param mixed $prices
-     * @return void
+     * @return TModel
      */
     public static function create(
         $id,
@@ -77,6 +78,8 @@ class ProductController extends Controller
         $product->tags()->createMany(self::serializeTags($tags, $product->id));
         $product->options()->createMany(self::serializeOptions($options, $product->id));
         $product->prices()->createMany(self::serializePrices($prices, $product->id));
+
+        return $product;
     }
 
     public static function serializeTags($tags, $id)

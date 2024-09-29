@@ -100,16 +100,17 @@ class ProductPage extends Component
     public function handshake()
     {
         if (session('cart')) {
-        if (array_key_exists('product: ' . $this->id, session('cart'))) {
-            $this->quantity = session('cart')['product: ' . $this->id]['quantity'];
+            if (array_key_exists('product: ' . $this->id, session('cart'))) {
+                $this->quantity = session('cart')['product: ' . $this->id]['quantity'];
+            }
         } else {
             $this->quantity = 0;
         }
     }
-    }
     public function removeAll()
     {
         $this->dispatch('removeFromCart', id: $this->id);
+        $this->dispatch('handshakeCard');
         $this->quantity = 0;
     }
     public function render()

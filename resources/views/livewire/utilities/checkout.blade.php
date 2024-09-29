@@ -11,7 +11,12 @@
             @isset($cart)
                 @foreach ($cart as $item)
                     <div class="item">
-                        <div class="image"></div>
+                        <div class="image">
+                            <div>
+                                <img src="{{ App\Http\Controllers\MediaController::serveImage('product-' . $item['id'], 'webp') }}"
+                                    alt="" />
+                            </div>
+                        </div>
                         <div class="id">
                             <span>
                                 <p>{{ $item['name'] }} </p>
@@ -84,10 +89,11 @@
                                 <p>Chq: 470463726301</p>
                             </small>
                         </div>
-                        <button class="purchase-btn bold" wire:click='pay'>Purchase</button>
+                        <button class="purchase-btn bold">Purchase</button>
+                        {{-- wire:click='pay' --}}
                     @endif
                     @if ($paymentOption === 'wipay')
-                        <button class="purchase-btn bold" wire:click='pay'>Purchase</button>
+                        <button class="purchase-btn bold" >Purchase</button>
                     @endif
                 </div>
             </div>

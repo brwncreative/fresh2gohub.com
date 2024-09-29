@@ -2,12 +2,14 @@
     display: flex !important;
     position: relative;
     .active {
+        pointer-events: all !important;
         opacity: 1 !important;
     }
     .bucket {
+        pointer-events: none;
         display: flex !important;
-        flex-direction: column ;
-        transition: .5s;
+        flex-direction: column;
+        transition: 0.5s;
         width: 18rem;
         right: 2%;
         border-radius: 10px;
@@ -17,7 +19,7 @@
         top: 120%;
         opacity: 0;
         background-color: var(--light-grey);
-        .tail{
+        .tail {
             position: absolute;
             top: -6%;
             right: 2%;
@@ -25,24 +27,25 @@
         }
         .intro {
             display: flex !important;
-            flex-direction: column ;
+            flex-direction: column;
         }
         form {
-            .errors{
+            .errors {
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
-                margin-block: .5rem;
+                margin-block: 0.5rem;
             }
             input {
                 width: 100%;
-                border: 2px solid grey;
-               padding-block: .2rem;
+                border: 1px solid grey;
+                padding-block: 0.2rem;
                 padding-inline: 0.5rem;
                 border-radius: 5px;
-                margin-block-end: .8rem;
+                margin-block-end: 0.8rem;
             }
             button {
+                padding-block: .2rem;
                 width: 100%;
                 border-radius: 10px;
                 border: none;

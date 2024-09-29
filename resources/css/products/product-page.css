@@ -89,6 +89,7 @@
                     flex-grow: 1;
                 }
                 select {
+                    color: black;
                     appearance: none;
                     padding-block: 0.2rem;
                     padding-inline: 0.5rem;

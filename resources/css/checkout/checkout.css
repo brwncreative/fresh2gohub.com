@@ -23,15 +23,33 @@
             border-radius: 10px;
             border: 1px solid grey;
             display: grid;
-            grid-template: 3fr / 1fr 2fr 1fr;
+            grid-template: 1fr / 1fr 2fr 1fr;
             gap: 0.5rem;
+            @media only screen and (max-width: 1070px) {
+                grid-template: max-content max-content max-content/ 1fr 2fr 1fr;
+            }
             .image {
+                @media only screen and (max-width: 1070px) {
+                    grid-area: 1 / 1 / 1 / 4;
+                }
                 height: 8rem;
                 width: 90%;
-                background-color: lightgrey;
                 border-radius: 5px;
+                overflow: hidden;
+                div {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    overflow: hidden;
+                    img {
+                        height: 11rem;
+                    }
+                }
             }
             .id {
+                @media only screen and (max-width: 1070px) {
+                    grid-area: 2 / 1 / 2 / 3;
+                }
                 .paragraph {
                     height: 2.5rem;
                     overflow: hidden;
@@ -43,12 +61,20 @@
                 }
             }
             .cost {
+                @media only screen and (max-width: 1070px) {
+                    grid-area: 2 / 3 / 2 / 4;
+                }
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
             .actions {
-                grid-area: 2 / 2 / 2 / 3;
+                display: flex;
+                justify-content: end;
+                @media only screen and (max-width: 1070px) {
+                    grid-area: 3 / 2 / 3 / 4;
+                }
+                grid-area: 2 / 2 / 2 / 4;
                 display: flex;
                 gap: 1rem;
                 * {

@@ -91,9 +91,9 @@ class ProductCard extends Component
         if (session('cart')) {
             if (array_key_exists('product: ' . $this->id, session('cart'))) {
                 $this->quantity = session('cart')['product: ' . $this->id]['quantity'];
-            } else {
-                $this->quantity = 0;
             }
+        } else {
+            $this->quantity = 0;
         }
     }
     public function mount()

@@ -5,7 +5,7 @@
                 #add-product {
                     opacity: 1;
                     display: grid;
-                    grid-template: .5fr 1fr max-content/ 1fr;
+                    grid-template: .5fr max-content max-content max-content/ 1fr;
                     gap: 0.5rem;
 
                     td {
@@ -87,7 +87,31 @@
                     <div class="add-btn" wire:click="$toggle('creating')"><i class="bi bi-plus-lg"></i></div>
                 @else
                     <div class="image">
-                        <img src="" alt="">
+                        <div class="img-container">
+                            <img src="{{ $image ? $image->temporaryUrl() : '' }}" alt="">
+                        </div>
+                    </div>
+                    <div class="errors">
+                        @error('name')
+                            <div class="error">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                        @error('stock')
+                            <div class="error">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                        @error('tags')
+                            <div class="error">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                        @error('category')
+                            <div class="error">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <table class="product-details">
                         <tbody>
@@ -101,7 +125,7 @@
                             </tr>
                             <tr>
                                 <td class="paragraph">Name:</td>
-                                <td><input type="text" wire:model='name'></td>
+                                <td><input type="text" wire:model.blur='name'></td>
                             </tr>
                             <tr>
                                 <td class="paragraph">Category:</td>
@@ -155,7 +179,9 @@
                         <button wire:click="$toggle('creating')"> Cancel</button>
                         <button wire:click='create'>Add</button>
                         <input wire:model='image' type="file" id="filebtn-hidden" hidden>
-                        <label for="filebtn-hidden"> <i class="bi bi-camera"></i> Upload image</label>
+                        @if (strlen($name) > 5)
+                            <label for="filebtn-hidden"> <i class="bi bi-camera"></i> Upload image</label>
+                        @endif
                     </div>
                 @endif
             </div>
