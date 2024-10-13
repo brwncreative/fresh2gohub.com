@@ -1,5 +1,12 @@
 <x-layouts.standard>
     <main>
+        <section>
+            <h2 class="bold">A new way to get your market</h2>
+            <h4>dsadasdsa</h4>
+        </section>
+        <section id="feature">
+            @livewire('products.feature', ['find' => 'popular'])
+        </section>
         <section id="welcome">
             @livewire('sections.explore', ['find' => 'popular'])
         </section>

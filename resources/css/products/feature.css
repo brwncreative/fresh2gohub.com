@@ -1,0 +1,16 @@
+.feature-product-bucket {
+    width: 100%;
+    .controls {
+        display: flex;
+        .actions{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-inline: .5rem;
+        }
+    }
+    .products {
+        display: flex;
+        padding-block: 1rem;
+    }
+}

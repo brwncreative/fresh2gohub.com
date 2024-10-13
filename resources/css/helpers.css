@@ -32,7 +32,7 @@
 }
 /* Tags */
 .tag {
-    font-size: .8rem !important;
+    font-size: 85% !important;
     color: grey;
     p::first-letter {
         text-transform: capitalize;

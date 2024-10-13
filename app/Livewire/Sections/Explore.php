@@ -23,14 +23,6 @@ class Explore extends Component
             MailController::send('marketing', $this->email);
         }
     }
-    public function featureProducts()
-    {
-        $this->products = ProductController::findBy($this->find, 'tag');
-    }
-    public function mount()
-    {
-        Self::featureProducts();
-    }
     public function render()
     {
         return view('livewire.sections.explore');

@@ -1,4 +1,4 @@
-<div id="menu-bucket" class="center">
+<div id="menu-bucket">
     <div class="items">
         @foreach ($items as $item)
             {{-- Menu Items (Item, Identifier) --}}

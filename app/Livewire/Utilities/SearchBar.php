@@ -9,10 +9,19 @@ class SearchBar extends Component
 {
     public $find, $products = [];
 
+    /**
+     * Gather the products the person is searching for
+     * @return void
+     */
     public function prepProducts()
     {
-        $this->products = ProductController::findBy($this->find);
+        $this->products = ProductController::search($this->find);
     }
+    /**
+     * Perform the search
+     * @param mixed $find
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function search($find = '?')
     {
         $searchWhat = function () use ($find) {
@@ -24,6 +33,11 @@ class SearchBar extends Component
         };
         return redirect()->route('results', ['find' => $searchWhat()]);
     }
+    /**
+     * Handle different search string scenarios
+     * @param mixed $property
+     * @return void
+     */
     public function updated($property)
     {
         if ($property == 'find') {

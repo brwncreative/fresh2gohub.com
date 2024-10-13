@@ -14,17 +14,30 @@ class Results extends Component
     public $price = 10;
     public $filter = false;
     public $products;
+    public $filteredProducts;
 
+    /**
+     * Prep initial products
+     * @return void
+     */
     public function prepProducts()
     {
-        $this->products = ProductController::findBy($this->find);
+        $this->products = ProductController::paginate($this->find);
+    }
+    public function move($position)
+    {
+        if ($this->filter) {
+            $this->filteredProducts = ProductController::paginateWithFilters($this->find, $this->price, $position);
+        } else {
+            $this->products = ProductController::paginate($this->find, $position);
+        }
     }
     public function prepFilters($case)
     {
         switch ($case) {
             case 'filter':
                 $this->filter = true;
-                $this->products = ProductController::filter($this->find, $this->price);
+                $this->filteredProducts = ProductController::paginateWithFilters($this->find, $this->price);
                 break;
             case 'none':
                 $this->filter = false;

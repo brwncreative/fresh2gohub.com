@@ -1,18 +1,19 @@
 #explore {
-    margin-block-end: 1rem;
-    display: grid;
-    grid-template: 1fr / 1fr 1.2fr;
-    @media only screen and (max-width: 1070px) {
-        grid-template: max-content 1fr/ 1fr;
-    }
+    height: 15rem;
+    padding-block: 1rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
     #mailing-cta {
-        padding: 1rem;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        position: relative;
         @media only screen and (max-width: 1070px) {
             padding-inline: 0;
-        } 
+        }
         #confetti {
             height: 100%;
             width: 100%;
@@ -25,7 +26,7 @@
             left: 0;
             pointer-events: none;
             #confetti-canvas {
-                scale: 1.5;
+                scale: 2;
                 position: absolute;
             }
         }
@@ -67,25 +68,6 @@
                 i:hover {
                     cursor: pointer;
                 }
-            }
-        } 
-    }
-    #featured-products {
-        flex: 0 50%;
-        @media only screen and (max-width: 1070px) {
-            flex: 0 100%;
-        }
-        .products {
-            height: 25rem;
-            overflow-x: auto;
-            overflow-y: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            .bucket {
-                position: absolute;
-                display: flex;
-                flex-direction: row;
             }
         }
     }

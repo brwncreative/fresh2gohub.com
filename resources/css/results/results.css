@@ -11,6 +11,7 @@
             border-radius: 10px;
             background-color: rgb(233, 233, 233);
             #filter-container {
+                margin-bottom: 1rem;
                 #priceRange {
                     input[type="range"] {
                         width: 100%;
@@ -31,13 +32,13 @@
                 }
             }
             #actions {
+                height: max-content;
                 display: flex;
                 gap: 0.5rem;
                 button {
                     font-size: 0.9rem;
                     border-radius: 20px;
                     width: 100%;
-                    margin-block: 1rem;
                     padding-block: 0.3rem;
                     border: none;
                 }
@@ -54,8 +55,21 @@
                 display: flex;
                 flex-wrap: wrap;
                 width: 100%;
-                @media only screen and (max-width: 1070px) {
-                    gap: unset;
+            }
+            #pagination {
+                margin-block: 1rem;
+                width: 100%;
+                display: flex;
+                justify-content: end;
+                gap: 0.5rem;
+                .page {
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: lightgrey;
                 }
             }
         }

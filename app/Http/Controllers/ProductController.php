@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
-use App\Models\Prices;
-use App\Models\Options;
-use App\Models\Tags;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
+use PDOException;
 
 class ProductController extends Controller
 {
@@ -17,23 +14,83 @@ class ProductController extends Controller
      * @param mixed $find
      * @param mixed $by
      */
-    public static function findBy($find)
+    public static function search($find)
     {
-        return Product::whereAny(['category', 'name'], 'like', '%' . $find . '%')->orWhereHas('tags', function (Builder $query) use ($find) {
+        return Product::whereAny(['category', 'provider', 'name'], 'LIKE', '%' . $find . '%')
+            ->orWhereHas('tags', function ($query) use ($find) {
+                $query->where('tags.tag', 'LIKE', '%' . $find . '%');
+            })
+            ->limit(10)
+            ->get();
+    }
+    /**
+     * Grab specific products
+     * @param mixed $find
+     * 
+     */
+    public static function grab($find, $chunk = 0)
+    {
+        $chunks = Product::whereHas('tags', function ($query) use ($find) {
             $query->where('tag', 'like', '%' . $find . '%');
-        })->get();
+        })->get()->chunk(4);
+
+        if ($chunks->has($chunk)) {
+            return $chunkpkg = [
+                'size' => sizeof($chunks),
+                'position' => $chunk,
+                'chunk' => $chunks[$chunk]
+            ];
+        }
     }
-    public static function filter($find, $price)
+    /**
+     * Get Products to paginate result
+     * @param mixed $limit
+     * @param mixed $chunk
+     * @return mixed
+     * 
+     */
+    public static function paginate($find, $chunk = 0, $limit = 4)
     {
-        return Product::withWhereHas(
-            'tags',
-            function ($query) use ($find) {
-                $query->where('tag', 'like', '%' . $find . '%');
-            }
-        )->whereHas('prices', function ($query) use ($price) {
-            $query->where('value', '<=', $price);
-        })->get();
+        $chunks = Product::whereAny(['category', 'provider', 'name'], 'LIKE', '%' . $find . '%')
+            ->orWhereHas('tags', function ($query) use ($find) {
+                $query->where('tags.tag', 'LIKE', '%' . $find . '%');
+            })
+            ->get()
+            ->chunk($limit);
+
+        if ($chunks->has($chunk)) {
+            return $chunkpkg = [
+                'size' => sizeof($chunks),
+                'position' => $chunk,
+                'chunk' => $chunks[$chunk]
+            ];
+        }
     }
+    /**
+     * Paginate with filters
+     * @param mixed $find
+     * @param mixed $price
+     * @param mixed $chunk
+     * @param mixed $limit
+     * @return mixed
+     */
+    public static function paginateWithFilters($find, $price, $chunk = 0, $limit = 4)
+    {
+        $chunks = Product::whereAny(['category', 'provider', 'name'], 'LIKE', '%' . $find . '%')
+            ->whereRelation('tags', 'tags.tag', 'LIKE', '%' . $find . '%')
+            ->whereHas('prices', function ($query) use ($price) {
+                $query->where('prices.value', '<=', $price);
+            })->get()->chunk($limit);
+
+        if ($chunks->has($chunk)) {
+            return $chunkpkg = [
+                'size' => sizeof($chunks),
+                'position' => $chunk,
+                'chunk' => $chunks[$chunk]
+            ];
+        }
+    }
+
     /**
      * Summary of create
      * @param mixed $id

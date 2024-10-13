@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         defer>
     @vite(['resources/css/login/login.css', 'resources/css/checkout/cart.css', 'resources/css/results/results.css', 'resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/sections.css'])
-    <link rel="icon" type="image/x-icon" href="{{ App\Http\Controllers\MediaController::serveImage('favicon', 'ico') }}">
+    <link rel="icon" type="image/x-icon"
+        href="{{ App\Http\Controllers\MediaController::serveImage('favicon', 'ico') }}">
 </head>
 
 <body>
@@ -45,7 +46,8 @@
                     @endauth
                     @guest
                         <div>
-                            <livewire:utilities.login :key="'mobile'" :type="'icon'" :how="'icon'"></livewire:utilities.login>
+                            <livewire:utilities.login :key="'mobile'" :type="'icon'" :how="'icon'">
+                            </livewire:utilities.login>
                         </div>
                     @endguest
                     @auth
@@ -71,18 +73,20 @@
                     {{-- --- --}}
                 </div>
                 {{-- Menu --}}
-                <div id="menu" class="center"><x-helpers.menu :items="[
-                    'mixed packages',
-                    'vegetables',
-                    'prepackaged fruit and platters',
-                    'mash',
-                    'sauces',
-                    'seasonings',
-                    'dry rubs(packs)',
-                    'meats',
-                    'seafood',
-                    'marinades',
-                ]"> </x-helpers.menu>
+                <div id="menu">
+                    <x-helpers.menu :items="[
+                        'mixed packages',
+                        'vegetables',
+                        'prepackaged fruit and platters',
+                        'mash',
+                        'sauces',
+                        'seasonings',
+                        'dry rubs(packs)',
+                        'meats',
+                        'seafood',
+                        'marinades',
+                    ]"> </x-helpers.menu>
+                     <div class="veil"></div>
                 </div>
             </section>
             {{-- Nav shopy by filters --}}
@@ -115,24 +119,23 @@
                     <p>Powered by:</p>
                     <img src="{{ App\Http\Controllers\MediaController::serveImage('brwncreative', 'svg') }}"
                         height="25px" width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo">
-                    </img>
                 </div>
             </span>
         </div>
     </footer>
 </body>
 <script>
-    const menuArea = document.querySelector("#menu");
+    const menuArea = document.querySelector(".veil");
     const menu = document.querySelector("#menu-bucket");
     const filters = document.querySelector("#nav-shopby");
     window.addEventListener('scroll', () => {
         if (window.scrollY > 20) {
             menuArea.classList.add("hide-menu");
-            menu.classList.add("hide-menu");
+            menu.classList.add("animate")
             filters.style.display = 'none';
         } else {
             menuArea.classList.remove("hide-menu");
-            menu.classList.remove("hide-menu");
+            menu.classList.remove("animate")
             filters.style.display = 'flex';
         }
     })

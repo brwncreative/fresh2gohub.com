@@ -4,12 +4,6 @@
     --grey: rgb(169, 169, 169);
     --green: rgb(190, 255, 92);
 
-    --small: 0.8rem;
-    --medium: 0.9rem;
-    --big: 1.1rem;
-    --bigger: 1.3rem;
-    --large: 2rem;
-
     --desktop: 3rem;
     --mobile: 1.2rem;
 }
@@ -22,14 +16,12 @@
 .small-title {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
-    font-style: normal;
     font-size: var(--big);
     -webkit-text-stroke: 0.3px;
 }
 .medium-title {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
-    font-style: normal;
     font-size: var(--bigger);
     -webkit-text-stroke: .6px;
 }
@@ -40,14 +32,12 @@
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: var(--large);
     -webkit-text-stroke: 0.7px;
 }
 .title::first-letter {
     text-transform: capitalize;
 }
 .paragraph {
-    font-size: var(--medium);
     color: grey;
 }
 .paragraph-reg {
@@ -58,7 +48,6 @@
 }
 /* --- */
 body {
-    font-size: var(--medium);
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     margin: 0;
