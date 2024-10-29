@@ -54,5 +54,5 @@
         </div>
     </section>
     <hr>
-    @livewire('products.product-page')
+    {{-- @livewire('products.product-page') --}}
 </x-layouts.standard>
