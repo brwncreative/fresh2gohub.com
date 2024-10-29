@@ -21,12 +21,13 @@
             height: max-content;
             padding: 1rem;
             border-radius: 10px;
-            border: 1px solid grey;
             display: grid;
             grid-template: 1fr / 1fr 2fr 1fr;
             gap: 0.5rem;
             @media only screen and (max-width: 1070px) {
                 grid-template: max-content max-content max-content/ 1fr 2fr 1fr;
+                padding-block: 1rem;
+                padding-inline: unset;
             }
             .image {
                 @media only screen and (max-width: 1070px) {
@@ -51,7 +52,6 @@
                     grid-area: 2 / 1 / 2 / 3;
                 }
                 .paragraph {
-                    height: 2.5rem;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: initial;
@@ -72,41 +72,61 @@
                 display: flex;
                 justify-content: end;
                 @media only screen and (max-width: 1070px) {
-                    grid-area: 3 / 2 / 3 / 4;
+                    grid-area: 3 / 2 / 3 / 4 !important;
                 }
                 grid-area: 2 / 2 / 2 / 4;
                 display: flex;
-                gap: 1rem;
-                * {
+                .action {
+                    cursor: pointer;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                 }
-                .remove {
-                    color: red;
+                .action:first-child {
+                    border-radius: 10px 0 0 10px;
                 }
-                .delete {
+                .action:last-child {
+                    border-radius: 0 10px 10px 0;
+                }
+                .remove {
+                    transition: 0.3s;
                     opacity: 0.8;
+                    padding-inline: 0.8rem;
+                    padding-block: 0.2rem;
+                    background-color: rgb(229, 229, 229);
+                    color: black;
+                }
+                .remove:hover {
+                    opacity: 1;
                     color: red;
                     background-color: pink;
-                    padding-inline: 0.5rem;
+                }
+                .delete {
+                    transition: 0.3s;
+                    opacity: 0.8;
+                    color: black;
+                    background-color: rgb(229, 229, 229);
+                    padding-inline: 0.8rem;
                     padding-block: 0.2rem;
-                    border-radius: 8px;
                 }
                 .delete:hover {
                     opacity: 1;
+                    color: red;
+                    background-color: pink;
                 }
-                button {
+                .add {
+                    transition: 0.3s;
                     color: black;
-                    opacity: 0.5;
-                    background-color: rgb(190, 255, 92);
+                    opacity: 0.8;
+                    background-color: rgb(229, 229, 229);
                     border: none;
                     padding-inline: 0.8rem;
                     padding-block: 0.2rem;
-                    border-radius: 10px;
                 }
-                button:hover {
+                .add:hover {
                     opacity: 1;
+                    color: green;
+                    background-color: greenyellow;
                 }
             }
         }
@@ -118,6 +138,63 @@
                 padding-inline: unset;
             }
             width: 100%;
+            .errors {
+                border: 1px solid orangered;
+                display: flex;
+                flex-direction: column;
+                border-radius: 10px;
+                padding: 1rem;
+                color: orangered;
+                background-color: rgba(255, 165, 0, 0.2);
+                ul{
+                    margin: 0;
+                }
+            }
+            form {
+                margin-block-start: 1rem;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                border-radius: 10px;
+                border: 1px solid grey;
+                div:first-child {
+                    width: 100%;
+                    display: flex;
+                    input {
+
+                        min-width: unset;
+                        flex: 0 50%;
+                    }
+                    input:first-child {
+                        border-radius: 10px 0 0 0;
+                        border-right: 1px solid grey;
+                    }
+                    input:nth-child(2) {
+                        border-radius: 0 10px 0 0;
+                    }
+                }
+                input:focus{
+                    outline: none;
+                    border-bottom: 2px solid grey;
+                }
+                input {
+                    border-radius: none;
+                    background: transparent;
+                    padding-inline: 1rem;
+                    padding-block: 0.5rem;
+                    border-radius: 0;
+                    border: none;
+                    border-bottom: 1px solid grey;
+                }
+                select {
+                    color: black;
+                    background: transparent;
+                    padding-inline: 1rem;
+                    padding-block: 0.5rem;
+                    border: none;
+                    border-radius: 0 0 10px 10px;
+                }
+            }
             #payment {
                 margin-block: 1rem;
                 #payment-options {
@@ -137,49 +214,32 @@
                         color: black;
                         height: 2.5rem;
                         width: 100%;
-                        margin-block: 1rem;
+                        margin-block: 0.5rem;
                         border-radius: 8px;
                         background-color: rgb(190, 255, 92);
+                        transition: 0.3s;
                     }
-                }
-            }
-            form {
-                margin-block-start: 1rem;
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                border-radius: 10px;
-                border: 1px solid grey;
-                div:first-child {
-                    width: 100%;
-                    display: flex;
-                    input {
-                        flex: 0 50%;
+                    .purchase-btn:hover {
+                        scale: 1.005;
                     }
-                    input:first-child {
-                        border-radius: 10px 0 0 0;
-                        border-right: 1px solid grey;
+                    #bank-details {
+                        border-radius: 10px;
+                        padding: 1rem;
+                        background-color: rgba(173, 255, 47, 0.5);
+                        color: green;
+                        p:first-child {
+                            color: black !important;
+                        }
                     }
-                    input:nth-child(2) {
-                        border-radius: 0 10px 0 0;
+                    #wipay-details {
+                        border-radius: 10px;
+                        padding: 1rem;
+                        background-color: rgba(124, 225, 237, 0.5);
+                        color: rgb(43, 106, 148);
+                        p:first-child {
+                            color: rgb(13, 78, 104) !important;
+                        }
                     }
-                }
-                input {
-                    border-radius: none;
-                    background: transparent;
-                    padding-inline: 1rem;
-                    padding-block: 0.5rem;
-                    border-radius: 0;
-                    border: none;
-                    border-bottom: 1px solid grey;
-                }
-                select {
-                    color: black;
-                    background: transparent;
-                    padding-inline: 1rem;
-                    padding-block: 0.5rem;
-                    border: none;
-                    border-radius: 0 0 10px 10px;
                 }
             }
         }

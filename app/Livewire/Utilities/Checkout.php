@@ -11,6 +11,7 @@ use App\Http\Controllers\MailController;
 
 class Checkout extends Component
 {
+    public $order;
     public $cart,
         $total,
         $paymentOption = 'bank',
@@ -36,18 +37,28 @@ class Checkout extends Component
     public function pay()
     {
         // Run Validation
-        // $this->validate([]);
+        $this->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'contact' => 'required',
+            'area' => 'required',
+            'address' => 'required',
+            'via' => 'required'
+        ]);
+
         $user = function () {
             if (Auth::user()) {
                 return Auth::user()->id;
             }
         };
 
+        // Different Payment method handling 
         switch ($this->paymentOption) {
                 // WiPay method
             case 'wipay':
                 self::makeOrderTicket();
-                OrderController::create(
+                $order =  OrderController::create(
                     $this->cart,
                     $this->ticket,
                     $this->paymentOption,
@@ -61,16 +72,19 @@ class Checkout extends Component
                     $this->total,
                     $user()
                 );
-       
-                $response = Http::withHeaders(['Authorization' => '123'])->accept('application/json')->post(
+
+                // Empty Cart after successful payment
+                $this->dispatch('paymentMade');
+
+                $response = Http::withHeaders(['Authorization' => 't4nz74lss5r66u'])->accept('application/json')->post(
                     'https://tt.wipayfinancial.com/plugins/payments/request',
                     [
-                        'account_number' => '1234567890',
+                        'account_number' => '4750666040',
                         'avs' => 1,
                         'country_code' => 'TT',
                         'currency' => 'TTD',
                         'data' => json_encode(['instructions' => $this->instructions]),
-                        'environment' => 'sandbox',
+                        'environment' => 'live',
                         'fee_structure' => 'customer_pay',
                         'method' => 'credit_card',
                         'order_id' => $this->ticket,
@@ -85,8 +99,10 @@ class Checkout extends Component
                         'phone' => $this->contact
                     ]
                 );
+                MailController::send('invoice', [$this->email, 'fresh2gohub@gmail.com'], $order);
                 $url = $response->json()['url'];
                 return redirect($url);
+
                 // Bank Method
             case 'bank':
                 self::makeOrderTicket();
@@ -104,6 +120,8 @@ class Checkout extends Component
                     $this->total,
                     $user()
                 );
+                // Empty Cart after successful payment
+                $this->dispatch('paymentMade');
                 MailController::send('invoice', $this->email, $order);
                 return redirect()->route('orders', ['ticket' => $this->ticket]);
         }

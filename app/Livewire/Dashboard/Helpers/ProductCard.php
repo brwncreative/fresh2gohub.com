@@ -12,58 +12,48 @@ class ProductCard extends Component
 
     public $product,
         $image,
-        $editTags = false,
         $editOptions = false,
         $editPrices = false,
-        $tags,
-        $options,
-        $prices,
         $category,
         $provider,
         $name,
         $description,
         $available,
-        $stock;
+        $stock,
+        $categories;
+
+    public $tagString, $tags = [];
+    public $optionString, $optionValueString, $options = [];
+    public $metricString, $priceValueString, $prices = [];
 
     public function serializeAttributes($case)
     {
+        // Serialiaze Tags
         $tags = function () {
-            $string = (string)'';
-            $count = 1;
+            $array = [];
             foreach ($this->product->tags as $tag) {
-                $string .= $tag['tag'];
-                if ($count != count($this->product->tags)) {
-                    $string .= ' , ';
-                }
-                $count++;
+                array_push($array, $tag['tag']);
             }
-            return $string;
+            return $array;
         };
+        // Serialize Options
         $options = function () {
-            $string = (string)'';
-            $count = 1;
+            $array = [];
             foreach ($this->product->options as $option) {
-                $string .= $option['option'] . '/' . $option['value'];
-                if ($count != count($this->product->options)) {
-                    $string .= ' , ';
-                }
-                $count++;
+                array_push($array, ['option' => $option['option'], 'value' => $option['value']]);
             }
-            return $string;
+            return $array;
         };
+        // Serialize Prices
         $prices = function () {
-            $string = (string)'';
-            $count = 1;
+            $array = [];
             foreach ($this->product->prices as $price) {
-                $string .= $price['value'] . '/' . $price['metric'];
-                if ($count != count($this->product->prices)) {
-                    $string .= ' , ';
-                }
-                $count++;
+                array_push($array, ['value' => $price['value'], 'metric' => $price['metric']]);
             }
-            return $string;
+            return $array;
         };
 
+        // Cases
         switch ($case) {
             case 'tags':
                 $this->tags = $tags();
@@ -117,6 +107,45 @@ class ProductCard extends Component
         if ($property === 'image') {
             MediaController::saveFile($this->image->getContent(), $this->name);
             MediaController::saveProductImageCloud($this->name, $this->product->id);
+        }
+    } 
+    // Handle Tags
+    public function handleTag($handle, $key = '?')
+    {
+        switch ($handle) {
+            case 'add':
+                array_push($this->tags, $this->tagString);
+                $this->tagString = null;
+                break;
+            case 'del':
+                unset($this->tags[$key]);
+        }
+    }
+    // Handle Options
+    public function handleOption($handle, $key = '?')
+    {
+        switch ($handle) {
+            case 'add':
+                array_push($this->options, ['option' => $this->optionString, 'value' => $this->optionValueString]);
+                $this->optionString = null;
+                $this->optionValueString = null;
+                break;
+            case 'del':
+                unset($this->options[$key]);
+        }
+    }
+    // Handle Price
+    public function handlePrice($handle, $key = '?')
+    {
+
+        switch ($handle) {
+            case 'add':
+                array_push($this->prices, ['value' => $this->priceValueString, 'metric' => $this->metricString]);
+                $this->priceValueString = null;
+                $this->metricString = null;
+                break;
+            case 'del':
+                unset($this->prices[$key]);
         }
     }
     public function render()

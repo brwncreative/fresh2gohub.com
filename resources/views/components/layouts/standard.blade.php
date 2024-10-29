@@ -10,7 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" defer>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         defer>
-    @vite(['resources/css/login/login.css', 'resources/css/checkout/cart.css', 'resources/css/results/results.css', 'resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/sections.css'])
+    @vite(['resources/css/ad-space/ad-space.css', 'resources/css/login/login.css', 'resources/css/checkout/cart.css', 'resources/css/results/results.css', 'resources/css/products/products.css', 'resources/css/helpers.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/navigation/standard-nav.css', 'resources/css/welcome/welcome.css', 'resources/css/sections/sections.css'])
     <link rel="icon" type="image/x-icon"
         href="{{ App\Http\Controllers\MediaController::serveImage('favicon', 'ico') }}">
 </head>
@@ -30,7 +30,7 @@
             {{-- Main nav elements --}}
             <section id="nav-main">
                 {{-- Logo --}}
-                <div id="logo" class="center">
+                <div id="logo">
                     <a href="{{ route('welcome') }}"> <img
                             src="{{ App\Http\Controllers\MediaController::serveImage('logo', 'svg') }}" height="50px"
                             width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
@@ -86,7 +86,7 @@
                         'seafood',
                         'marinades',
                     ]"> </x-helpers.menu>
-                     <div class="veil"></div>
+                    <div class="veil"></div>
                 </div>
             </section>
             {{-- Nav shopy by filters --}}
@@ -96,16 +96,16 @@
             </section>
         </nav>
     </header>
-    {{ $slot }}
+    <main>
+        {{ $slot }}
+    </main>
     <footer>
         <div class="f-container">
             <span class="message">
                 <div>
-                    <p class="bold">Hey hey!</p>
-                    <p class="paragraph">We hope you enjoy your stay at Fresh2GoHub.com. We're always open to feedback
-                        so
-                        shoot
-                        us a message on one of our socials at any time</p>
+                    <p class="bold">We hope you're enjoying Fresh2GoHub!</p>
+                    <p class="paragraph">Feel free to give us feedback through any of our socials, we'll have in site
+                        reviews up soon! </p>
                 </div>
             </span>
             <span class="social-links">
@@ -114,11 +114,9 @@
                 <i class="bi bi-tiktok h4"></i>
             </span>
             <span class="disclaimer">
-                <p class="bold">All rights reserved by Fresh2GoHub</p>
                 <div class="powered">
-                    <p>Powered by:</p>
                     <img src="{{ App\Http\Controllers\MediaController::serveImage('brwncreative', 'svg') }}"
-                        height="25px" width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo">
+                        height="40px" width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo">
                 </div>
             </span>
         </div>

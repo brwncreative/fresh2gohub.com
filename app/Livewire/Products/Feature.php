@@ -11,6 +11,7 @@ class Feature extends Component
     public $chunk = 0;
     public $products;
     public $chunks = [];
+    public $limit = 4;
 
     public function mount()
     {
@@ -18,7 +19,7 @@ class Feature extends Component
     }
     public function grab()
     {
-        $this->products = ProductController::grab($this->find, $this->chunk);
+        $this->products = ProductController::grab($this->find, $this->chunk, $this->limit);
     }
     public function setChunk($how)
     {

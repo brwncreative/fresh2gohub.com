@@ -30,6 +30,9 @@
                     </a>
                 </div>
             </div>
+            <div id="searchbar">
+                @livewire('dashboard.helpers.search-bar')
+            </div>
             <div id="menu">
                 <x-helpers.dashboard.menu :items="['products', 'orders', 'users']"></x-helpers.dashboard.menu>
             </div>

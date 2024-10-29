@@ -1,201 +1,235 @@
-#products {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: start;
-    gap: 1rem;
-}
-#add-product {
-    opacity: 0.5;
-    background-color: rgb(232, 232, 232);
-    min-height: 10rem;
-    height: max-content;
-    width: 100%;
-    padding-inline: 1rem;
-    padding-block: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    @media only screen and (max-width: 1070px) {
-    }
-    .image {
-        height: max-content;
-        display: flex;
-        align-items: center;
-        .img-container {
-            height: 12rem;
-            background-color: grey;
-            width: 15rem;
-            border-radius: 10px;
+.product-card {
+    .bucket {
+        .bar {
+            cursor: pointer;
+            background-color: var(--light-grey);
+            padding-inline: 1%;
+            padding-block: 0.5%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            overflow: hidden;
-            img {
-                height: 12rem;
+            .text {
+                flex: 0 50%;
+            }
+            .icon {
+                flex-grow: 1;
+                display: flex;
+                justify-content: end;
+                i {
+                    background-color: white;
+                    height: 2rem;
+                    width: 2rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 100px;
+                }
             }
         }
-    }
-    .add-btn {
-        transition: 0.5s;
-        font-size: 2rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 5rem;
-        height: 5rem;
-        border-radius: 30rem;
-        box-shadow: 0 0 5px 2px rgb(162, 162, 162);
-    }
-    .add-btn:hover {
-        scale: 1.1;
-    }
-}
-.product {
-    background-color: rgb(232, 232, 232);
-    padding-block: 1rem;
-    padding-inline: 1.5rem;
-    overflow: hidden;
-    border-radius: 10px;
-    display: grid;
-    grid-template: 1fr max-content max-content max-content/ 1fr;
-    .image {
-        grid-area: 1 / 1 / 1 /3;
-    }
-    .product-details {
-        grid-area: 2 / 1 / 2 / 3;
-    }
-    .buttons {
-        grid-area: 3 / 1 / 3 / 3;
-    }
-    .image {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        margin-block-end: 1rem;
-        .image-container {
+        .actions {
             display: flex;
+            justify-content: end;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-radius: 10px;
-            height: 12rem;
-            width: 15rem;
-            background-color: grey;
+            height: 3rem;
+            button:first-child {
+                border-radius: 10px 0 0 10px;
+            }
+            button:hover,
+            label:hover {
+                opacity: 1;
+            }
+            .remove {
+                background-color: pink;
+                color: red;
+            }
+            button,
+            label {
+                opacity: 0.8;
+                text-wrap: nowrap;
+                display: flex;
+                align-items: center;
+                padding-inline: 0.8rem;
+                width: max-content;
+                height: 2rem;
+                border: none;
+                background-color: var(--light-grey);
+                color: black;
+            }
+            label {
+                border-radius: 0 10px 10px 0;
+                justify-content: center;
+                gap: 3%;
+            }
         }
-        img {
-            height: 12rem;
+        .active {
+            height: max-content !important;
         }
-    }
-    .buttons {
-        display: flex;
-        justify-content: end;
-        gap: 0.5rem;
-        margin-block-start: 1rem;
-        button,
-        label {
-            color: black;
-            background-color: rgb(204, 204, 204);
-            font-size: 0.95rem;
-            border: none;
-            padding-inline: 0.8rem;
-            padding-block: 0.2rem;
-            border-radius: 5px;
-        }
-        .remove {
-            color: red;
-            background-color: pink;
-        }
-    }
-    .toggle-available {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-    }
-    td {
-        font-size: 0.9rem;
-
-        .thumb-active {
-            background-color: rgba(0, 128, 0, 0.5) !important;
-            justify-content: end !important;
-        }
-        .toggle {
-            padding-inline: 0.2rem;
-            display: flex;
-            border-radius: 10px;
-            padding-inline: 0.2rem;
-            background-color: grey;
-            font-size: 1rem;
-            height: 1.2rem;
-            width: 3rem;
-            padding-block: 0.2rem;
-            justify-content: start;
+        .form {
+            display: block;
             transition: 0.5s;
-
-            .thumb {
-                border-radius: 1rem;
-                width: 1rem;
-                height: 100%;
-                background-color: white;
+            overflow: hidden;
+            height: 0;
+            .image {
+                margin-block: 1rem;
+                .image-container {
+                    border-radius: 10px;
+                    width: 5rem;
+                    height: 5rem;
+                    background-color: var(--light-grey);
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img {
+                        height: 5rem;
+                    }
+                }
             }
-        }
-    }
-    td > input,
-    textarea {
-        width: 100%;
-        padding-inline: 0.5rem;
-        background: rgba(198, 198, 198, 0.2);
-        border: none;
-        color: rgb(0, 0, 0);
-    }
-    td > input:focus {
-        outline: none;
-        border: 1px solid grey;
-    }
-    textarea:focus {
-        border: 1px solid grey;
-        outline: none;
-    }
-    tr > td > p {
-        width: max-content;
-    }
-    tr > .options,
-    .prices,
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        .tag {
-            word-break: break-all;
-            margin-block: 0.2rem;
-            margin-inline: 0.2rem;
-            padding-inline: 0.5rem;
-            border-radius: 5px;
-            padding-block: 0.2rem;
-            background-color: rgba(128, 128, 128, 0.5);
-        }
-        .price {
-            word-break: break-all;
-            margin-block: 0.2rem;
-            margin-inline: 0.2rem;
-            padding-inline: 0.5rem;
-            border-radius: 5px;
-            padding-block: 0.2rem;
-            background-color: rgba(186, 98, 98, 0.5);
-        }
-        .option {
-            word-break: break-all;
-            margin-block: 0.2rem;
-            margin-inline: 0.2rem;
-            padding-inline: 0.5rem;
-            border-radius: 5px;
-            padding-block: 0.2rem;
-            background-color: rgba(219, 197, 145, 0.5);
+            .inputs {
+                display: grid;
+                grid-template: 1fr / 0.3fr 3fr;
+                .field {
+                    margin-block: 3px;
+                    display: flex;
+                    align-items: center;
+                    gap: 1%;
+                    flex-direction: column;
+                    .pill {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        word-break: break-all;
+                        margin-block: 5px;
+                        padding-inline-end: 0.8rem;
+                        padding-inline-start: 0.5rem;
+                        border-radius: 100px;
+                        padding-block: 0.2rem;
+                        background-color: var(--light-grey);
+                        .del {
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            height: 20px;
+                            width: 20px;
+                            border-radius: 100px;
+                            background-color: white;
+                        }
+                    }
+                    .tags,
+                    .prices,
+                    .options,
+                    .inputs {
+                        gap: 0.5%;
+                        width: 100%;
+                        justify-content: start;
+                        display: flex;
+                        button {
+                            color: grey;
+                            border: 1px solid grey;
+                            background-color: unset;
+                            border-radius: 10px;
+                            padding-inline: 1rem;
+                        }
+                    }
+
+                    .toggle {
+                        display: flex;
+                    }
+                    .inputs {
+                        gap: 1%;
+                    }
+                    input:focus,
+                    select:focus,
+                    textarea:focus {
+                        outline: none;
+                        border: 1px solid grey;
+                    }
+                    input,
+                    select,
+                    textarea {
+                        flex: 0 100%;
+                        border: 1px solid rgb(197, 197, 197);
+                        width: 100%;
+                        padding-inline: 0.5rem;
+                        background: rgba(198, 198, 198, 0.2);
+                        color: rgb(0, 0, 0);
+                    }
+                    .toggle-active {
+                        background-color: rgba(0, 128, 0, 0.5) !important;
+                    }
+                    .toggle {
+                        align-items: center;
+                        position: relative;
+                        display: flex;
+
+                        border-radius: 10px;
+                        padding-inline: 0.2rem;
+                        padding-block: 0.2rem;
+
+                        background-color: grey;
+                        height: 1.2rem;
+                        width: 3rem;
+
+                        transition: 0.5s;
+                        .thumb-active {
+                            right: 8% !important;
+                        }
+                        .thumb {
+                            transition: 0.2s;
+                            right: 63%;
+                            position: absolute;
+                            border-radius: 1rem;
+                            width: 0.9rem;
+                            height: 0.9rem;
+                            background-color: white;
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
-/** Add Product */
+#filters {
+    margin-block: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    input,
+    select {
+        padding-inline: 0.2rem;
+        border-radius: 5px;
+        flex: 0 20%;
+        height: 2rem;
+    }
+    input:focus,
+    select:focus {
+        border-radius: 5px;
+        flex: 0 20%;
+        height: 2rem;
+    }
+}
+
+#pagination-controls {
+    margin-block: 1rem;
+    display: flex;
+    justify-content: end;
+    .active {
+        color: white;
+        background-color: rgb(56, 56, 56);
+        opacity: 1 !important;
+    }
+    p:nth-child(1) {
+        border-radius: 10px 0 0px 10px;
+    }
+    p:last-child {
+        border-radius: 0px 10px 10px 0px;
+    }
+    p {
+        cursor: pointer;
+        opacity: 0.5;
+        padding-block: 0.2rem;
+        padding-inline: 1rem;
+        background-color: var(--light-grey);
+    }
+}

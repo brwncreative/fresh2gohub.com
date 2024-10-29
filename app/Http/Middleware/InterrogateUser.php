@@ -21,7 +21,7 @@ class InterrogateUser
                 return redirect()->route('welcome');
             };
         } else {
-            return redirect()->route('login');
+            return redirect()->route('welcome');
         }
         return $next($request);
     }

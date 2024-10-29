@@ -17,6 +17,7 @@ export default defineConfig({
                 "resources/css/results/results.css",
                 "resources/css/checkout/cart.css",
                 "resources/css/app.css",
+                "resources/css/ad-space/ad-space.css"
             ],
             refresh: true,
         }),

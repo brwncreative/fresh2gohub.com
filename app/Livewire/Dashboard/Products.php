@@ -16,23 +16,37 @@ class Products extends Component
         $provider = 'Fresh2GoHub',
         $name,
         $description,
-        $tags,
-        $options,
-        $prices,
         $available = false,
         $stock,
         $creating = false,
         $image,
-        $created;
+        $created, $chunk = 0;
 
+    public $filtering = false, $search;
+    public $categories = [
+        'mixed packages',
+        'vegetables',
+        'prepackaged fruit and platters',
+        'mash',
+        'seasonings',
+        'dry rubs (packs)',
+        'meats',
+        'seafood',
+        'marinades'
+    ];
+
+    public $tags = [], $tagString;
+    public $options = [], $optionString, $optionValueString;
+    public $prices = [], $metricString, $priceValueString;
     /**
      * Prep products
      * @return void
      */
     #[On('reloadProducts')]
-    public function prepProducts()
+    public function prepProducts($chunk = 0)
     {
-        $this->products = ProductController::index();
+        $this->products = ProductController::paginate($this->filtering ? $this->search : '?', $chunk);
+        $this->chunk = $this->products['position'];
         $this->dispatch('$refresh');
     }
     #[On('update')]
@@ -48,13 +62,15 @@ class Products extends Component
         $options = '?',
         $prices = '?',
     ) {
-        $this->validate([
-            'image' => 'required_with:name',
-            'name' => 'required|min:3',
-            'stock' => 'required',
-            'tags' => 'required',
-            'category' => 'required'
-        ]);
+        if ($id == '?') {
+            $this->validate([
+                'image' => 'required_with:name',
+                'name' => 'required|min:3',
+                'stock' => 'required',
+                'tags' => 'required',
+                'category' => 'required'
+            ]);
+        }
         $this->created = ProductController::create(
             $id == '?' ? null : $id,
             $category == '?' ? $this->category : $category,
@@ -67,7 +83,9 @@ class Products extends Component
             $options == '?' ? $this->options :  $options,
             $prices == '?' ? $this->prices :  $prices,
         );
-        MediaController::saveProductImageCloud($this->name, $this->created->id);
+        if ($this->image) {
+            MediaController::saveProductImageCloud($this->name, $this->created->id);
+        }
         $this->dispatch('reloadProducts')->self();
     }
     #[On('remove')]
@@ -76,10 +94,20 @@ class Products extends Component
         ProductController::remove($id);
         $this->dispatch('reloadProducts')->self();
     }
+    
     public function updated($property)
     {
         if ($property === 'image') {
             MediaController::saveFile($this->image->getContent(), $this->name);
+        }
+        if ($property == 'filtering') {
+            switch ($this->filtering) {
+                case true:
+                    self::prepProducts();
+                    break;
+                case false:
+                    self::prepProducts();
+            }
         }
     }
     public function mount()

@@ -1,5 +1,4 @@
 footer {
-    font-size: 0.8rem;
     position: relative;
     overflow: hidden;
     margin-block-start: 2rem;
@@ -21,6 +20,7 @@ footer {
     .message {
         display: flex;
         align-items: center;
+        flex-direction: column;
         @media only screen and (max-width: 1070px) {
             div {
                 text-align: center;
@@ -36,15 +36,10 @@ footer {
         gap: 2rem;
     }
     .disclaimer {
-        height: 5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 0.5rem;
-        .powered {
-            display: flex;
-            gap: 0.5rem;
-        }
+        gap: .5rem;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Helpers;
 
 use App\Http\Controllers\OrderController;
 use Livewire\Component;
+use App\Http\Controllers\MediaController;
 
 class OrderCard extends Component
 {
@@ -12,11 +13,21 @@ class OrderCard extends Component
         $stage,
         $paid = false,
         $viewScreenshot = false,
-        $image;
-        
+        $image,
+        $imageFromStorage;
+
+    public function deleteOrder()
+    {
+        OrderController::deleteOrder($this->order->id);
+        $this->dispatch('reload-orders');
+    }
     public function updated($property)
     {
         if ($property == 'viewScreenshot') {
+            switch ($this->viewScreenshot) {
+                case true:
+                    $this->imageFromStorage = MediaController::checkForOrderImageLocal($this->order->ticket);
+            }
         }
         if ($property == 'stage') {
             OrderController::update($this->order->ticket, '?', $this->stage);

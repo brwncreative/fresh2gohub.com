@@ -27,7 +27,7 @@ class Results extends Component
     public function move($position)
     {
         if ($this->filter) {
-            $this->filteredProducts = ProductController::paginateWithFilters($this->find, $this->price, $position);
+            $this->products = ProductController::paginateWithFilters($this->find, $this->price, $position);
         } else {
             $this->products = ProductController::paginate($this->find, $position);
         }
@@ -37,7 +37,7 @@ class Results extends Component
         switch ($case) {
             case 'filter':
                 $this->filter = true;
-                $this->filteredProducts = ProductController::paginateWithFilters($this->find, $this->price);
+                $this->products = ProductController::paginateWithFilters($this->find, $this->price);
                 break;
             case 'none':
                 $this->filter = false;

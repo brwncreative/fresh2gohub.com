@@ -8,25 +8,40 @@ use Livewire\Component;
 
 class Users extends Component
 {
-    public $users, $recipients, $mlist = [], $email, $subject, $message;
+    public $users, $email, $subject, $message, $chunk = 0;
+    public $recipients = [], $recipientString;
 
-    public function prepUsers()
+    public function prepUsers($chunk)
     {
-        $this->users = UserController::index();
+        $this->users = UserController::paginateAll($chunk);
+        $this->chunk = $chunk;
+    }
+    public function test()
+    {
+        dump('es');
+    }
+    public function handleUser($handle, $email = '?', $key = '?', $id = '?')
+    {
+        switch ($handle) {
+            case 'mailBtn':
+                array_push($this->recipients, $email);
+                break;
+            case 'mailForm':
+                array_push($this->recipients, $this->recipientString);
+                $this->recipientString = null;
+                break;
+            case 'del':
+                unset($this->recipients[$key]);
+                break;
+        }
     }
     public function sendMail()
     {
-        MailController::send('hr', $this->mlist, '?', $this->subject, $this->message);
-    }
-    public function updated($property)
-    {
-        if ($property == 'recipients') {
-            $this->mlist = explode(' ', $this->recipients);
-        }
+        MailController::send('hr', $this->recipients, '?', $this->subject, $this->message);
     }
     public function mount()
     {
-        self::prepUsers();
+        self::prepUsers(0);
     }
     public function render()
     {

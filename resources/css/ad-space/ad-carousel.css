@@ -1,0 +1,57 @@
+.carousel {
+    margin-bottom: 2rem;
+    width: 100%;
+    display: grid;
+    grid-template: 1fr / 1fr 4fr;
+.appeal{
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+    .text{
+   
+    }
+}
+
+    .bucket {
+        overflow: hidden;
+        border-radius: 10px;
+        background-color: grey;
+        width: 100%;
+        height: 12rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        .media {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            .incoming {
+                display: block !important;
+                left: 100% !important;
+            }
+            .previous {
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                left: -100% !important;
+            }
+            .active {
+                display: flex !important;
+                left: 0 !important;
+            }
+            .slide {
+                justify-content: center;
+                align-items: center;
+                display: none;
+                transition-property: left;
+                transition: 0.5s;
+                left: 100%;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgb(238, 238, 238);
+            }
+        }
+    }
+}

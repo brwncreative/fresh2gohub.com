@@ -10,7 +10,13 @@ class Cart extends Component
     public $items = 0;
     public $cart = [];
 
-
+    #[On('paymentMade')]
+    public function paymentMade()
+    {
+        session()->remove('cart');
+        $this->cart = [];
+        self::save();
+    }
     // Handshake
     public function handshake()
     {
@@ -25,7 +31,8 @@ class Cart extends Component
         session(['cart' => $this->cart]);
         $this->items = count($this->cart);
     }
-
+    // Load the cart from outside the regular scope
+    public function loadCartExternally($order) {}
     // Add to cart
     #[On('addToCart')]
     public function addToCart(
@@ -111,6 +118,10 @@ class Cart extends Component
         if (session('cart')) {
             $this->cart = session('cart');
             $this->items = count($this->cart);
+        }
+        if (session('orderToUpdate')) {
+            foreach (session('orderToUpdate') as $order) {
+            }
         }
     }
     public function render()

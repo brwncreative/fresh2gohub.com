@@ -3,58 +3,17 @@
     --light-grey: rgb(219, 219, 219);
     --grey: rgb(169, 169, 169);
     --green: rgb(190, 255, 92);
-
     --desktop: 3rem;
     --mobile: 1.2rem;
-}
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-/* Custom Classes */
-.small-title {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-size: var(--big);
-    -webkit-text-stroke: 0.3px;
-}
-.medium-title {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-size: var(--bigger);
-    -webkit-text-stroke: .6px;
-}
-.medium-title::first-letter {
-    text-transform: capitalize;
-}
-.title {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    -webkit-text-stroke: 0.7px;
-}
-.title::first-letter {
-    text-transform: capitalize;
-}
-.paragraph {
-    color: grey;
-}
-.paragraph-reg {
-    font-size: var(--medium);
-}
-.bold {
-    -webkit-text-stroke: 0.5px;
 }
 /* --- */
 body {
     font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     font-optical-sizing: auto;
     margin: 0;
     color: black;
-    hr {
-        z-index: -1;
-    }
     a {
         color: green;
     }
@@ -80,7 +39,7 @@ body {
             padding-inline: var(--mobile);
         }
         /* --- */
-        margin-top: 15rem;
+        margin-top: 14rem;
         @media only screen and (max-width: 1070px) {
             margin-top: 15rem;
         }

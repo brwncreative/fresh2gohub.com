@@ -1,0 +1,17 @@
+#searchbar-bucket {
+    width: 100%;
+    .searchbar {
+        input:focus{
+            outline: none;
+        }
+        input {
+            color: white;
+            border: 1px solid grey;
+            background: transparent;
+            height: 2.5rem;
+            padding-inline: 1rem;
+            border-radius: 10px;
+            width: 100%;
+        }
+    }
+}

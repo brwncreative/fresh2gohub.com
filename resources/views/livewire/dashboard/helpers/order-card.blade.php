@@ -1,14 +1,15 @@
 <div class="order">
-    @if ($viewScreenshot)
-        <div class="screenshot">dsad</div>
-    @endif
+    {{-- Order details --}}
     <div class="order-details order-{{ $order->ticket }}">
-        {{-- Order details --}}
         <div class="heading">
-            <p class="small-title">Ticket: <span class="bold">{{ $order->ticket }}</span></p>
+            <h5>Ticket: <span class="bold">{{ $order->ticket }}</span></h5>
             <button wire:click="$toggle('viewScreenshot')"><i class="bi bi-receipt"></i></button>
             <button wire:click="$toggle('active')"> Transactions</button>
             <button><i class="bi bi-printer"></i></button>
+            <button wire:click='deleteOrder'  wire:confirm="Are you sure you want to delete this order?">Delete</button>
+        </div>
+        <div class="estimate">
+            <p>Total: ${{ number_format($order->total, 2, '.', '') }}</p>
         </div>
         <hr>
         <div class="order-information">
@@ -71,6 +72,15 @@
             </table>
         </div>
     </div>
+    {{-- Proof of Purchase --}}
+    @if ($viewScreenshot)
+        <div class="pop">
+            @if ($imageFromStorage)
+                <img src="data:image/{{ $imageFromStorage['ext'] }};base64, {{ $imageFromStorage['stream'] }}"
+                    alt="">
+            @endif
+        </div>
+    @endif
     {{-- Transactions --}}
     <div class="transactions {{ $active ? 'active' : '' }}">
         <div class="transaction {{ $active ? 'active' : '' }}">
@@ -90,17 +100,39 @@
                         <th class="paragraph-reg" style="
                             width:6rem">Total</th>
                     </tr>
+                    <tr>
+                        <th class="paragraph-reg" style="
+                        width:12rem"></th>
+                        <th class="paragraph-reg" style="
+                        width:6rem"></th>
+                        <th class="paragraph-reg" style="
+                        width:6rem"></th>
+                        <th class="paragraph-reg" style="
+                        width:6rem"></th>
+                        <th class="paragraph-reg" style="
+                        width:6rem"></th>
+                        <th class="paragraph-reg" style="
+                        width:6rem"></th>
+                    </tr>
                     @foreach ($order->transactions as $transaction)
                         <tr>
                             <td class="paragraph-reg">{{ $transaction->product->name }}</td>
-                            <td class="paragraph-reg">{{ $transaction->option }}</td>
+                            <td class="paragraph-reg">{{ $transaction->option ? $transaction->option : 'NA' }}</td>
                             <td class="paragraph-reg">{{ $transaction->metric }}</td>
                             <td class="paragraph-reg">{{ $transaction->value }}</td>
                             <td class="paragraph-reg">{{ $transaction->quantity }}</td>
                             <td class="paragraph-reg">
-                                {{ number_format($transaction->quantity * $transaction->value, 2, '.', '') }}</td>
+                                ${{ number_format($transaction->quantity * $transaction->value, 2, '.', '') }}</td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="bold">${{ number_format($order->total, 2, '.', '') }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

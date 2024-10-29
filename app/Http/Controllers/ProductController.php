@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
-use Illuminate\Database\Query\Builder;
-use PDOException;
 
 class ProductController extends Controller
 {
@@ -28,11 +26,11 @@ class ProductController extends Controller
      * @param mixed $find
      * 
      */
-    public static function grab($find, $chunk = 0)
+    public static function grab($find, $chunk = 0, $limit = 4)
     {
         $chunks = Product::whereHas('tags', function ($query) use ($find) {
             $query->where('tag', 'like', '%' . $find . '%');
-        })->get()->chunk(4);
+        })->get()->chunk($limit);
 
         if ($chunks->has($chunk)) {
             return $chunkpkg = [
@@ -49,8 +47,27 @@ class ProductController extends Controller
      * @return mixed
      * 
      */
-    public static function paginate($find, $chunk = 0, $limit = 4)
+    public static function paginate($find = '?', $chunk = 0, $limit = 10)
     {
+        if ($find == '?') {
+            $chunks = Product::all()->reverse()
+                ->chunk($limit);
+
+            if ($chunks->has($chunk)) {
+                return $chunkpkg = [
+                    'size' => sizeof($chunks),
+                    'position' => $chunk,
+                    'chunk' => $chunks[$chunk]
+                ];
+            } else {
+                return $chunkpkg = [
+                    'size' => 0,
+                    'position' => $chunk,
+                    'chunk' => []
+                ];
+            }
+        }
+
         $chunks = Product::whereAny(['category', 'provider', 'name'], 'LIKE', '%' . $find . '%')
             ->orWhereHas('tags', function ($query) use ($find) {
                 $query->where('tags.tag', 'LIKE', '%' . $find . '%');
@@ -64,6 +81,12 @@ class ProductController extends Controller
                 'position' => $chunk,
                 'chunk' => $chunks[$chunk]
             ];
+        } else {
+            return $chunkpkg = [
+                'size' => 0,
+                'position' => $chunk,
+                'chunk' => []
+            ];
         }
     }
     /**
@@ -74,19 +97,26 @@ class ProductController extends Controller
      * @param mixed $limit
      * @return mixed
      */
-    public static function paginateWithFilters($find, $price, $chunk = 0, $limit = 4)
+    public static function paginateWithFilters($find = '?', $price, $chunk = 0, $limit = 10)
     {
         $chunks = Product::whereAny(['category', 'provider', 'name'], 'LIKE', '%' . $find . '%')
-            ->whereRelation('tags', 'tags.tag', 'LIKE', '%' . $find . '%')
-            ->whereHas('prices', function ($query) use ($price) {
-                $query->where('prices.value', '<=', $price);
-            })->get()->chunk($limit);
+            ->whereRelation('prices', 'value', '<=', $price)
+            ->orWhereRelation('tags', 'tag', 'LIKE', '%' . $find . '%')
+            ->whereRelation('prices', 'value', '<=', $price)
+            ->get()
+            ->chunk($limit);
 
         if ($chunks->has($chunk)) {
             return $chunkpkg = [
                 'size' => sizeof($chunks),
                 'position' => $chunk,
                 'chunk' => $chunks[$chunk]
+            ];
+        } else {
+            return $chunkpkg = [
+                'size' => 0,
+                'position' => $chunk,
+                'chunk' => []
             ];
         }
     }
@@ -141,41 +171,27 @@ class ProductController extends Controller
 
     public static function serializeTags($tags, $id)
     {
-        $tags_array = [];
-        $temp = explode(',', $tags);
-        foreach ($temp as $tag) {
-            if (strlen($tag) < 1 || $tag == null) {
-                $tag = 'tag';
-            }
-            array_push($tags_array, ['tag' => $tag, 'product_id' => $id]);
+        $array = [];
+        foreach ($tags as $tag) {
+            array_push($array, ['tag' => $tag, 'product_id' => $id]);
         }
-        return $tags_array;
+        return $array;
     }
     public static function serializeOptions($options, $id)
     {
-        $options_array = [];
-        $temp = explode(',', $options);
-        foreach ($temp as $option) {
-            if (!str_contains($option, '/')) {
-                $option .= 'option/0.0';
-            }
-            $option_tmp = explode('/', $option);
-            array_push($options_array, ['option' => $option_tmp[0], 'value' => $option_tmp[1], 'product_id' => $id]);
+        $array = [];
+        foreach ($options as $option) {
+            array_push($array, ['option' => $option['option'], 'value' => $option['value'], 'product_id' => $id]);
         }
-        return $options_array;
+        return $array;
     }
     public static function serializePrices($prices, $id)
     {
-        $prices_array = [];
-        $temp = explode(',', $prices);
-        foreach ($temp as $price) {
-            if (!str_contains($price, '/')) {
-                $price .= '0.0/empty';
-            }
-            $price_tmp = explode('/', $price);
-            array_push($prices_array, ['value' => $price_tmp[0], 'metric' => $price_tmp[1], 'product_id' => $id]);
+        $array = [];
+        foreach ($prices as $price) {
+            array_push($array, ['value' => $price['value'], 'metric' => $price['metric'], 'product_id' => $id]);
         }
-        return $prices_array;
+        return $array;
     }
     /**
      * Remove product from database

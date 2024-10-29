@@ -2,9 +2,9 @@
     <div class="items">
         @foreach ($items as $item)
             {{-- Menu Items (Item, Identifier) --}}
-            <div class="item">
+            <div class="item {{ str_contains(url()->current(), $item) ? 'active' : '' }}">
                 <a href="{{ route('dashboard', ['purpose' => $item]) }}">
-                    <p>{{ $item }}</p>
+                    {{ $item }}
                 </a>
             </div>
         @endforeach

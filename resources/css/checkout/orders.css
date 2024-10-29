@@ -1,66 +1,4 @@
 #orders {
-    #response {
-        pointer-events: none;
-        z-index: 2;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        .active {
-            pointer-events: all !important;
-            opacity: 1 !important;
-        }
-        .vail-active {
-            pointer-events: all !important;
-            opacity: 0.3 !important;
-        }
-        #response-container {
-            pointer-events: none;
-            transition: 0.5s;
-            opacity: 0;
-            position: absolute;
-            z-index: 2;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            height: max-content;
-            width: 50vw;
-            @media only screen and (max-width: 1070px){
-                width: 90%;
-            }
-            padding: 1rem;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            #close-response {
-                cursor: pointer;
-                position: absolute;
-                right: 2%;
-                font-size: large;
-                -webkit-text-stroke: 0.05rem;
-            }
-            #response-details {
-                margin-block: 1rem;
-                padding: 0.5rem;
-                border: 1px solid var(--grey);
-                display: grid;
-                grid-template: 1fr / 1fr 5fr;
-            }
-        }
-        #vail {
-            pointer-events: none;
-            transition: 0.5s;
-            opacity: 0;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--light-grey);
-        }
-    }
     .toolbar {
         display: grid;
         grid-template: 1fr / max-content 2.5fr 1fr;
@@ -95,6 +33,7 @@
             justify-content: center;
             align-items: center;
             input {
+                height: 80%;
                 width: 90%;
                 border-radius: 10px;
                 padding-inline: 1rem;
@@ -114,18 +53,25 @@
                 width: 90%;
                 pointer-events: none;
                 i {
+                    cursor: pointer;
                     pointer-events: all;
                 }
             }
         }
         .print {
-            color: green;
-            text-decoration: underline;
             display: flex;
-            width: 100%;
-            justify-content: start;
+            justify-content: center;
             align-items: center;
-            cursor: pointer;
+            #print-btn {
+                border: 0;
+                background-color: unset;
+                color: green;
+                text-decoration: underline;
+                display: flex;
+                gap: 2%;
+                width: 100%;
+                align-items: center;
+            }
         }
     }
     .bucket {
@@ -136,23 +82,37 @@
             border: 2px solid var(--light-grey);
             border-radius: 10px;
             .order-information {
+                .status-paid {
+                    color: green;
+                }
                 .status-unpaid {
                     color: red;
                 }
             }
             .order-transactions {
+                border-radius: 10px;
                 margin-block: 1rem;
+                display: flex;
+                flex-direction: column;
+                .transaction:first-child {
+                    border-top: 1px solid var(--light-grey);
+                }
                 .transaction {
+                    padding-block: 1rem;
+                    border-bottom: 1px solid var(--light-grey);
                     display: flex;
                     flex-direction: row;
                     div:nth-child(1) {
                         margin-inline-end: 0.5rem;
-                        width: 0.5rem;
+                        width: 5px;
                         border-radius: 10px;
                         background-color: var(--light-grey);
                     }
                     div:nth-child(2) {
-                        flex: 0 90%;
+                        flex-grow: 1;
+                    }
+                    div:nth-child(3) {
+                        padding-inline: 0.5rem;
                     }
                 }
             }
@@ -160,7 +120,14 @@
                 margin-top: 1rem;
                 display: flex;
                 gap: 1rem;
-                button, label {
+                a {
+                    text-decoration: none;
+                }
+                button,
+                label {
+                    display: flex;
+                    align-items: center;
+                    height: 2rem;
                     cursor: pointer;
                     margin: 0 !important;
                     padding: 0;
@@ -168,16 +135,70 @@
                     gap: 0.5rem;
                     color: rgb(32, 105, 160);
                     margin-top: 1rem;
-                    font-size: 0.9rem;
                     border-radius: 10px;
                     padding-inline: 0.8rem;
                     border: 1px solid rgb(66, 156, 156);
                     background-color: lightblue;
                 }
             }
+            .proofOfPayment {
+                margin-block: 1rem;
+            }
         }
         #history {
             margin-block: 1rem;
+            #order-history {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                .previous-order:hover {
+                    box-shadow: 0 0 3px 1px var(--light-grey);
+                }
+                .previous-order {
+                    transition: 0.5s;
+                    padding-block: 0.8rem;
+                    padding-inline: 0.8rem;
+                    border: 3px solid var(--light-grey);
+                    border-radius: 10px;
+                    display: flex;
+                    .info {
+                        flex-grow: 1;
+                    }
+                    .actions {
+                        flex: 0 20%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+}
+.response{
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: rgb(53, 53, 53);
+    color: rgb(231, 231, 231);
+    .table{
+        display: grid;
+        grid-template: 1fr / .1fr 1fr;
+    }
+    .actions{
+        margin-block-start: 1.5rem;
+        button:hover{
+            width: 8rem;
+            color: green;
+        }
+        button{
+            width: 5rem;
+            transition: .5s;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            padding-inline: 1rem;
+            padding-block: .2rem;
         }
     }
 }

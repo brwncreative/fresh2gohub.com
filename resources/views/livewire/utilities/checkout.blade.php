@@ -1,6 +1,6 @@
-<main id="checkout">
-    <p class="medium-title">Checkout ${{ number_format($total, 2, '.', '') }}</p>
-    <p>Lets get you those eats!</p>
+<div id="checkout">
+    <h3 class="bold">Checkout ${{ number_format($total, 2, '.', '') }}</h3>
+    <h5>Lets get you those eats!</h5>
     <p class="paragraph">Please note additional costs for the different payment options</p>
     <hr>
     <div class="bucket">
@@ -39,35 +39,45 @@
                             </span>
                         </div>
                         <div class="actions">
-                            <i class="bi bi-trash h6 delete"
+                            <i class="action bi bi-trash h6 delete"
                                 wire:click="$dispatch('removeFromCart',{id: {{ $item['id'] }}, source: 'checkout'})"></i>
-                            <i class="bi bi-dash-circle remove h4"
+                            <i class="action bi bi-dash h4 remove "
                                 wire:click="$dispatch('addToCart',{how: '-', id: {{ $item['id'] }}, source: 'checkout'})"></i>
-                            <button
-                                wire:click="$dispatch('addToCart',{how: '+',id: {{ $item['id'] }}, source: 'checkout'})"><i
-                                    class="bi bi-plus h4"></i></button>
+                            <i class="action bi bi-plus h4 add"
+                                wire:click="$dispatch('addToCart',{how: '+',id: {{ $item['id'] }}, source: 'checkout'})"></i>
                         </div>
                     </div>
                 @endforeach
             @endisset
         </div>
         <div id="checkout-form">
-            <p class="small-title">Order Info and Payment</p>
-            <p class="paragraph">Psst.. Don't worry any information stored is secured and used for your order</p>
+            @if ($errors->any())
+                <div class="errors">
+                    <h6><span class="bold"> Don't worry</span> <br> we just need a few details</h6>
+                    <ul>
+                        @foreach ($errors->getBags() as $error)
+                            @foreach ($error->getMessages() as $message)
+                                <li>{{ $message[0] }}</li>
+                            @endforeach
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form>
                 <div>
-                    <input wire:model='fname' type="text" placeholder="First Name">
-                    <input wire:model='lname' type="text" placeholder="Last Name">
+                    <input size='1' wire:model='fname' type="text" placeholder="First Name">
+                    <input size='1' wire:model='lname' type="text" placeholder="Last Name">
                 </div>
-                <input wire:model='email' type="email" placeholder="Email">
-                <input wire:model='contact' type="text" placeholder="Contact">
-                <input wire:model='area' type="text" list="tt-areas" placeholder="Area" wire:model='area' />
+                <input size='1' wire:model='email' type="email" placeholder="Email">
+                <input size='1' wire:model='contact' type="text" placeholder="Contact">
+                <input size='1' wire:model='area' type="text" list="tt-areas" placeholder="Area"
+                    wire:model='area' />
                 <datalist class="ci-input" id="tt-areas">
                     <option value="Mayaro"></option>
                 </datalist>
-                <input wire:model='address' type="text" placeholder="Address">
-                <input wire:model='instructions' type="text" placeholder="Delivery Instructions">
-                <select wire:model='via' class="ci-input" wire:model='via'>
+                <input size='1' wire:model='address' type="text" placeholder="Address">
+                <input size='1' wire:model='instructions' type="text" placeholder="Delivery Instructions">
+                <select size='1' wire:model='via' class="ci-input" wire:model='via'>
                     <option value="Receive the order by...">Receive the order via...</option>
                     <option value="Delivery">Delivery</option>
                     <option value="Meet Up">Meet Up</option>
@@ -80,23 +90,29 @@
                 </div>
                 <div id="payment-actions">
                     @if ($paymentOption === 'bank')
-                        <div>
-                            <small>
-                                <p class="bold">Bank Details</p>
-                                <p class="paragraph">Keep your order number safe yuh' hear</p>
-                                <p>Bank: Republic Bank Limited</p>
-                                <p>Name: Tajah Ieasha Lawrence</p>
-                                <p>Chq: 470463726301</p>
-                            </small>
+                        <div id="bank-details">
+                            <h5 class="bold">Bank Details</h5>
+                            <p>Bank: Republic Bank Limited</p>
+                            <p>Name: Tajah Ieasha Lawrence</p>
+                            <p>Chq: 470463726301</p>
                         </div>
-                        <button class="purchase-btn bold">Purchase</button>
-                        {{-- wire:click='pay' --}}
                     @endif
                     @if ($paymentOption === 'wipay')
-                        <button class="purchase-btn bold" >Purchase</button>
+                        <div id="wipay-details">
+                            <h5 class="bold">WiPay Details</h5>
+                            <p>Do note there is a small fee attached to this payment option.</p>
+                        </div>
                     @endif
+                    <button class="purchase-btn bold" wire:click='pay'>Purchase</button>
                 </div>
             </div>
         </div>
     </div>
-</main>
+    <hr>
+    <div class="terms">
+        {{-- <h5>Terms and conditions</h5>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, fugiat! Dolor, adipisci asperiores! Sequi
+            quidem laboriosam possimus maxime qui. Accusamus a officiis dolores at voluptates quod iste labore
+            asperiores sint!</p> --}}
+    </div>
+</div>

@@ -11,12 +11,12 @@
             </div>
             {{-- Id --}}
             <div class="id">
-                {{-- Category --}}
-                <p>{{ $category }}</p>
                 {{-- Available --}}
-                <p class="{{ $available ? 'in-stock' : 'out-stock' }} bold">
+                <p class="pill {{ $available ? 'in-stock' : 'out-stock' }} bold">
                     {{ $available ? 'In Stock' : 'Out of Stock' }}
                 </p>
+                {{-- Category --}}
+                <p>{{ $category }}</p>
                 {{-- Tags --}}
                 <span class="tags">
                     @if ($tags)
@@ -28,8 +28,10 @@
                     @endif
                 </span>
                 {{-- Title and description --}}
-                <p class="medium-title">{{ $provider }} : <span class="bold">{{ $name }}</span></p>
-                <p class="description">{{ $description }}</p>
+                <div class="identifier">
+                    <h5>{{ $provider }} : <span class="bold">{{ $name }}</span></h5>
+                    <p class="description">{{ $description }}</p>
+                </div>
             </div>
             {{-- Actions --}}
             <div class="actions">
@@ -57,12 +59,19 @@
                 {{-- Buttons --}}
                 <div class="buttons">
                     <button class="remove" wire:click="removeAll()"><i class="bi bi-trash"></i></button>
-                    <div class="todowCart">
-                        <p class="minus" wire:click="addToCart('-')"><i class="bi bi-dash-lg"></i></p>
-                        <p>
-                            {{ $quantity }}
-                        </p>
-                        <p class="add" wire:click="addToCart('+')"><i class="bi bi-plus-lg"></i></p>
+                    <div class="cart">
+                        <div class="minus {{ $quantity > 0 ? 'active' : '' }}" wire:click="addToCart('-')"><i
+                                class="bi bi-dash-lg"></i></div>
+                        <div class="add {{ $quantity > 0 ? 'add-active' : '' }}" wire:click="addToCart('+')">
+                            <p>{{ $quantity > 0 ? $quantity : '' }}</p>
+                            @if ($quantity > 0)
+                                <i class="bi bi-plus-lg h5"></i>
+                            @else
+                                <i class="bi bi bi-basket h5"></i>
+                            @endif
+
+
+                        </div>
                     </div>
                 </div>
             </div>

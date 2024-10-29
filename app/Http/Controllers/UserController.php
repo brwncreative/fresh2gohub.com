@@ -14,7 +14,24 @@ class UserController extends Controller
     {
         return User::all()->reverse();
     }
+    public static function paginateAll($chunk)
+    {
+        $chunks = User::all()->reverse()->chunk(5);
 
+        if ($chunks->has($chunk)) {
+            return $chunkpkg = [
+                'size' => sizeof($chunks),
+                'position' => $chunk,
+                'chunk' => $chunks[$chunk]
+            ];
+        } else {
+            return $chunkpkg = [
+                'size' => 0,
+                'position' => $chunk,
+                'chunk' => []
+            ];
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -34,7 +51,7 @@ class UserController extends Controller
 
     public static function change()
     {
-       User::updateOrCreate();
+        User::updateOrCreate();
     }
     /**
      * Store a newly created resource in storage.

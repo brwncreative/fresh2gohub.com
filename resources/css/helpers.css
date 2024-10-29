@@ -30,11 +30,18 @@
     background-color: rgba(255, 165, 0, 0.3);
     border: 1px solid orange;
 }
-/* Tags */
-.tag {
-    font-size: 85% !important;
-    color: grey;
-    p::first-letter {
-        text-transform: capitalize;
-    }
+
+/* Sections */
+.section{
+    margin-block: 3rem;
+}
+/* Text */
+.title::first-letter{
+    text-transform: capitalize;
+}
+.bold {
+    -webkit-text-stroke: 0.5px;
+}
+.bolder {
+    -webkit-text-stroke: 0.7px;
 }

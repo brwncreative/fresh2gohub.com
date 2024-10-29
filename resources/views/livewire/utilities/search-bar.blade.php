@@ -8,11 +8,12 @@
         <div id="results">
             <div id="results-container">
                 @foreach ($products as $product)
-                <span wire:click="search('{{$product->name}}')" class="result">
-                   <p class="result-identifier">{{$product->provider}} - {{$product->name}}</p>
-                   <p style="color:{{$product->available ? 'green' : 'red'}}">{{$product->available ? 'in stock' : 'out of stock'}}</p>
-                   <i class="bi bi-arrow-up-right"></i>
-                </span>
+                    <span wire:click="search('{{ $product->name }}')" class="result">
+                        <p class="result-identifier"><span class="paragraph">{{ $product->provider }}</span> - {{ $product->name }}</p>
+                        <p style="color:{{ $product->available ? 'green' : 'red' }}">
+                            {{ $product->available ? 'in stock' : 'out of stock' }}</p>
+                        <i class="bi bi-arrow-up-right"></i>
+                    </span>
                 @endforeach
             </div>
         </div>

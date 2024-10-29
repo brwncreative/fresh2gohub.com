@@ -18,7 +18,7 @@
     {{-- Controls --}}
     <div class="controls">
         <div class="text">
-            <h4 class="bold">See whats popular</h4>
+            <h5 class="bold">See whats popular</h5>
             <p>Explore what's going fast</p>
         </div>
         <div class="actions">
@@ -29,9 +29,34 @@
     {{-- Products --}}
     <div class="products">
         @foreach ($products['chunk'] as $product)
-            <livewire:products.product-card :key="$product->id" :id="$product->id" :tags="$product->tags" :provider="$product->provider"
+            <livewire:products.product-card lazy :key="$product->id" :id="$product->id" :tags="$product->tags" :provider="$product->provider"
                 :name="$product->name" :description="$product->description" :options="$product->options" :prices="$product->prices" :available="$product->available"
                 :category="$product->category"></livewire:products.product-card>
         @endforeach
     </div>
+    {{-- Card Wide JS --}}
+    @script
+        <script>
+            // Create a MediaQueryList object
+            mobile = window.matchMedia("(max-width: 1070px)")
+            // Initial call
+            if (mobile.matches) {
+                $wire.set('limit', '2');
+                $wire.call('grab');
+            } else if ($wire.get('limit') == 2) {
+                $wire.set('limit', '4');
+                $wire.call('grab');
+            }
+            // Attach listener function on state changes
+            mobile.addEventListener("change", function() {
+                if (mobile.matches) {
+                    $wire.set('limit', '2');
+                    $wire.call('grab');
+                } else if ($wire.get('limit') == 2) {
+                    $wire.set('limit', '4');
+                    $wire.call('grab');
+                }
+            });
+        </script>
+    @endscript
 </div>

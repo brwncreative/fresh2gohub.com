@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Utilities;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use Livewire\Attributes\Url;
@@ -11,37 +12,68 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 class Orders extends Component
 {
     use WithFileUploads;
-    #[Url(keep: true)]
+    #[Url(keep: false)]
     public $ticket;
-    public $orders = [], $history = [], $user_id, $response, $image;
-    public $resp_active = false;
-
-    public function wiPayHandshake()
+    public $orders = [], $history = [], $user_id, $response, $image, $imageFromStorage;
+    public $showResponse = false;
+    /**
+     * WiPay handshake after person has paid
+     * @return void
+     */
+    public function getQuery()
     {
-        if (request()->query('card')) {
-            $this->resp_active = true;
-            $this->response = request()->query();
-            if (isset($this->response['status']) & ($this->response['status'] == 'success')) {
-                OrderController::update($this->response['order_id'], true);
-            }
+        $this->response = request()->query();
+        if (array_key_exists('card', $this->response)) {
+            $this->showResponse = true;
+            OrderController::update($this->response['order_id'], 1, 'received');
         }
     }
+    public function acknowledge($ticket)
+    {
+        $this->showResponse = false;
+        $this->ticket = $ticket;
+        self::find();
+    }
+    /**
+     * Find specific order
+     * @return void
+     */
     public function find()
     {
         $this->orders = OrderController::find($this->ticket);
     }
-    public function mount()
+    /**
+     * Get order history if logged in
+     * @return void
+     */
+    public function getOrderHistory()
     {
-        self::wiPayHandshake();
-        if ($this->ticket) {
-            self::find();
+        if (Auth::check()) {
+            $this->history = OrderController::getOrderHistory(Auth::user()->id);
         }
+    }
+    public function displayOrderImage()
+    {
+        $this->imageFromStorage = MediaController::checkForOrderImageLocal($this->ticket);
     }
     public function updated($property)
     {
         if ($property == 'image') {
             MediaController::saveOrderImageLocal($this->orders[0]->ticket, $this->image);
         }
+    }
+    public function changePaymentMethod()
+    {
+        session(['orderToUpdate' => $this->orders]);
+        $this->redirectRoute('checkout');
+    }
+    public function mount()
+    {
+        self::getQuery();
+        if ($this->ticket) {
+            self::find();
+        }
+        self::getOrderHistory();
     }
     public function render()
     {

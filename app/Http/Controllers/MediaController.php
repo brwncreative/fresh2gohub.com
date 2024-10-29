@@ -7,6 +7,21 @@ use Illuminate\Http\Request;
 
 class MediaController extends Controller
 {
+    public static function checkForOrderImageLocal($ticket)
+    {
+        if ($dh = opendir(base_path('resources/media/orders/'))) {
+            while (($file = readdir($dh)) !== false) {
+                similar_text($file, $ticket, $percent);
+                if ($percent > 80) {
+                    closedir($dh);
+                    return $image = [
+                        'ext' => explode('.', $file)[1],
+                        'stream' => base64_encode(file_get_contents(base_path('resources/media/orders/' . $file)))
+                    ];
+                }
+            }
+        }
+    }
     public static function saveOrderImageLocal($ticket, $file)
     {
         if (isset($file)) {
@@ -29,8 +44,6 @@ class MediaController extends Controller
         if (file_exists(base_path('resources/media/' . $filename . $ext))) {
             $resp = Http::withToken(env('GITHUB_TOKEN'))->put(env('GITHUB_STORE') . 'product-' . $id  . $ext, ['message' => "image upload", 'content' => base64_encode(file_get_contents(base_path('resources/media/' . $filename . $ext))), 'sha' => $sha]);
         }
-        if ($resp->created()) {
-        }
     }
     /**
      * Delete image from github
@@ -42,7 +55,7 @@ class MediaController extends Controller
         $sha = $previous ? $previous->json('sha') : '';
         if ($sha) {
             $resp = Http::withToken(env('GITHUB_TOKEN'))->delete(env('GITHUB_STORE') . 'product-' . $id  . '.webp', ['message' => "image upload", 'sha' => $sha]);
-            if($resp->ok()){
+            if ($resp->ok()) {
             }
         }
     }

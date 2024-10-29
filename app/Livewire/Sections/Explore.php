@@ -10,6 +10,23 @@ use App\Http\Controllers\ProductController;
 class Explore extends Component
 {
     public $title = "Join our mailing list!", $email, $products, $find;
+    public $benefits = [
+        [
+            'tagline' => 'Never miss out',
+            'text' => 'Our news feed right in your inbox',
+            'icon' => 'bi-megaphone'
+        ],
+        [
+            'tagline' => 'Coupon Shopping',
+            'text' => 'Get early access to new deals and coupons',
+            'icon' => 'bi-percent'
+        ],
+        [
+            'tagline' => 'Just getting started',
+            'text' => 'Get site updates and new feature notes',
+            'icon' => 'bi-flag'
+        ]
+    ], $pointer;
 
     public function handleInvitee()
     {
@@ -23,6 +40,16 @@ class Explore extends Component
             MailController::send('marketing', $this->email);
         }
     }
+
+    public function switch()
+    {
+        if ($this->pointer < sizeof($this->benefits) - 1) {
+            $this->pointer++;
+        } else {
+            $this->pointer = 0;
+        }
+    }
+
     public function render()
     {
         return view('livewire.sections.explore');
