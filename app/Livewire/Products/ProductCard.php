@@ -19,8 +19,6 @@ class ProductCard extends Component
         </div>
         HTML;
     }
-
-
     public $type = 'scroll',
         $id,
         $tags,
@@ -31,10 +29,8 @@ class ProductCard extends Component
         $prices,
         $available,
         $category,
-        $selectedOpt,
-        $optPlaceholder = ['option' => 'Check Options', 'value' => '{"option":"Check Options", "value":0}'],
-        $priPlaceholder = ['value' => null, 'price' => null],
-        $selectedPri;
+        $selectedOpt = 'x',
+        $selectedPri = '0';
     public $quantity = 0;
 
     public function callPage($id)
@@ -50,12 +46,12 @@ class ProductCard extends Component
             description: $this->description,
             options: $this->options,
             prices: $this->prices,
-            selectedOpt: $this->optPlaceholder,
-            selectedPri: $this->priPlaceholder,
+            selectedOpt: $this->selectedOpt,
+            selectedPri: $this->selectedPri,
             quantity: $this->quantity,
         );
     }
-    public function addToCart($how)
+    public function handleCart($how)
     {
         switch ($how) {
             case '+':
@@ -68,8 +64,14 @@ class ProductCard extends Component
                     name: $this->name,
                     provider: $this->provider,
                     description: $this->description,
-                    selectedOpt: $this->optPlaceholder['value'],
-                    selectedPri: $this->priPlaceholder['value']
+                    selectedOpt: [
+                        'position' => $this->selectedOpt,
+                        'value' => $this->selectedOpt == 'x' ? '{"option":"Check Options", "value":0}' : json_encode($this->options[$this->selectedOpt])
+                    ],
+                    selectedPri: [
+                        'position' => $this->selectedPri,
+                        'value' => json_encode($this->prices[$this->selectedPri])
+                    ]
                 );
                 break;
             case '-':
@@ -88,10 +90,31 @@ class ProductCard extends Component
     {
         switch ($property) {
             case 'selectedOpt':
-                $this->dispatch('updateCart', how: 'option', id: $this->id, selectedOpt: $this->selectedOpt, selectedPri: $this->selectedPri);
+                $this->dispatch(
+                    'updateCart',
+                    how: 'option',
+                    id: $this->id,
+                    selectedOpt: [
+                        'position' => $this->selectedOpt,
+                        'value' => $this->selectedOpt == 'x' ? '{"option":"Check Options", "value":0}' : json_encode($this->options[$this->selectedOpt])
+                    ],
+                    selectedPri: [
+                        'position' => $this->selectedPri,
+                        'value' => json_encode($this->prices[$this->selectedPri])
+                    ]
+                );
                 break;
             case 'selectedPri':
-                $this->dispatch('updateCart', how: 'price', id: $this->id, selectedOpt: null, selectedPri: $this->selectedPri);
+                $this->dispatch(
+                    'updateCart',
+                    how: 'price',
+                    id: $this->id,
+                    selectedOpt: null,
+                    selectedPri: [
+                        'position' => $this->selectedPri,
+                        'value' => json_encode($this->prices[$this->selectedPri])
+                    ]
+                );
                 break;
         }
     }
@@ -101,22 +124,13 @@ class ProductCard extends Component
         if (session('cart')) {
             if (array_key_exists('product: ' . $this->id, session('cart'))) {
                 $this->quantity = session('cart')['product: ' . $this->id]['quantity'];
-                $temp = json_decode(session('cart')['product: ' . $this->id]['selectedOpt'], true);
-                $temp2 = json_decode(session('cart')['product: ' . $this->id]['selectedPri'], true);
-                $this->optPlaceholder['option'] = $temp['option'];
-                $this->optPlaceholder['value'] = session('cart')['product: ' . $this->id]['selectedOpt'];
-                $this->priPlaceholder['price'] = '$' . $temp2['value'] . ' / ' . $temp2['metric'];
-                $this->priPlaceholder['value'] = session('cart')['product: ' . $this->id]['selectedPri'];
-                $temp = null;
-                $temp2 = null;
+                $this->selectedOpt = session('cart')['product: ' . $this->id]['selectedOpt']['position'];
+                $this->selectedPri = session('cart')['product: ' . $this->id]['selectedPri']['position'];
                 return;
             }
         } else {
             $this->quantity = 0;
         }
-
-        $this->priPlaceholder['value'] = json_encode($this->prices[0]);
-        $this->priPlaceholder['price'] = '$' . $this->prices[0]['value'] . ' / ' . $this->prices[0]['metric'];
         return;
     }
     public function mount()

@@ -1,4 +1,4 @@
-<main id="dashboard">
+<div id="dashboard">
     <div class="greeting">
         <h2>Users</h2>
         <p class="paragraph">Manage and send mail to your users here</p>
@@ -65,4 +65,4 @@
             <button wire:click='sendMail'>Send</button>
         </div>
     </div>
-</main>
+</div>

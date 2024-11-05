@@ -31,10 +31,7 @@
     <div class="pc-bucket" style="{{ $type == 'list' ? 'width:100%' : '' }}">
         {{-- Image --}}
         <div class="image" wire:click="callPage('{{ $id }}')">
-            <div>
-                <img src="{{ App\Http\Controllers\MediaController::serveImage('product-' . $id, 'webp') }}"
-                    alt="" />
-            </div>
+            <img src="{{ App\Http\Controllers\MediaController::serveImage('product-' . $id, 'webp') }}" alt="" />
         </div>
         {{-- Tags --}}
         <div class="tags">
@@ -46,84 +43,47 @@
         </div>
         {{-- ID --}}
         <div class="identifiers" wire:click="callPage({{ $id }})">
-            <span class="bold"> {{ $provider }} : {{ $name }}</span>
+            <p class="provider">{{ $provider }}</p>
+            <p class="name bold">{{ $name }}</p>
         </div>
-        <div class="description paragraph">{{ $description }}</div>
-        {{-- Row: Options --}}
-        <div class="choices">
-            {{-- Options --}}
-            <div class="options">
-                <select wire:model.live="selectedOpt" class="option-{{ $id }}" name="options">
-                    <option value="{{ $optPlaceholder['value'] }}">
-                        {{ $optPlaceholder['option'] }}
-                    </option>
-                    <option value='{"option":"Check Options", "value":0}'>
-                        Check Options
-                    </option>
-                    @foreach ($options as $option)
-                        <option value="{{ $option }}">{{ $option->option }}</option>
-                    @endforeach
-                </select>
-                <div class="option-icon">
-                    <i class="bi bi-chevron-right arrow arrow-{{ $id }}"></i>
-                </div>
-                @script
-                    <script>
-                        const options = document.querySelector(".option-{{ $id }}");
-                        const arrow = document.querySelector(".arrow-{{ $id }}");
-                        options.addEventListener("focus", (e) => {
-                            arrow.style.transform = "rotate(90deg)";
-                        });
-                        options.addEventListener("focusout", (e) => {
-                            arrow.style.transform = "rotate(0deg)";
-                        });
-                    </script>
-                @endscript
-                {{-- @script
-                     <script>
-                        $wire.set(
-                            "selectedOpt",
-                            document.querySelector(".option-{{ $id }}").value
-                        );
-                    </script>
-                @endscript --}}
-            </div>
+        {{-- Options --}}
+        <div class="options">
+            <select size="1" wire:model.live="selectedOpt" name="options" class="options-{{ $id }}">
+                <option value={{ $selectedOpt }}>
+                    {{ $selectedOpt == 'x' ? 'Check Options' : $options[$selectedOpt]->option }}
+                </option>
+                <option value="x">
+                    Check Options
+                </option>
+                @for ($x = 0; $x < sizeof($options); $x++)
+                    <option value="{{ $x }}">{{ $options[$x]->option }}</option>
+                @endfor
+            </select>
         </div>
-        {{-- Row: Prices and Actions --}}
+        {{-- Prices --}}
+        <div class="prices">
+            @for ($x = 0; $x < sizeof($prices); $x++)
+                <div wire:click="$set('selectedPri',{{ $x }})"
+                    class="price pill {{ $selectedPri == $x ? 'active' : '' }}">${{ $prices[$x]->value }}
+                    /{{ $prices[$x]->metric }} </div>
+            @endfor
+        </div>
+        {{-- Actions --}}
         <div class="actions">
-            {{-- Prices --}}
-            <div class="prices">
-                <select wire:model.live="selectedPri" class="price-{{ $id }}" name="prices">
-                    <option value="{{ $priPlaceholder['value'] }}">
-                        {{ $priPlaceholder['price'] }}
-                    </option>
-                    @foreach ($prices as $price)
-                        <option value="{{ $price }}">
-                            ${{ $price->value }} / {{ $price->metric }}
-                        </option>
-                    @endforeach
-                </select>
-                {{-- @script
-                    <script>
-                        $wire.set(
-                            "selectedPri",
-                            document.querySelector(".price-{{ $id }}").value
-                        );
-                    </script>
-                @endscript --}}
-            </div>
-            <div class="btns">
-                <div wire:click="addToCart('-')"
-                    class="click minus-container {{ $quantity > 0 ? 'minus-active' : '' }}"><i
-                        class=" bi bi-dash minus h5 {{ $quantity > 0 ? 'active' : '' }}"></i></div>
-                <div wire:click="addToCart('+')" class="click add-container {{ $quantity > 0 ? 'add-active' : '' }}">
+            <div class="buttons {{ $quantity > 0 ? 'active' : '' }}">
+                @if ($quantity > 0)
+                    <button wire:click="handleCart('-')" class="remove">
+                        <i class="bi bi-dash-lg h5"></i>
+                    </button>
+                    <p class="quantity">{{ $quantity }}</p>
+                @endif
+                <button wire:click="handleCart('+')" class="add">
                     @if ($quantity > 0)
-                        <p>{{ $quantity }}</p>
-                        <i class="bi bi-plus-lg h5 {{ $quantity > 0 ? 'active' : '' }}"></i>
+                        <i class="bi bi-plus-lg h5"></i>
                     @else
-                        <i class=" bi bi-basket add h5 {{ $quantity > 0 ? 'active' : '' }}"></i>
+                        <i class="bi bi-basket h5"></i>
                     @endif
-                </div>
+                </button>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<main id="dashboard">
+<div id="dashboard">
     <div class="intro">
         <p class="medium-title">Hi {{ Auth::user()->name }} Welcome to your dashboard</p>
         <p class="paragraph-reg">Interact with your website content, users and more here</p>
@@ -41,4 +41,4 @@
             </div>
         </a>
     </div>
-</main>
+</div>

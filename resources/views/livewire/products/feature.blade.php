@@ -19,7 +19,7 @@
     <div class="controls">
         <div class="text">
             <h5 class="bold">See whats popular</h5>
-            <p>Explore what's going fast</p>
+            <p class="bold paragraph">These are going fast</p>
         </div>
         <div class="actions">
             <i class="bi bi-chevron-left h4" wire:click="setChunk('-')"></i>

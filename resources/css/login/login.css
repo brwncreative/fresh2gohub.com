@@ -1,16 +1,22 @@
 #login-container {
     display: flex !important;
     position: relative;
+    .click-text{
+        width: 100%;
+    }
     .active {
         pointer-events: all !important;
         opacity: 1 !important;
+    }
+    .icon {
+        cursor: pointer;
     }
     .bucket {
         pointer-events: none;
         display: flex !important;
         flex-direction: column;
-        transition: 0.5s;
-        width: 18rem;
+        transition: 0.2s;
+        min-width: 18rem !important;
         right: 2%;
         border-radius: 10px;
         z-index: 2;
@@ -21,7 +27,7 @@
         background-color: var(--light-grey);
         .tail {
             position: absolute;
-            top: -6%;
+            top: -5%;
             right: 2%;
             color: var(--light-grey);
         }
@@ -30,22 +36,25 @@
             flex-direction: column;
         }
         form {
-            .errors {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                margin-block: 0.5rem;
+            .input {
+                display: block !important;
+                margin-bottom: 1rem;
+                input:focus {
+                    outline: none;
+                }
+                input {
+                    outline: none;
+                    width: 100%;
+                    border: 1px solid grey;
+                    padding-block: 0.2rem;
+                    padding-inline: 0.5rem;
+                    border-radius: 5px;
+                    margin-block-end: 0.5rem;
+                }
             }
-            input {
-                width: 100%;
-                border: 1px solid grey;
-                padding-block: 0.2rem;
-                padding-inline: 0.5rem;
-                border-radius: 5px;
-                margin-block-end: 0.8rem;
-            }
+
             button {
-                padding-block: .2rem;
+                padding-block: 0.2rem;
                 width: 100%;
                 border-radius: 10px;
                 border: none;

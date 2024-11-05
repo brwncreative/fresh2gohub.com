@@ -1,5 +1,5 @@
-<div id="menu-bucket">
-    <div class="items">
+<div class="bucket">
+    <div class="items center">
         @foreach ($items as $item)
             {{-- Menu Items (Item, Identifier) --}}
             <div class="item {{Request::get('find') == $item ? 'active' : ''}}" >

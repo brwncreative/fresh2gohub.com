@@ -7,15 +7,16 @@
     <div class="mailing">
         <div class="text">
             {{-- Title --}}
-            <h2 class="bold">{{ $title }}</h2>
+            <h3 class="bold">{{ $title }}</h3>
+            <h5>benefits include:</h5>
             {{-- Benefits --}}
             <div id="benefits">
                 @for ($x = 0; $x < sizeof($benefits); $x++)
                     <div class="benefit {{ $pointer == $x ? 'active' : '' }}">
-                        <i class="bi {{ $benefits[$x]['icon'] }} h3"></i>
+                        <i class="bi {{ $benefits[$x]['icon'] }} h4"></i>
                         <div class="text">
-                            <h4 class="bold">{{ $benefits[$x]['tagline'] }}</h4>
-                            <h5>{{ $benefits[$x]['text'] }}</h5>
+                            <h6 class="bold">{{ $benefits[$x]['tagline'] }}</h4>
+                                <p class="context">{{ $benefits[$x]['text'] }}</p>
                         </div>
                     </div>
                 @endfor

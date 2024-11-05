@@ -12,7 +12,26 @@
         width: 15rem;
         padding: 1rem;
         border-radius: 10px;
-        background-color: rgb(237, 237, 237);
+        background-color: rgb(244, 244, 244);
         border: 1px solid grey;
+        position: relative;
+        .bi {
+            position: absolute;
+            right: 5%;
+            top: 3%;
+            color: green;
+        }
+        .text {
+            color: rgb(61, 61, 61);
+            font-size: 85%;
+        }
+    }
+}
+#contact-us {
+    .mini-divider {
+        margin-block: 1rem;
+        width: 10rem;
+        height: 1px;
+        background-color: grey;
     }
 }

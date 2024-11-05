@@ -7,6 +7,27 @@
     --mobile: 1.2rem;
 }
 /* --- */
+a {
+    color: green;
+}
+i {
+    margin: 0 !important;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+.paragraph{
+    color: rgb(115, 115, 115);
+}
 body {
     font-family: "Inter", sans-serif;
     font-weight: 400;
@@ -14,34 +35,20 @@ body {
     font-optical-sizing: auto;
     margin: 0;
     color: black;
-    a {
-        color: green;
-    }
-    i {
-        margin: 0 !important;
-    }
-    p {
-        margin: 0;
-        padding: 0;
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0;
-    }
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     main {
+        min-height: 15rem;
         /* Buffer at screen edge */
-        padding-inline: var(--desktop);
+        width: 95%;
         @media only screen and (max-width: 1070px) {
-            padding-inline: var(--mobile);
+            width: 90%;
         }
         /* --- */
-        margin-top: 14rem;
+        margin-top: 12.5rem;
         @media only screen and (max-width: 1070px) {
-            margin-top: 15rem;
+            margin-top: 13rem;
         }
     }
     *::-webkit-scrollbar {

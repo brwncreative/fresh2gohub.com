@@ -1,4 +1,4 @@
-<main id="dashboard">
+<div id="dashboard">
     <div id="greeting">
         <div class="text">
             <h2 class="bold">Orders</h2>
@@ -33,4 +33,4 @@
             <p>When someone places an order you will see it reflected here</p>
         @endif
     </div>
-</main>
+</div>

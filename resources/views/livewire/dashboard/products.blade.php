@@ -1,4 +1,4 @@
-<main id="dashboard">
+<div id="dashboard">
     <div class="greeting">
         <h2 class="bold">Products</h2>
         <p class="pargraph">Products management section. Choose a category and click the funnel to filter</p>
@@ -158,4 +158,4 @@
             @endfor
         </div>
     </div>
-</main>
+</div>

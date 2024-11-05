@@ -19,122 +19,146 @@
     <header>
         {{-- Navigation container --}}
         <nav id="standard-nav">
-            {{-- Navigation Links --}}
-            <section id="nav-links">
-                <a href=""><small>About</small></a>
-                <a href=""><small>Contact</small></a>
-                <a href=""><small>More</small></a>
-                <a href=""><small>Terms and Conditions</small></a>
-                <a href=""><small>Delivery</small></a>
-            </section>
-            {{-- Main nav elements --}}
-            <section id="nav-main">
-                {{-- Logo --}}
-                <div id="logo">
-                    <a href="{{ route('welcome') }}"> <img
-                            src="{{ App\Http\Controllers\MediaController::serveImage('logo', 'svg') }}" height="50px"
-                            width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo"></img>
-                    </a>
-                    <div class="v-divider"></div>
-                </div>
-                {{-- Searchbar --}}
-                <div id="searchbar" class="center"><livewire:utilities.search-bar></livewire:utilities.search-bar></div>
-                {{-- Actions --}}
-                <div id="actions">
-                    @auth
-                        <div><a href=""><i class="bi bi-truck h3"></i></a></div>
-                    @endauth
-                    @guest
-                        <div>
-                            <livewire:utilities.login :key="'mobile'" :type="'icon'" :how="'icon'">
-                            </livewire:utilities.login>
-                        </div>
-                    @endguest
-                    @auth
-                        <div class="auth-greeting">
-                            <a href="{{ Auth::user()->role != 'guest' ? route('dashboard') : route('logout') }}">
-                                <span class="paragraph">Hi</span>
-                                <span><small>{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</small></span>
-                            </a>
-                        </div>
-                    @endauth
-                    <div><a href="{{ route('orders') }}"><i class="bi bi-receipt h3"></i></a></div>
-                    <div id="cart-action">@livewire('cart.cart')</div>
-                    <div id="mobile-menu-action">
-                        <i class="bi bi-list h3" onclick="callMenu()"></i>
-                        @livewire('helpers.mobile-nav')
+            <div class="bucket">
+                <section id="nav-links">
+                    <a href="{{ route('about') }}">About</a>
+                    <a href="{{ route('contact') }}">Contact</a>
+                    <a href="{{ route('more') }}">More</a>
+                    <a href="{{ route('terms-and-conditions') }}">Terms and Conditions</a>
+                    <a href="{{ route('delivery') }}">Delivery</a>
+                </section>
+                <section class="main-controls">
+                    {{-- Logo --}}
+                    <div id="logo" class="control center">
+                        <a href="{{ route('welcome') }}"> <img
+                                src="{{ App\Http\Controllers\MediaController::serveImage('logo', 'svg') }}"
+                                height="55px" width="auto" fetchpriority="high" loading="eager"
+                                alt="Fresh2Go Logo"></img>
+                        </a>
+                        <div class="v-divider"></div>
                     </div>
-                    {{-- Livewire interaction - Mobile menu --}}
-                    <script>
-                        function callMenu() {
-                            Livewire.dispatch('toggle');
-                        }
-                    </script>
-                    {{-- --- --}}
-                </div>
-                {{-- Menu --}}
-                <div id="menu">
-                    <x-helpers.menu :items="[
-                        'mixed packages',
-                        'vegetables',
-                        'prepackaged fruit and platters',
-                        'mash',
-                        'sauces',
-                        'seasonings',
-                        'dry rubs(packs)',
-                        'meats',
-                        'seafood',
-                        'marinades',
-                    ]"> </x-helpers.menu>
-                    <div class="veil"></div>
-                </div>
-            </section>
-            {{-- Nav shopy by filters --}}
-            <section id="nav-shopby">
-                <x-helpers.shop-by :items="['healthy', 'popular', 'diwali']">
-                </x-helpers.shop-by>
-            </section>
+                    {{-- SearchBar --}}
+                    <div id="searchbar" class="control center">
+                        <livewire:utilities.search-bar></livewire:utilities.search-bar>
+                    </div>
+                    {{-- Actions --}}
+                    <div id="actions" class="control center">
+                        @guest
+                            <div>
+                                <livewire:utilities.login :key="'mobile'" :type="'icon'" :how="'icon'">
+                                </livewire:utilities.login>
+                            </div>
+                        @endguest
+                        @auth
+                            <div><a href=""><i class="bi bi-truck h4"></i></a></div>
+                            <div class="auth-greeting">
+                                <a href="{{ Auth::user()->role != 'guest' ? route('dashboard') : route('logout') }}">
+                                    <span class="paragraph">Hi</span>
+                                    <span><small>{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</small></span>
+                                </a>
+                            </div>
+                        @endauth
+                        <div><a href="{{ route('orders') }}"><i class="bi bi-receipt h4"></i></a></div>
+                        <div id="cart-action">@livewire('cart.cart')</div>
+                         <div id="mobile-menu-action">
+                            <i class="bi bi-list h3" onclick="callMenu()"></i>
+                            @livewire('helpers.mobile-nav')
+                        </div>
+                        
+                        <script>
+                            function callMenu() {
+                                Livewire.dispatch('toggle');
+                            }
+                        </script>
+                    </div>
+                    {{-- Menu --}}
+                    <div id="menu" class="control center">
+                        <x-helpers.menu :items="[
+                            'mixed packages',
+                            'vegetables',
+                            'prepackaged fruit and platters',
+                            'mash',
+                            'sauces',
+                            'seasonings',
+                            'dry rubs(packs)',
+                            'meats',
+                            'seafood',
+                            'marinades',
+                        ]"> </x-helpers.menu>
+                    </div>
+                </section>
+                {{-- Shop By --}}
+                <section id="shopBy">
+                    <x-helpers.shop-by :items="['healthy', 'popular', 'diwali']">
+                    </x-helpers.shop-by>
+                </section>
+            </div>
         </nav>
     </header>
     <main>
         {{ $slot }}
     </main>
     <footer>
-        <div class="f-container">
-            <span class="message">
-                <div>
-                    <p class="bold">We hope you're enjoying Fresh2GoHub!</p>
-                    <p class="paragraph">Feel free to give us feedback through any of our socials, we'll have in site
-                        reviews up soon! </p>
+        <div class="backtotop">
+            <button type="button" id="btpBtn">Back To Top</button>
+        </div>
+        <script>
+            document.getElementById('btpBtn').onclick = function() {
+                window.scrollTo(0, 0);
+            }
+        </script>
+        <div class="links">
+            <div class="column">
+                <p class="heading">Categories</p>
+                <div class="list">
+                    <a href="{{ route('results', ['find' => 'Mixed Packages']) }}">Mixed Packages</a>
+                    <a href="{{ route('results', ['find' => 'Vegetables']) }}">Vegetables</a>
+                    <a href="{{ route('results', ['find' => 'Prepackaged Fruit and Vegetables']) }}">Prepackaged Fruit
+                        and Vegetables</a>
+                    <a href="{{ route('results', ['find' => 'Salts']) }}">Salts</a>
+                    <a href="{{ route('results', ['find' => 'Sauces']) }}">Sauces</a>
+                    <a href="{{ route('results', ['find' => 'Seasonings']) }}">Seasonings</a>
+                    <a href="{{ route('results', ['find' => 'Dry Rubs']) }}">Dry Rubs</a>
+                    <a href="{{ route('results', ['find' => 'Meats']) }}">Meats</a>
+                    <a href="{{ route('results', ['find' => 'Seafood']) }}">Seafood</a>
+                    <a href="{{ route('results', ['find' => 'Marinades']) }}">Marinades</a>
                 </div>
-            </span>
-            <span class="social-links">
-                <i class="bi bi-instagram h4"></i>
-                <i class="bi bi-facebook h4"></i>
-                <i class="bi bi-tiktok h4"></i>
-            </span>
-            <span class="disclaimer">
-                <div class="powered">
-                    <img src="{{ App\Http\Controllers\MediaController::serveImage('brwncreative', 'svg') }}"
-                        height="40px" width="auto" fetchpriority="high" loading="eager" alt="Fresh2Go Logo">
+            </div>
+            <div class="column">
+                <p class="heading">Useful Links</p>
+                <div class="list">
+                    <a href="{{ route('about') }}">About</a>
+                    <a href="{{ route('contact') }}">Contact</a>
+                    <a href="{{ route('more') }}">More</a>
+                    <a href="{{ route('terms-and-conditions') }}">Terms and Conditions</a>
+                    <a href="{{ route('delivery') }}">Delivery</a>
                 </div>
-            </span>
+            </div>
+            <div class="column">
+                <p class="heading">Social Media</p>
+                <div class="social-list">
+                    <a href="https://www.instagram.com/fresh2gohub?igsh=MWxhYTVqcTVqNDZxMg=="> <i class="bi bi-instagram h4"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61560308751020"> <i class="bi bi-facebook h4"></i></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="bar">
+            <small> All rights reserved to Fresh2GoHub</small>
         </div>
     </footer>
 </body>
+
+
+{{-- Nav Behavior --}}
 <script>
-    const menuArea = document.querySelector(".veil");
-    const menu = document.querySelector("#menu-bucket");
-    const filters = document.querySelector("#nav-shopby");
+    const menu = document.querySelector("#menu");
+    const filters = document.querySelector("#shopBy");
     window.addEventListener('scroll', () => {
         if (window.scrollY > 20) {
-            menuArea.classList.add("hide-menu");
-            menu.classList.add("animate")
-            filters.style.display = 'none';
+            menu.classList.add('hide');
         } else {
-            menuArea.classList.remove("hide-menu");
-            menu.classList.remove("animate")
-            filters.style.display = 'flex';
+            menu.classList.remove('hide');
         }
     })
 </script>

@@ -5,15 +5,15 @@
     position: relative;
     p{
         position: absolute;
-        background-color: beige;
-        padding: .5rem;
-        width: 2rem;
-        height: 2rem;
+        color: white;
+        background-color: rgb(184, 114, 57);
+        padding: .2rem;
+        padding-inline: .5rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        top: .5rem;
-        left: 1rem;
+        top: -.5rem;
+        left: 1.2rem;
         border-radius: 3rem;
     }
 }

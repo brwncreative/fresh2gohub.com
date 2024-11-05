@@ -2,7 +2,7 @@
     <div class="bucket">
         {{-- Filters --}}
         <div id="filters">
-            <h5>Filters</h5>
+            <h6>Filters</h6>
             <hr>
             <div id="filter-container">
                 <div id="priceRange">
@@ -20,7 +20,7 @@
         {{-- Products --}}
         <div id="products">
             <div class="text">
-                <h3 class="bold title">{{ $find ? $find : 'Click an option!' }}</h3>
+                <h4 class="bold title">{{ $find ? $find : 'Click an option!' }}</h4>
                 <p class="paragraph ">Lets see what we have here...</p>
             </div>
             <div id="product-container">

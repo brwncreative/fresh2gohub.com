@@ -1,45 +1,78 @@
 footer {
-    position: relative;
-    overflow: hidden;
     margin-block-start: 2rem;
-    height: max-content;
-    padding-block-end: 2rem;
-    .f-container {
-        /* Buffer at screen edge */
-        padding-inline: var(--desktop);
-        @media only screen and (max-width: 1070px) {
-            padding-inline: var(--mobile);
-        }
-        /* --- */
-        display: grid;
-        grid-template: 1fr / 1fr 1fr 1fr;
-        @media only screen and (max-width: 1070px) {
-            grid-template: 1fr max-content 1fr/ 1fr;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .backtotop {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-block-end: 1rem;
+        button {
+            font-weight: 500;
+            height: 2rem;
+            color: green;
+            border: 2px solid green;
+            background-color: transparent;
+            border-radius: 1rem;
+            padding-inline: 1rem;
+            width: 80%;
         }
     }
-    .message {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        @media only screen and (max-width: 1070px) {
-            div {
+    @media only screen and (max-width: 1070px) {
+       .links{
+        width: 90% !important;
+        grid-auto-flow: row !important;
+        gap: 1rem;
+       }
+    }
+    .links {
+        font-size: 85%;
+        width: 95%;
+        display: grid;
+        grid-auto-flow: column;
+        margin-bottom: 1rem;
+        .column {
+            text-wrap: break-word;
+            display: grid;
+            grid-auto-flow: row;
+            grid-auto-rows: max-content;
+            @media only screen and (max-width: 1070px) {
                 text-align: center;
-                margin-block: 1rem;
+                .social-list{
+                    justify-content: center;
+                }
+             }
+            .heading {
+                font-size: 98% !important;
+                color: green;
+                margin-bottom: 5px;
+                -webkit-text-stroke: .3px;
+            }
+            .list {
+                display: flex;
+                flex-direction: column;
+                gap: 1%;
+                a{
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+            .social-list {
+                display: flex;
+                gap: 5%;
             }
         }
     }
-    .social-links {
+    .bar {
+        font-size: 85%;
+        background-color: rgb(246, 246, 246);
+        padding-block: 0.2rem;
+        width: 100%;
         color: grey;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-    }
-    .disclaimer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: .5rem;
+        text-align: center;
     }
 }

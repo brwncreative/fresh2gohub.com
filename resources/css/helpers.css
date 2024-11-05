@@ -33,15 +33,15 @@
 
 /* Sections */
 .section{
-    margin-block: 3rem;
+    margin-block: 1.5rem;
 }
 /* Text */
 .title::first-letter{
     text-transform: capitalize;
 }
 .bold {
-    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke: 0.3px;
 }
 .bolder {
-    -webkit-text-stroke: 0.7px;
+    -webkit-text-stroke: 0.5px;
 }

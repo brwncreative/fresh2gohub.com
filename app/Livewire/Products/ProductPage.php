@@ -21,7 +21,7 @@ class ProductPage extends Component
         $available,
         $category;
 
-    #[On('call-page')]
+    #[On('call-page')]  
     public function displayPage(
         $id,
         $category,
@@ -63,8 +63,14 @@ class ProductPage extends Component
                     name: $this->name,
                     provider: $this->provider,
                     description: $this->description,
-                    selectedOpt: $this->selectedOpt,
-                    selectedPri: $this->selectedPri
+                    selectedOpt: [
+                        'position' => $this->selectedOpt,
+                        'value' => $this->selectedOpt == 'x' ? '{"option":"Check Options", "value":0}' : json_encode($this->options[$this->selectedOpt])
+                    ],
+                    selectedPri: [
+                        'position' => $this->selectedPri,
+                        'value' => json_encode($this->prices[$this->selectedPri])
+                    ]
                 );
                 break;
             case '-':
@@ -74,12 +80,6 @@ class ProductPage extends Component
                         'addToCart',
                         how: $how,
                         id: $this->id,
-                        tags: $this->tags,
-                        name: $this->name,
-                        provider: $this->provider,
-                        description: $this->description,
-                        selectedOpt: $this->selectedOpt,
-                        selectedPri: $this->selectedPri
                     );
                 }
                 break;
@@ -89,10 +89,31 @@ class ProductPage extends Component
     {
         switch ($property) {
             case 'selectedOpt':
-                $this->dispatch('updateCart', how: 'option', id: $this->id, selectedOpt: $this->selectedOpt, selectedPri: $this->selectedPri);
+                $this->dispatch(
+                    'updateCart',
+                    how: 'option',
+                    id: $this->id,
+                    selectedOpt: [
+                        'position' => $this->selectedOpt,
+                        'value' => $this->selectedOpt == 'x' ? '{"option":"Check Options", "value":0}' : json_encode($this->options[$this->selectedOpt])
+                    ],
+                    selectedPri: [
+                        'position' => $this->selectedPri,
+                        'value' => json_encode($this->prices[$this->selectedPri])
+                    ]
+                );
                 break;
             case 'selectedPri':
-                $this->dispatch('updateCart', how: 'price', id: $this->id, selectedOpt: null, selectedPri: $this->selectedPri);
+                $this->dispatch(
+                    'updateCart',
+                    how: 'price',
+                    id: $this->id,
+                    selectedOpt: null,
+                    selectedPri: [
+                        'position' => $this->selectedPri,
+                        'value' => json_encode($this->prices[$this->selectedPri])
+                    ]
+                );
                 break;
         }
     }
@@ -102,10 +123,14 @@ class ProductPage extends Component
         if (session('cart')) {
             if (array_key_exists('product: ' . $this->id, session('cart'))) {
                 $this->quantity = session('cart')['product: ' . $this->id]['quantity'];
+                $this->selectedOpt = session('cart')['product: ' . $this->id]['selectedOpt']['position'];
+                $this->selectedPri = session('cart')['product: ' . $this->id]['selectedPri']['position'];
+                return;
             }
         } else {
             $this->quantity = 0;
         }
+        return;
     }
     public function removeAll()
     {

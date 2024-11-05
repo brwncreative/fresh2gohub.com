@@ -86,6 +86,9 @@ body {
         }
     }
 }
+main{
+    margin: unset !important;
+}
 #dashboard {
     margin-block-start: 9.5rem;
     display: flex;

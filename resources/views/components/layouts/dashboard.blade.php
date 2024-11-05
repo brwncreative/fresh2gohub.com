@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         defer>
     @vite(['resources/css/dashboard/dashboard.css', 'resources/css/app.css'])
-    <link rel="icon" type="image/x-icon" href="{{ App\Http\Controllers\MediaController::serveImage('favicon', 'ico') }}">
+    <link rel="icon" type="image/x-icon"
+        href="{{ App\Http\Controllers\MediaController::serveImage('favicon', 'ico') }}">
 </head>
 
 <body>
@@ -38,7 +39,9 @@
             </div>
         </nav>
     </header>
-    {{ $slot }}
+
+    <main>{{ $slot }}</main>
+
     <footer>
     </footer>
 </body>

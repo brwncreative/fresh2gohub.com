@@ -1,7 +1,9 @@
 <div id="checkout">
-    <h3 class="bold">Checkout ${{ number_format($total, 2, '.', '') }}</h3>
-    <h5>Lets get you those eats!</h5>
-    <p class="paragraph">Please note additional costs for the different payment options</p>
+    <h4 class="bold" style="margin-bottom:1rem">Checkout <span
+            style="padding-inline:1rem;background-color:rgb(229, 248, 202); color: green">
+            ${{ number_format($total, 2, '.', '') }}</span> </h4>
+    <h6>You can practically taste it at this point</h6>
+    <p class="paragraph">Please note , Debit/ Credit card payment options carry an additional cost</p>
     <hr>
     <div class="bucket">
         <div id="cart-items">
@@ -18,10 +20,7 @@
                             </div>
                         </div>
                         <div class="id">
-                            <span>
-                                <p>{{ $item['name'] }} </p>
-                                <p class="bold"> {{ $item['provider'] }}</p>
-                            </span>
+                            <p class="bold">{{ $item['provider'] }} {{ $item['name'] }}</p>
                             <p class="paragraph">{{ $item['description'] }}</p>
                         </div>
                         <div class="cost">
@@ -30,10 +29,10 @@
                                     <p>Qty: {{ $item['quantity'] }}</p>
                                 </small>
                                 @if ($item['selectedOpt']['option'] == 'Check Options')
-                                    <p class="">${{ $item['selectedPri']['value'] }} /
+                                    <p class="bolder">${{ $item['selectedPri']['value'] }} /
                                         {{ $item['selectedPri']['metric'] }}</p>
                                 @else
-                                    <p class="">{{ $item['selectedOpt']['option'] }} @
+                                    <p class="bolder">{{ $item['selectedOpt']['option'] }} @
                                         ${{ $item['selectedOpt']['value'] }}</p>
                                 @endif
                             </span>
@@ -90,16 +89,16 @@
                 </div>
                 <div id="payment-actions">
                     @if ($paymentOption === 'bank')
-                        <div id="bank-details">
-                            <h5 class="bold">Bank Details</h5>
+                        <div id="bank-details" class="details">
+                            <h6 class="bold">Bank Details</h6>
                             <p>Bank: Republic Bank Limited</p>
                             <p>Name: Tajah Ieasha Lawrence</p>
                             <p>Chq: 470463726301</p>
                         </div>
                     @endif
                     @if ($paymentOption === 'wipay')
-                        <div id="wipay-details">
-                            <h5 class="bold">WiPay Details</h5>
+                        <div id="wipay-details" class="details">
+                            <h6 class="bold">WiPay Details</h6>
                             <p>Do note there is a small fee attached to this payment option.</p>
                         </div>
                     @endif
@@ -109,10 +108,91 @@
         </div>
     </div>
     <hr>
-    <div class="terms">
-        {{-- <h5>Terms and conditions</h5>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, fugiat! Dolor, adipisci asperiores! Sequi
-            quidem laboriosam possimus maxime qui. Accusamus a officiis dolores at voluptates quod iste labore
-            asperiores sint!</p> --}}
+    <div id="terms-and-conditions" class="terms">
+        <h5>Terms and conditions</h5>
+        <ol>
+            <li>
+                <p class="heading">Introduction</p>
+                <p class="paragraph">Welcome to Fresh2Go Hub. By accessing or using our website and purchasing our
+                    products, you agree to comply with and be bound by the following terms and conditions. Please read
+                    them carefully.</p>
+            </li>
+            <li>
+                <p class="heading">Products and Services</p>
+                <p class="paragraph">Fresh2Go Hub provides prepped food products including fruits, vegetables, meats,
+                    salts, and marinades. All products are packaged with care to maintain freshness and quality.
+                    However, as they are perishable, it is important to follow recommended storage instructions to
+                    maximize shelf life.</p>
+            </li>
+            <li>
+                <p class="heading">Ordering and Payment</p>
+                <p class="paragraph">All orders must be placed through our website. Payment can be made via accepted
+                    credit or debit cards as well as bank transfer. If the bank transfer option is selected, you have 2
+                    days to upload proof of payment before the order is cancelled. Upon placing an order, you will
+                    receive an email confirmation detailing your order as well as an order number in which you can use
+                    to
+                    upload proof of payment or check on the status of your order. If any issues arise, please contact
+                    our customer support team.</p>
+            </li>
+            <li>
+                <p class="heading">Shipping and Delivery</p>
+                <p class="paragraph">We offer delivery within designated areas through the use of a partnership delivery
+                    service. Delivery fees and estimated times may vary based on location as well as day and time in
+                    which the courier service delivers to your area. Fresh2Go Hub cannot be held responsible for delays
+                    due to unforeseen circumstances because once your package is passed off to the courier, we are no
+                    longer in control as we have fulfilled our part of the agreement which is to package your product
+                    and pass it off to be delivered to you at your designated location. If you are not available at the
+                    delivery time, please arrange for someone to receive your order or give instructions on where to
+                    leave the package to the courier driver.</p>
+            </li>
+            <li>
+                <p class="heading">Return Policy</p>
+                <p class="paragraph">Due to the perishable nature of our products, Fresh2Go Hub generally does not
+                    accept returns. However, if you receive a damaged or incorrect item, please contact our customer
+                    service team within 24 hours of receiving your order. We may offer a replacement or refund at our
+                    discretion. Proof of damage or defect (such as photos) may be required to process your claim.</p>
+            </li>
+            <li>
+                <p class="heading">Product Quality</p>
+                <p class="paragraph">While we make every effort to ensure the highest quality, please note that
+                    freshness may vary slightly depending on storage conditions. Products should be consumed by the
+                    recommended "use by" dates on their packaging.</p>
+            </li>
+            <li>
+                <p class="heading">Liability</p>
+                <p class="paragraph">Fresh2Go Hub is not liable for any indirect, incidental, or consequential damages
+                    that may result from the use of our products. Please review all ingredients for potential allergens,
+                    as Fresh2Go Hub is not responsible for allergic reactions.</p>
+            </li>
+            <li>
+                <p class="heading">Amendments to Terms and Conditions</p>
+                <p class="paragraph">Fresh2Go Hub reserves the right to update or amend these terms and conditions at
+                    any time. Any changes will be posted on this page. Continued use of our site and services
+                    constitutes acceptance of any modified terms.</p>
+            </li>
+            <li>
+                <p class="heading">Contact Us</p>
+                <p class="paragraph">For questions regarding these terms, or if you have concerns about your order,
+                    please reach out to our customer service team.</p>
+            </li>
+        </ol>
+
+        {{-- LinK Behaiour --}}
+        @if (Route::is('terms-and-conditions'))
+            <script>
+                document.getElementById('terms-and-conditions').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+            </script>
+        @endif
+        @if (Route::is('delivery'))
+            <script>
+                document.getElementById('terms-and-conditions').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                });
+            </script>
+        @endif
     </div>
 </div>

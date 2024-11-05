@@ -1,7 +1,10 @@
 #explore {
+    border-radius: 10px;
+    background-color: rgb(95, 114, 82);
     padding-block: 1rem;
     width: 100%;
     position: relative;
+    padding: 1rem;
     #confetti {
         overflow: hidden;
         height: 100%;
@@ -27,74 +30,91 @@
         width: max-content;
         text-align: center;
         width: 100%;
+        .error{
+            color: rgb(255, 194, 96);
+        }
         .text {
+            color: white;
+            width: 100%;
         }
         #benefits {
+            flex-wrap: wrap;
             margin-block: 1.5rem;
             height: max-content;
             width: 100%;
             align-items: center;
             justify-content: center;
             display: flex;
-            gap: 5%;
+            gap: 1rem;
             .active {
-                scale: 1.05;
+                scale: 1.01;
                 opacity: 1 !important;
             }
             .benefit {
-                transition: 0.5s;
+                transition: 0.3s;
                 opacity: 0.5;
-                width: 18rem;
+                width: 10rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
+                background-color: rgb(216, 243, 208);
+                padding: 1rem;
+                border-radius: 10px;
                 gap: 1rem;
                 i {
                     color: #028902;
                     display: flex;
                     justify-content: center;
-                    width: 5rem;
-                    height: 4rem;
                     align-items: center;
-                    background-color: rgb(216, 243, 208);
-                    border-radius: 100rem;
                 }
                 .text {
+                    color: black;
                     text-align: center;
                     display: flex;
                     align-items: center;
                     flex-direction: column;
-
-                    h2 {
-                        width: max-content;
-                    }
+                   .context{
+                    color: green;
+                    margin-top: .5rem;
+                    font-size: 95%;
+                   }
                 }
             }
         }
         .inputs {
-            margin-block-start: 2rem;
+            margin-block-start: 1rem;
             margin-block-end: 1rem;
             position: relative;
             width: 100%;
             display: flex;
             justify-content: center;
             input {
-                color: grey;
+                color: rgb(255, 255, 255);
                 background: transparent;
                 padding-inline: 1rem;
                 padding-inline-end: 5.5rem;
                 padding-block: 0.5rem;
-                border: 2px solid grey;
+                border: 2px solid rgb(255, 255, 255);
                 width: 50%;
                 border-radius: 10px;
+                @media only screen and (max-width: 1070px) {
+                    width: 100% !important;
+                }
+            }
+            input::placeholder{
+                color: white;
             }
             input:focus {
-                outline: 1px solid green;
+               box-shadow: 0 0 0px 1px green;
+               outline: none;
             }
             .input-btn {
+                @media only screen and (max-width: 1070px) {
+                    width: 100% !important;
+                }
                 pointer-events: none;
-                color: black;
+                color: rgb(255, 255, 255);
                 margin: 0;
                 position: absolute !important;
                 top: 0;
@@ -112,6 +132,7 @@
                     transition: 0.2s;
                 }
                 i:hover {
+                    text-decoration: underline;
                     cursor: pointer;
                 }
             }
