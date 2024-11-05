@@ -58,6 +58,7 @@
                 transition: 0.3s;
                 opacity: 0.5;
                 min-width: 10rem;
+                width: 10rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
