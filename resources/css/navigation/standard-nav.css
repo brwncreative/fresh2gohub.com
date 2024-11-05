@@ -57,6 +57,7 @@
                 grid-area: 1 / 2 / 1 / 4;
                 position: relative;
                 .bucket {
+                    height: 100%;
                     width: 100% !important;
                     display: flex;
                     align-items: center;
@@ -66,17 +67,19 @@
                         box-shadow: 0 0 2px 2px lightgrey;
                     }
                     input {
+                        height: 65%;
+                        background-color: transparent;
                         width: 100%;
                         padding-block: 0.3rem;
                         padding-inline: 1rem;
-                        padding-inline-end: 3rem;
+                        padding-inline-end: 5rem;
                         border-radius: 0.5rem;
                         border: 1px solid grey;
                         outline: none;
                     }
                     .search-icon {
                         position: absolute;
-                        right: 2%;
+                        right: 4%;
                     }
                     #results {
                         border: 1px solid rgb(187, 187, 187);
@@ -123,7 +126,7 @@
             #actions {
                 display: flex;
                 justify-content: space-around;
-                #mobile-menu-action{
+                #mobile-menu-action {
                     display: none;
                 }
                 @media only screen and (max-width: 1070px) {
@@ -190,6 +193,15 @@
                             opacity: 0.8 !important;
                             text-decoration: underline;
                         }
+                        @media only screen and (max-width: 1070px) {
+                            .item:first-child {
+                                padding-inline-start: 0;
+                            }
+                            .item:last-child {
+                                padding-inline-end: 0;
+                            }
+                        }
+
                         .item {
                             text-transform: capitalize;
                             opacity: 0.5;

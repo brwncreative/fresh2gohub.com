@@ -6,7 +6,7 @@
     <section class="section">
         <h4 style="font-weight: 600">Welcome to Fresh2GoHub, <span class="bold"
                 style="text-decoration:underline">your</span> e-market!</h4>
-        <h5 class="paragraph">See our wide array of options and cut your commute and stress from the equation</h5>
+        <h5 class="paragraph">See our wide array of options and kick your stress out the door</h5>
     </section>
     {{-- Feature Popular --}}
     <section id="feature">

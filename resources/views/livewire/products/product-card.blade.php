@@ -43,8 +43,7 @@
         </div>
         {{-- ID --}}
         <div class="identifiers" wire:click="callPage({{ $id }})">
-            <p class="provider">{{ $provider }}</p>
-            <p class="name bold">{{ $name }}</p>
+            <p><span class="provider">{{ $provider }}</span> <span class="name">{{ $name }}</span></p>
         </div>
         {{-- Options --}}
         <div class="options">
