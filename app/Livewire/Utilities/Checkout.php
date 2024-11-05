@@ -75,7 +75,26 @@ class Checkout extends Component
 
                 // Empty Cart after successful payment
                 $this->dispatch('paymentMade');
-
+                /*  [
+                    'account_number' => '4750666040',
+                    'avs' => 1,
+                    'country_code' => 'TT',
+                    'currency' => 'TTD',
+                    'data' => json_encode(['instructions' => $this->instructions]),
+                    'environment' => 'live',
+                    'fee_structure' => 'customer_pay',
+                    'method' => 'credit_card',
+                    'order_id' => $this->ticket,
+                    'origin' => 'Fresh2GoHub',
+                    'response_url' => route('orders'),
+                    'total' => number_format($this->total, 2, '.', ''),
+                    'addr1' => $this->address,
+                    'city' => $this->area,
+                    'email' => $this->email,
+                    'fname' => $this->fname,
+                    'lname' => $this->lname,
+                    'phone' => $this->contact
+                ]*/
                 $response = Http::withHeaders(['Authorization' => 't4nz74lss5r66u'])->accept('application/json')->post(
                     'https://tt.wipayfinancial.com/plugins/payments/request',
                     [

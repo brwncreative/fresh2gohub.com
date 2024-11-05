@@ -23,7 +23,7 @@ Route::get('/delivery', [LandingController::class, 'checkout'])->name('delivery'
 
 
 Route::get('/order', function () {
-    return view('mail.order')->with('order', Order::find(1));
+    return view('mail.order')->with('order', Order::find(7));
 });
 Route::get('/welcome-mailing', function () {
     return view('mail.welcome-mailing')->with('recipient', 'fresh2gohub@gmail.com');

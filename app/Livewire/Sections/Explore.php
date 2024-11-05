@@ -30,17 +30,13 @@ class Explore extends Component
 
     public function handleInvitee()
     {
-        $this->dispatch('confetti');
-        $this->title = 'Thank you for joining us';
-        MailController::send('marketing', $this->email);
-        
-        // $this->validate(['email' => 'required|email|unique:users,email']);
-        // $response = UserController::create($this->email, true, 'guest');
-        // if ($response == 1) {
-        //     $this->dispatch('confetti');
-        //     $this->title = 'Thank you for joining us';
-        //     MailController::send('marketing', $this->email);
-        // }
+        $this->validate(['email' => 'required|email|unique:users,email']);
+        $response = UserController::create($this->email, true, 'guest');
+        if ($response == 1) {
+            $this->dispatch('confetti');
+            $this->title = 'Thank you for joining us';
+            MailController::send('marketing', $this->email);
+        }
     }
 
     public function switch()

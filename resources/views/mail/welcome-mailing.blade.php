@@ -37,22 +37,40 @@
         <table style="margin-top:1rem; width: 30rem">
             <tbody>
                 <tr>
-                    <td>Welcome <span style="font-weight: 600"> {{ $recipient }}</span>!</td>
+                    <td>Welcome <span style="font-weight: 600"> {{ $recipient }}</span></td>
                 </tr>
                 <tr>
                     <td>
-                        <h4>Thank you so much for joining us <3< /h4>
-                                <p>
-                                    At Fresh2GoHub we hope to bring the wholesale needs of Trinidad much more
-                                    convenient, quality assured and approachable. When we say 'lets get you something to
-                                    eat'
-                                    We're not kidding!
-                                </p>
+                        <h4>Thank you so much for joining us!</h4>
+                        <p>
+                            All of us at Fresh2GoHub.com are happy to have you and hope to share some great things in
+                            the coming future.
+                        </p>
                     </td>
                 </tr>
+                <tr><td><hr></td></tr>
                 <tr>
                     <td>
-                        <p>Stay tuned for deals, updates and more @fresh2GoHub</p>
+                        <h6 style="font-weight: 600">About Us</h6>
+                        <p>Fresh2GoHub is your destination for premium prepped foods that bring flavor, convenience, and quality to
+                            your kitchen. We specialize in a curated selection of freshly prepped fruits, vegetables,
+                            meats, salts, and marinades, designed to elevate your culinary experience with ease and
+                            excellence.
+                            At Fresh2Go Hub, we believe that great food starts with the freshest ingredients. That’s why
+                            we carefully source each product and prepare it with attention to detail, ensuring that you
+                            can enjoy quick and delicious meals without compromising on quality. Whether you’re a busy
+                            professional, a home cook, or a food enthusiast, our goal is to provide you with ingredients
+                            that help you create wholesome, tasty meals in no time.
+                            We’re dedicated to making meal prep simple and sustainable by offering portioned, prepped
+                            ingredients that cut down on food waste and cooking time. Thank you for choosing Fresh2Go
+                            Hub – where freshness and flavor are always within reach.</p>
+                    </td>
+                </tr>
+                <tr><td><hr></td></tr>
+                <tr>
+                    <td>
+                        <p>We'll be sure to update you soon, in the meantime check us out on social media @fresh2GoHub
+                        </p>
                     </td>
                 </tr>
             </tbody>
