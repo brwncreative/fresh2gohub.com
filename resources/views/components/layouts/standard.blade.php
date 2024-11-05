@@ -32,7 +32,7 @@
                     <div id="logo" class="control center">
                         <a href="{{ route('welcome') }}"> <img
                                 src="{{ App\Http\Controllers\MediaController::serveImage('logo', 'svg') }}"
-                                height="55px" width="auto" fetchpriority="high" loading="eager"
+                                height="50px" width="auto" fetchpriority="high" loading="eager"
                                 alt="Fresh2Go Logo"></img>
                         </a>
                         <div class="v-divider"></div>
