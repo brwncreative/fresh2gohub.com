@@ -77,7 +77,6 @@
                             'mixed packages',
                             'vegetables',
                             'prepackaged fruit and platters',
-                            'mash',
                             'sauces',
                             'seasonings',
                             'dry rubs(packs)',
